@@ -1,0 +1,436 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/identity/infrastructure/persistence/prisma/client"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model user {
+  id                  String    @id @default(uuid())
+  name                String
+  email               String    @unique
+  phone               String?
+  password            String
+  role                String    @default("user")
+  status              String    @default("pending")
+  emailVerified       Boolean   @default(false)
+  emailVerifiedAt     DateTime?
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+  lastLoginAt         DateTime?
+  companyId           String?
+  businessUnitId      String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  company      Company?      @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  businessUnit BusinessUnit? @relation(fields: [businessUnitId], references: [id], onDelete: SetNull)
+  userRoles    UserRole[]
+  auditLogs    AuditLog[]
+
+  @@index([email])
+  @@index([status])
+  @@index([companyId])
+  @@index([businessUnitId])
+  @@map("users")
+}
+
+model Banque {
+  id            String          @id @default(uuid())
+  nom           String
+  codeSwift     String          @unique
+  codeGuichet   String?
+  adresse       String
+  contactInfo   String?
+  establishment String? // Added to match Domain
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  lignesCredit  LigneCredit[]
+  companies     CompanyBanque[]
+  bankAccounts  BankAccount[]
+
+  @@index([codeSwift])
+  @@map("banques")
+}
+
+model BankAccount {
+  id            String  @id @default(uuid())
+  accountNumber String
+  keyAccount    String
+  currency      String
+  rib           String?
+  isActive      Boolean @default(true)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String
+  updatedBy String
+  deletedBy String?
+
+  banqueId String
+  banque   Banque @relation(fields: [banqueId], references: [id])
+
+  @@map("bank_accounts")
+}
+
+model LigneCredit {
+  id          String  @id @default(uuid())
+  no          String  @unique
+  description String?
+
+  // --- RELATIONS ---
+  banqueId String
+  banque   Banque @relation(fields: [banqueId], references: [id])
+
+  garanties                Garantie[]
+  engagements              Engagement[]
+  // --- CORE FINANCIAL INFORMATION ---
+  autorisationNo           String
+  bankAccountNo            String
+  montantPlafond           Float // Plafond autorisé
+  montantDevise            String // Devise (DZD, EUR, USD)
+  taux                     Float // Interest rate
+  commitmentCommissionRate Float // Taux commission d'engagement
+  estimatedOutstanding     Float // Encours estimé
+
+  // Current utilization
+  consumption Float // Consumption = montant déjà utilisé
+  outstanding Float // Outstanding = montant restant dû
+
+  // Dates
+  startDate   DateTime
+  expiryDate  DateTime
+  renewalDate DateTime?
+
+  // Status
+  statut String // OUVERT / EXPÉDIÉ / UTILISÉ / SUSPENDU / CLOTURÉ
+
+  // Responsibility
+  responsibilityCenter String?
+
+  // --- THRESHOLDS (SEUILS) ---
+
+  seuilAvanceSurStock   Float
+  seuilAvanceSurFacture Float
+  seuilEscompte         Float
+  seuilLC               Float
+  seuilObligtDouane     Float
+  seuilCautionAdmin     Float
+  seuilDcvrtMobile      Float
+  seuilTrsfrLibre       Float
+  seuilLeasing          Float
+  seuilCMT              Float
+  seuilFraisMission     Float
+  seuilLCAS             Float
+
+  // --- UTILISATION PAR TYPE DE FINANCEMENT ---
+  avanceSurStock   Float
+  avanceFacture    Float
+  escompte         Float
+  obligatDouane    Float
+  cautionAdmin     Float
+  dcvrtMobile      Float
+  trsfrLibre       Float
+  leasing          Float
+  CMT              Float
+  fraisMission     Float
+  LCAS             Float
+  faciliteCaissier Float
+
+  // --- FINANCING TYPE ---
+  typeFinancement String // LC, AVANCE_SUR_STOCK, AVANCE_SUR_FACTURE, etc.
+
+  // --- LOGISTICAL / SYSTEM DATA ---
+  maxConsumptionTolerance Float
+  minConsumptionTolerance Float
+  noSeries                String
+  refinancing             Float // Peut être converti en Boolean si nécessaire
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([banqueId])
+  @@index([statut])
+  @@map("lignes_credit")
+}
+
+model Garantie {
+  id             String   @id @default(uuid())
+  ligneCreditId  String
+  type           String
+  montant        Float
+  dateExpiration DateTime
+  description    String?
+  createdAt      DateTime @default(now())
+
+  ligneCredit LigneCredit @relation(fields: [ligneCreditId], references: [id], onDelete: Cascade)
+
+  @@index([ligneCreditId])
+  @@map("garanties")
+}
+
+model Engagement {
+  id               String   @id @default(uuid())
+  ligneCreditId    String
+  typeFinancement  String
+  montant          Float
+  devise           String
+  dateEngagement   DateTime
+  dateEcheance     DateTime
+  statut           String // EN_COURS, REGLE, ANNULE
+  referenceDossier String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  ligneCredit LigneCredit @relation(fields: [ligneCreditId], references: [id])
+
+  @@index([ligneCreditId])
+  @@index([statut])
+  @@index([referenceDossier])
+  @@map("engagements")
+}
+
+model SwiftMessage {
+  id               String   @id @default(uuid())
+  type             String // MT700, MT707, MT734
+  content          String   @db.Text
+  referenceDossier String
+  dateGeneration   DateTime
+  statut           String // GENERATED, SENT, ACKNOWLEDGED
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([referenceDossier])
+  @@index([statut])
+  @@map("swift_messages")
+}
+
+model DocumentImport {
+  id               String   @id @default(uuid())
+  type             String // PRO_FORMA, FACTURE, BL, AUTRE
+  nomFichier       String
+  cheminFichier    String
+  dateUpload       DateTime
+  metadata         String?  @db.Text // JSON string
+  referenceDossier String
+  createdAt        DateTime @default(now())
+
+  @@index([referenceDossier])
+  @@map("documents_import")
+}
+
+// Company Structure Models
+model Company {
+  id              String   @id @default(uuid())
+  name            String
+  code            String   @unique
+  description     String?
+  address         String?
+  contactInfo     String?
+  parentCompanyId String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  parentCompany    Company?          @relation("CompanyHierarchy", fields: [parentCompanyId], references: [id], onDelete: SetNull)
+  subCompanies     Company[]         @relation("CompanyHierarchy")
+  businessUnits    BusinessUnit[]
+  users            user[]
+  companySuppliers CompanySupplier[]
+  companyBanques   CompanyBanque[]
+
+  @@index([code])
+  @@index([parentCompanyId])
+  @@index([isActive])
+  @@map("companies")
+}
+
+model BusinessUnit {
+  id          String   @id @default(uuid())
+  name        String
+  code        String
+  description String?
+  companyId   String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company               Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  users                 user[]
+  businessUnitSuppliers BusinessUnitSupplier[]
+
+  @@unique([code, companyId])
+  @@index([code])
+  @@index([companyId])
+  @@index([isActive])
+  @@map("business_units")
+}
+
+// Supplier Models
+model Supplier {
+  id          String   @id @default(uuid())
+  name        String
+  code        String   @unique
+  description String?
+  contactInfo String?
+  address     String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  companySuppliers      CompanySupplier[]
+  businessUnitSuppliers BusinessUnitSupplier[]
+
+  @@index([code])
+  @@index([isActive])
+  @@map("suppliers")
+}
+
+// Many-to-Many Junction Tables
+model CompanySupplier {
+  id         String   @id @default(uuid())
+  companyId  String
+  supplierId String
+  createdAt  DateTime @default(now())
+
+  company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  supplier Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, supplierId])
+  @@index([companyId])
+  @@index([supplierId])
+  @@map("company_suppliers")
+}
+
+model BusinessUnitSupplier {
+  id             String   @id @default(uuid())
+  businessUnitId String
+  supplierId     String
+  createdAt      DateTime @default(now())
+
+  businessUnit BusinessUnit @relation(fields: [businessUnitId], references: [id], onDelete: Cascade)
+  supplier     Supplier     @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  @@unique([businessUnitId, supplierId])
+  @@index([businessUnitId])
+  @@index([supplierId])
+  @@map("business_unit_suppliers")
+}
+
+model CompanyBanque {
+  id        String   @id @default(uuid())
+  companyId String
+  banqueId  String
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  banque  Banque  @relation(fields: [banqueId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, banqueId])
+  @@index([companyId])
+  @@index([banqueId])
+  @@map("company_banques")
+}
+
+// RBAC Models
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  code        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userRoles       UserRole[]
+  rolePermissions RolePermission[]
+
+  @@index([code])
+  @@index([isActive])
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  code        String   @unique
+  description String?
+  resource    String // e.g., 'user', 'company', 'credit-line'
+  action      String // e.g., 'read', 'write', 'delete'
+  scope       String   @default("all") // 'all', 'own', 'company', 'business-unit'
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rolePermissions RolePermission[]
+
+  @@index([code])
+  @@index([resource])
+  @@index([action])
+  @@map("permissions")
+}
+
+model UserRole {
+  id             String   @id @default(uuid())
+  userId         String
+  roleId         String
+  companyId      String? // Optional: scope role to company
+  businessUnitId String? // Optional: scope role to business unit
+  assignedAt     DateTime @default(now())
+  assignedBy     String? // User ID who assigned this role
+
+  user user @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId, companyId, businessUnitId])
+  @@index([userId])
+  @@index([roleId])
+  @@index([companyId])
+  @@index([businessUnitId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  id           String   @id @default(uuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String // CREATE, UPDATE, DELETE
+  entity    String // User, Role, Company, etc.
+  entityId  String // ID of the affected entity
+  userId    String? // ID of the user performing the action (Optional for system actions)
+  details   Json? // Store changed fields, diffs, or snapshot
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user user? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([entity])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

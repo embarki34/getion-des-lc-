@@ -1,0 +1,187 @@
+components:
+  schemas:
+    CreateBanque:
+      type: object
+      required:
+        - nom
+        - codeSwift
+        - adresse
+      properties:
+        nom:
+          type: string
+        codeSwift:
+          type: string
+        codeGuichet:
+          type: string
+        establishment:
+          type: string
+        adresse:
+          type: string
+        contactInfo:
+          type: string
+        bankAccounts:
+          type: array
+          items:
+            type: object
+            required:
+              - accountNumber
+              - currency
+              - keyAccount
+            properties:
+              accountNumber:
+                type: string
+                description: Bank account number
+              currency:
+                type: string
+                description: Currency code (3 characters)
+              keyAccount:
+                type: string
+                description: Account key/type identifier
+              rib:
+                type: string
+                description: Relevé d'Identité Bancaire (RIB)
+
+    UpdateBanque:
+      type: object
+      properties:
+        nom:
+          type: string
+        codeSwift:
+          type: string
+        establishment:
+          type: string
+        adresse:
+          type: string
+        contactInfo:
+          type: string
+
+    CreateLigneDeCredit:
+      type: object
+      required:
+        - no
+        - banqueId
+        - montantPlafond
+        - montantDevise
+        - startDate
+        - expiryDate
+      properties:
+        no:
+          type: string
+        banqueId:
+          type: string
+          format: uuid
+        description:
+          type: string
+        autorisationNo:
+          type: string
+        bankAccountNo:
+          type: string
+        montantPlafond:
+          type: number
+        montantDevise:
+          type: string
+        taux:
+          type: number
+        commitmentCommissionRate:
+          type: number
+        startDate:
+          type: string
+          format: date-time
+        expiryDate:
+          type: string
+          format: date-time
+        typeFinancement:
+          type: string
+        responsibilityCenter:
+          type: string
+        maxConsumptionTolerance:
+          type: number
+        minConsumptionTolerance:
+          type: number
+        noSeries:
+          type: string
+        refinancing:
+          type: number
+        thresholds:
+          type: object
+          properties:
+            seuilAvanceSurStock:
+              type: number
+            seuilAvanceSurFacture:
+              type: number
+            seuilEscompte:
+              type: number
+            seuilLC:
+              type: number
+            seuilObligtDouane:
+              type: number
+            seuilCautionAdmin:
+              type: number
+            seuilDcvrtMobile:
+              type: number
+            seuilTrsfrLibre:
+              type: number
+            seuilLeasing:
+              type: number
+            seuilCMT:
+              type: number
+            seuilFraisMission:
+              type: number
+            seuilLCAS:
+              type: number
+        garanties:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - montant
+              - dateExpiration
+            properties:
+              type:
+                type: string
+              montant:
+                type: number
+              dateExpiration:
+                type: string
+                format: date-time
+              description:
+                type: string
+
+    GenerateSwiftMT700:
+      type: object
+      required:
+        - referenceDossier
+        - applicantName
+        - applicantAddress
+        - beneficiaryName
+        - beneficiaryAddress
+        - amount
+        - currency
+        - expiryDate
+        - description
+        - issuingBankSwift
+      properties:
+        referenceDossier:
+          type: string
+        applicantName:
+          type: string
+        applicantAddress:
+          type: string
+        beneficiaryName:
+          type: string
+        beneficiaryAddress:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        issuingBankSwift:
+          type: string
+        advisingBankSwift:
+          type: string

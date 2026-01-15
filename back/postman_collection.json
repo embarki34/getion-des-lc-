@@ -1,0 +1,1034 @@
+}
+]
+},
+{
+"name": "Companies",
+"item": [
+{
+	"name": "Create Company",
+	"request": {
+		"method": "POST",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Main Company SARL\",\n  \"code\": \"MAIN\",\n  \"description\": \"Main company description\",\n  \"address\": \"123 Main Street, Algiers\",\n  \"contactInfo\": \"contact@main.com\",\n  \"parentCompanyId\": null,\n  \"isActive\": true\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/companies",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"companies"
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "List Companies",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/companies?includeInactive=false",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"companies"
+			],
+			"query": [
+				{
+					"key": "includeInactive",
+					"value": "false"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Get Company",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/companies/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"companies",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "company-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Update Company",
+	"request": {
+		"method": "PUT",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Main Company SARL (Updated)\",\n  \"description\": \"Updated description\"\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/companies/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"companies",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "company-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Delete Company",
+	"request": {
+		"method": "DELETE",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/companies/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"companies",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "company-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+}
+]
+},
+{
+"name": "Business Units",
+"item": [
+{
+	"name": "Create Business Unit",
+	"request": {
+		"method": "POST",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Sales Department\",\n  \"code\": \"SALES\",\n  \"description\": \"Sales business unit\",\n  \"companyId\": \"company-uuid\",\n  \"isActive\": true\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/business-units",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"business-units"
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "List Business Units",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/business-units?companyId=company-uuid&includeInactive=false",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"business-units"
+			],
+			"query": [
+				{
+					"key": "companyId",
+					"value": "company-uuid"
+				},
+				{
+					"key": "includeInactive",
+					"value": "false"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Get Business Unit",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/business-units/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"business-units",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "business-unit-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Update Business Unit",
+	"request": {
+		"method": "PUT",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Sales & Marketing Department\"\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/business-units/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"business-units",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "business-unit-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Delete Business Unit",
+	"request": {
+		"method": "DELETE",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/business-units/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"business-units",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "business-unit-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+}
+]
+},
+{
+"name": "Suppliers",
+"item": [
+{
+	"name": "Create Supplier",
+	"request": {
+		"method": "POST",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Supplier Company Ltd\",\n  \"code\": \"SUP001\",\n  \"description\": \"Raw materials supplier\",\n  \"contactInfo\": \"contact@supplier.com\",\n  \"address\": \"456 Supplier Street, London\",\n  \"isActive\": true\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/suppliers",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"suppliers"
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "List Suppliers",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/suppliers?includeInactive=false",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"suppliers"
+			],
+			"query": [
+				{
+					"key": "includeInactive",
+					"value": "false"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Get Supplier",
+	"request": {
+		"method": "GET",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/suppliers/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"suppliers",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "supplier-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Update Supplier",
+	"request": {
+		"method": "PUT",
+		"header": [],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Supplier Company Ltd (Updated)\",\n  \"contactInfo\": \"newcontact@supplier.com\"\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{baseUrl}}/suppliers/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"suppliers",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "supplier-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+},
+{
+	"name": "Delete Supplier",
+	"request": {
+		"method": "DELETE",
+		"header": [],
+		"url": {
+			"raw": "{{baseUrl}}/suppliers/:id",
+			"host": [
+				"{{baseUrl}}"
+			],
+			"path": [
+				"suppliers",
+				":id"
+			],
+			"variable": [
+				{
+					"key": "id",
+					"value": "supplier-uuid"
+				}
+			]
+		}
+	},
+	"response": []
+}
+]
+}
+],
+"auth": {swift/mt700","host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"mt700"
+]
+}
+},
+"response": []
+},
+{
+"name": "Get SWIFT Message",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/swift/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "swift-message-uuid"
+}
+]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Banks",
+"item": [
+{
+"name": "Create Bank",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nom\": \"Banque Nationale d'Algérie\",\n  \"codeSwift\": \"BNAADZAL\",\n  \"adresse\": \"8 Bd Ernesto Che Guevara, Alger\",\n  \"contactInfo\": \"+213 21 71 47 19\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/swift/banks",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"banks"
+]
+}
+},
+"response": []
+},
+{
+"name": "List Banks",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/swift/banks",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"banks"
+]
+}
+},
+"response": []
+},
+{
+"name": "Get Bank",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/swift/banks/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"banks",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "bank-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Update Bank",
+"request": {
+"method": "PUT",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nom\": \"Banque Nationale d'Algérie (BNA)\",\n  \"contactInfo\": \"contact@bna.dz\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/swift/banks/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"banks",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "bank-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Delete Bank",
+"request": {
+"method": "DELETE",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/swift/banks/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"swift",
+"banks",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "bank-uuid"
+}
+]
+}
+},
+"response": []
+}
+]
+}
+]
+},
+{
+"name": "Companies",
+"item": [
+{
+"name": "Create Company",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Main Company SARL\",\n  \"code\": \"MAIN\",\n  \"description\": \"Main company description\",\n  \"address\": \"123 Main Street, Algiers\",\n  \"contactInfo\": \"contact@main.com\",\n  \"parentCompanyId\": null,\n  \"isActive\": true\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/companies",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"companies"
+]
+}
+},
+"response": []
+},
+{
+"name": "List Companies",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/companies?includeInactive=false",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"companies"
+],
+"query": [
+{
+"key": "includeInactive",
+"value": "false"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Get Company",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/companies/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"companies",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "company-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Update Company",
+"request": {
+"method": "PUT",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Main Company SARL (Updated)\",\n  \"description\": \"Updated description\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/companies/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"companies",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "company-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Delete Company",
+"request": {
+"method": "DELETE",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/companies/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"companies",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "company-uuid"
+}
+]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Business Units",
+"item": [
+{
+"name": "Create Business Unit",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Sales Department\",\n  \"code\": \"SALES\",\n  \"description\": \"Sales business unit\",\n  \"companyId\": \"company-uuid\",\n  \"isActive\": true\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/business-units",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"business-units"
+]
+}
+},
+"response": []
+},
+{
+"name": "List Business Units",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/business-units?companyId=company-uuid&includeInactive=false",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"business-units"
+],
+"query": [
+{
+"key": "companyId",
+"value": "company-uuid"
+},
+{
+"key": "includeInactive",
+"value": "false"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Get Business Unit",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/business-units/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"business-units",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "business-unit-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Update Business Unit",
+"request": {
+"method": "PUT",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Sales & Marketing Department\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/business-units/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"business-units",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "business-unit-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Delete Business Unit",
+"request": {
+"method": "DELETE",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/business-units/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"business-units",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "business-unit-uuid"
+}
+]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Suppliers",
+"item": [
+{
+"name": "Create Supplier",
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Supplier Company Ltd\",\n  \"code\": \"SUP001\",\n  \"description\": \"Raw materials supplier\",\n  \"contactInfo\": \"contact@supplier.com\",\n  \"address\": \"456 Supplier Street, London\",\n  \"isActive\": true\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/suppliers",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"suppliers"
+]
+}
+},
+"response": []
+},
+{
+"name": "List Suppliers",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/suppliers?includeInactive=false",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"suppliers"
+],
+"query": [
+{
+"key": "includeInactive",
+"value": "false"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Get Supplier",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/suppliers/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"suppliers",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "supplier-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Update Supplier",
+"request": {
+"method": "PUT",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"name\": \"Supplier Company Ltd (Updated)\",\n  \"contactInfo\": \"newcontact@supplier.com\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/suppliers/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"suppliers",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "supplier-uuid"
+}
+]
+}
+},
+"response": []
+},
+{
+"name": "Delete Supplier",
+"request": {
+"method": "DELETE",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/suppliers/:id",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"suppliers",
+":id"
+],
+"variable": [
+{
+"key": "id",
+"value": "supplier-uuid"
+}
+]
+}
+},
+"response": []
+}
+]
+}
+],
+"auth": {
+"type": "bearer",
+"bearer": [
+{
+"key": "token",
+"value": "{{accessToken}}",
+"type": "string"
+}
+]
+},
+"event": [
+{
+"listen": "prerequest",
+"script": {
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+},
+{
+"listen": "test",
+"script": {
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+}
+],
+"variable": [
+{
+"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+"type": "string"
+}
+]
+}
