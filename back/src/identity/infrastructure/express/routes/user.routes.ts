@@ -53,7 +53,6 @@ export function createUserRoutes(
   router.get(
     "/me",
     authMiddleware.authenticate,
-    permissionMiddleware.requirePermission('user:read:own'),
     userController.getProfile
   );
 

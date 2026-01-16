@@ -18,6 +18,26 @@ export interface FormSchema {
     fields: FormFieldSchema[];
 }
 
+// Step-level field configuration
+export interface StepFieldConfig {
+    name: string;
+    label: string;
+    type: 'text' | 'number' | 'date' | 'select' | 'relation' | 'textarea' | 'checkbox' | 'calculated';
+    required?: boolean;
+    placeholder?: string;
+    relationTo?: 'banks' | 'companies' | 'suppliers' | 'clients';
+    options?: string[];
+    validation?: {
+        min?: number;
+        max?: number;
+        pattern?: string;
+    };
+    // Calculation support
+    formula?: string;          // JavaScript expression
+    calculatedFrom?: string[]; // Field dependencies
+    readonly?: boolean;        // Calculated fields are read-only
+}
+
 export interface WorkflowStep {
     id: string;
     templateId: string;
@@ -25,7 +45,7 @@ export interface WorkflowStep {
     code: string;
     label: string;
     description: string | null;
-    requiredFields: string[] | null;
+    requiredFields: StepFieldConfig[] | string[] | null; // Support both formats
     requiredDocuments: string[] | null;
     requiresApproval: boolean;
     approvalRoles: string[] | null;

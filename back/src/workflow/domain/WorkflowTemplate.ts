@@ -21,6 +21,26 @@ export interface FormSchema {
     fields: FormFieldSchema[];
 }
 
+// Step-level field configuration (same structure as FormFieldSchema for consistency)
+export interface StepFieldConfig {
+    name: string;
+    label: string;
+    type: 'text' | 'number' | 'date' | 'select' | 'relation' | 'textarea' | 'checkbox' | 'calculated';
+    required?: boolean;
+    placeholder?: string;
+    relationTo?: 'banks' | 'companies' | 'suppliers' | 'clients';
+    options?: string[];
+    validation?: {
+        min?: number;
+        max?: number;
+        pattern?: string;
+    };
+    // Calculation support
+    formula?: string;          // JavaScript expression, e.g., "capital * rate * Math.pow(1 + rate, periods) / (Math.pow(1 + rate, periods) - 1)"
+    calculatedFrom?: string[]; // Field dependencies: ["capital", "rate", "periods"]
+    readonly?: boolean;        // Calculated fields are read-only
+}
+
 export class WorkflowTemplate {
     constructor(
         public id: string,
@@ -79,7 +99,7 @@ export class WorkflowStep {
         public code: string,
         public label: string,
         public description: string | null,
-        public requiredFields: string[] | null,
+        public requiredFields: StepFieldConfig[] | string[] | null, // Support both new and legacy formats
         public requiredDocuments: string[] | null,
         public requiresApproval: boolean,
         public approvalRoles: string[] | null,

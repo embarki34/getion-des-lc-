@@ -1,12 +1,12 @@
 import { AggregateRoot } from "../../../shared/domain/ddd";
 
 export interface EngagementProps {
-  ligneCreditId: string;
+  ligneCreditId?: string;
   typeFinancement: string; // LC, CMT, etc.
-  montant: number;
-  devise: string;
-  dateEngagement: Date;
-  dateEcheance: Date;
+  montant?: number;
+  devise?: string;
+  dateEngagement?: Date;
+  dateEcheance?: Date;
   statut: "EN_COURS" | "REGLE" | "ANNULE";
   referenceDossier: string; // e.g., LC Number
 }
@@ -20,7 +20,7 @@ export class Engagement extends AggregateRoot<EngagementProps> {
     return new Engagement(props, id);
   }
 
-  get montant(): number {
+  get montant(): number | undefined {
     return this.props.montant;
   }
   get statut(): string {

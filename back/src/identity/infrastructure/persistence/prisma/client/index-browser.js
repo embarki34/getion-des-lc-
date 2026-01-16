@@ -245,6 +245,19 @@ exports.Prisma.EngagementScalarFieldEnum = {
   parentEngagementId: 'parentEngagementId'
 };
 
+exports.Prisma.StepCompletionScalarFieldEnum = {
+  id: 'id',
+  engagementId: 'engagementId',
+  workflowStepId: 'workflowStepId',
+  fieldData: 'fieldData',
+  documents: 'documents',
+  completedBy: 'completedBy',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  notes: 'notes'
+};
+
 exports.Prisma.SwiftMessageScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -391,7 +404,7 @@ exports.Prisma.WorkflowTemplateScalarFieldEnum = {
 
 exports.Prisma.WorkflowStepScalarFieldEnum = {
   id: 'id',
-  templateId: 'templateId',
+  workflowTemplateId: 'workflowTemplateId',
   stepOrder: 'stepOrder',
   code: 'code',
   label: 'label',
@@ -437,6 +450,7 @@ exports.Prisma.ModelName = {
   LigneCredit: 'LigneCredit',
   Garantie: 'Garantie',
   Engagement: 'Engagement',
+  StepCompletion: 'StepCompletion',
   SwiftMessage: 'SwiftMessage',
   DocumentImport: 'DocumentImport',
   Company: 'Company',

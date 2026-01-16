@@ -1,12 +1,15 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { FormFieldSchema } from '@/lib/services/workflow/WorkflowTemplateService';
+import { RelationService, SelectOption } from '@/lib/services/RelationService';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
+import { Loader2 } from 'lucide-react';
 
 interface DynamicFieldProps {
     field: FormFieldSchema;
@@ -20,6 +23,30 @@ interface DynamicFieldProps {
  * Renders a form field based on its type from JSON schema
  */
 export function DynamicField({ field, value, onChange, error }: DynamicFieldProps) {
+    const [relationOptions, setRelationOptions] = useState<SelectOption[]>([]);
+    const [loadingRelation, setLoadingRelation] = useState(false);
+
+    // Fetch relation options if field type is 'relation'
+    useEffect(() => {
+        if (field.type === 'relation' && field.relationTo) {
+            loadRelationOptions();
+        }
+    }, [field.type, field.relationTo]);
+
+    const loadRelationOptions = async () => {
+        if (!field.relationTo) return;
+
+        try {
+            setLoadingRelation(true);
+            const options = await RelationService.fetchOptions(field.relationTo);
+            setRelationOptions(options);
+        } catch (error) {
+            console.error(`Error loading ${field.relationTo} options:`, error);
+        } finally {
+            setLoadingRelation(false);
+        }
+    };
+
     const renderField = () => {
         switch (field.type) {
             case 'text':
@@ -96,16 +123,41 @@ export function DynamicField({ field, value, onChange, error }: DynamicFieldProp
                 );
 
             case 'relation':
-                // For now, simple text input for relation ID
-                // TODO: Add autocomplete/search for related entities
+                // Relational field - fetch options from backend
+                if (loadingRelation) {
+                    return (
+                        <div className="flex items-center gap-2 px-3 py-2 border rounded-md bg-gray-50 dark:bg-slate-900">
+                            <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                                Loading {field.relationTo}...
+                            </span>
+                        </div>
+                    );
+                }
+
+                if (relationOptions.length === 0) {
+                    return (
+                        <div className="flex items-center gap-2 px-3 py-2 border rounded-md bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200">
+                            <span className="text-sm">
+                                No {field.relationTo} available
+                            </span>
+                        </div>
+                    );
+                }
+
                 return (
-                    <Input
-                        type="text"
-                        value={value || ''}
-                        onChange={(e) => onChange(e.target.value)}
-                        placeholder={`Select ${field.label}`}
-                        required={field.required}
-                    />
+                    <Select value={value || ''} onValueChange={onChange}>
+                        <SelectTrigger>
+                            <SelectValue placeholder={`Select ${field.label}`} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {relationOptions.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 );
 
             case 'file':
@@ -137,7 +189,7 @@ export function DynamicField({ field, value, onChange, error }: DynamicFieldProp
             </Label>
             {renderField()}
             {field.helpText && (
-                <p className="text-sm text-gray-500">{field.helpText}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{field.helpText}</p>
             )}
             {error && (
                 <p className="text-sm text-red-600">{error}</p>

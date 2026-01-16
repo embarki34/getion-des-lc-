@@ -44,6 +44,11 @@ export type Garantie = $Result.DefaultSelection<Prisma.$GarantiePayload>
  */
 export type Engagement = $Result.DefaultSelection<Prisma.$EngagementPayload>
 /**
+ * Model StepCompletion
+ * 
+ */
+export type StepCompletion = $Result.DefaultSelection<Prisma.$StepCompletionPayload>
+/**
  * Model SwiftMessage
  * 
  */
@@ -301,6 +306,16 @@ export class PrismaClient<
     * ```
     */
   get engagement(): Prisma.EngagementDelegate<ExtArgs>;
+
+  /**
+   * `prisma.stepCompletion`: Exposes CRUD operations for the **StepCompletion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StepCompletions
+    * const stepCompletions = await prisma.stepCompletion.findMany()
+    * ```
+    */
+  get stepCompletion(): Prisma.StepCompletionDelegate<ExtArgs>;
 
   /**
    * `prisma.swiftMessage`: Exposes CRUD operations for the **SwiftMessage** model.
@@ -896,6 +911,7 @@ export namespace Prisma {
     LigneCredit: 'LigneCredit',
     Garantie: 'Garantie',
     Engagement: 'Engagement',
+    StepCompletion: 'StepCompletion',
     SwiftMessage: 'SwiftMessage',
     DocumentImport: 'DocumentImport',
     Company: 'Company',
@@ -926,7 +942,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "banque" | "bankAccount" | "ligneCredit" | "garantie" | "engagement" | "swiftMessage" | "documentImport" | "company" | "businessUnit" | "supplier" | "companySupplier" | "businessUnitSupplier" | "companyBanque" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "workflowTemplate" | "workflowStep"
+      modelProps: "user" | "banque" | "bankAccount" | "ligneCredit" | "garantie" | "engagement" | "stepCompletion" | "swiftMessage" | "documentImport" | "company" | "businessUnit" | "supplier" | "companySupplier" | "businessUnitSupplier" | "companyBanque" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "workflowTemplate" | "workflowStep"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1323,6 +1339,72 @@ export namespace Prisma {
           count: {
             args: Prisma.EngagementCountArgs<ExtArgs>
             result: $Utils.Optional<EngagementCountAggregateOutputType> | number
+          }
+        }
+      }
+      StepCompletion: {
+        payload: Prisma.$StepCompletionPayload<ExtArgs>
+        fields: Prisma.StepCompletionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StepCompletionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StepCompletionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          findFirst: {
+            args: Prisma.StepCompletionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StepCompletionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          findMany: {
+            args: Prisma.StepCompletionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>[]
+          }
+          create: {
+            args: Prisma.StepCompletionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          createMany: {
+            args: Prisma.StepCompletionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.StepCompletionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          update: {
+            args: Prisma.StepCompletionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          deleteMany: {
+            args: Prisma.StepCompletionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StepCompletionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.StepCompletionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StepCompletionPayload>
+          }
+          aggregate: {
+            args: Prisma.StepCompletionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStepCompletion>
+          }
+          groupBy: {
+            args: Prisma.StepCompletionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StepCompletionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StepCompletionCountArgs<ExtArgs>
+            result: $Utils.Optional<StepCompletionCountAggregateOutputType> | number
           }
         }
       }
@@ -2479,11 +2561,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     userRoles: number
     auditLogs: number
+    stepCompletions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
+    stepCompletions?: boolean | UserCountOutputTypeCountStepCompletionsArgs
   }
 
   // Custom InputTypes
@@ -2509,6 +2593,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StepCompletionWhereInput
   }
 
 
@@ -2607,10 +2698,12 @@ export namespace Prisma {
 
   export type EngagementCountOutputType = {
     childEngagements: number
+    stepCompletions: number
   }
 
   export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     childEngagements?: boolean | EngagementCountOutputTypeCountChildEngagementsArgs
+    stepCompletions?: boolean | EngagementCountOutputTypeCountStepCompletionsArgs
   }
 
   // Custom InputTypes
@@ -2629,6 +2722,13 @@ export namespace Prisma {
    */
   export type EngagementCountOutputTypeCountChildEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EngagementWhereInput
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountStepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StepCompletionWhereInput
   }
 
 
@@ -2896,10 +2996,12 @@ export namespace Prisma {
 
   export type WorkflowStepCountOutputType = {
     engagements: number
+    stepCompletions: number
   }
 
   export type WorkflowStepCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     engagements?: boolean | WorkflowStepCountOutputTypeCountEngagementsArgs
+    stepCompletions?: boolean | WorkflowStepCountOutputTypeCountStepCompletionsArgs
   }
 
   // Custom InputTypes
@@ -2918,6 +3020,13 @@ export namespace Prisma {
    */
   export type WorkflowStepCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EngagementWhereInput
+  }
+
+  /**
+   * WorkflowStepCountOutputType without action
+   */
+  export type WorkflowStepCountOutputTypeCountStepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StepCompletionWhereInput
   }
 
 
@@ -3215,6 +3324,7 @@ export namespace Prisma {
     businessUnit?: boolean | user$businessUnitArgs<ExtArgs>
     userRoles?: boolean | user$userRolesArgs<ExtArgs>
     auditLogs?: boolean | user$auditLogsArgs<ExtArgs>
+    stepCompletions?: boolean | user$stepCompletionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3243,6 +3353,7 @@ export namespace Prisma {
     businessUnit?: boolean | user$businessUnitArgs<ExtArgs>
     userRoles?: boolean | user$userRolesArgs<ExtArgs>
     auditLogs?: boolean | user$auditLogsArgs<ExtArgs>
+    stepCompletions?: boolean | user$stepCompletionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3253,6 +3364,7 @@ export namespace Prisma {
       businessUnit: Prisma.$BusinessUnitPayload<ExtArgs> | null
       userRoles: Prisma.$UserRolePayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+      stepCompletions: Prisma.$StepCompletionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3615,6 +3727,7 @@ export namespace Prisma {
     businessUnit<T extends user$businessUnitArgs<ExtArgs> = {}>(args?: Subset<T, user$businessUnitArgs<ExtArgs>>): Prisma__BusinessUnitClient<$Result.GetResult<Prisma.$BusinessUnitPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     userRoles<T extends user$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, user$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany"> | Null>
     auditLogs<T extends user$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, user$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
+    stepCompletions<T extends user$stepCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, user$stepCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4026,6 +4139,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuditLogScalarFieldEnum | AuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * user.stepCompletions
+   */
+  export type user$stepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    where?: StepCompletionWhereInput
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    cursor?: StepCompletionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
   }
 
   /**
@@ -8734,12 +8867,12 @@ export namespace Prisma {
 
   export type EngagementGroupByOutputType = {
     id: string
-    ligneCreditId: string
+    ligneCreditId: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date
-    dateEcheance: Date
+    montant: number | null
+    devise: string | null
+    dateEngagement: Date | null
+    dateEcheance: Date | null
     statut: string
     referenceDossier: string
     createdAt: Date
@@ -8783,11 +8916,12 @@ export namespace Prisma {
     workflowTemplateId?: boolean
     workflowStepId?: boolean
     parentEngagementId?: boolean
-    ligneCredit?: boolean | LigneCreditDefaultArgs<ExtArgs>
+    ligneCredit?: boolean | Engagement$ligneCreditArgs<ExtArgs>
     workflowTemplate?: boolean | Engagement$workflowTemplateArgs<ExtArgs>
     workflowStep?: boolean | Engagement$workflowStepArgs<ExtArgs>
     parentEngagement?: boolean | Engagement$parentEngagementArgs<ExtArgs>
     childEngagements?: boolean | Engagement$childEngagementsArgs<ExtArgs>
+    stepCompletions?: boolean | Engagement$stepCompletionsArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["engagement"]>
 
@@ -8810,31 +8944,33 @@ export namespace Prisma {
   }
 
   export type EngagementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ligneCredit?: boolean | LigneCreditDefaultArgs<ExtArgs>
+    ligneCredit?: boolean | Engagement$ligneCreditArgs<ExtArgs>
     workflowTemplate?: boolean | Engagement$workflowTemplateArgs<ExtArgs>
     workflowStep?: boolean | Engagement$workflowStepArgs<ExtArgs>
     parentEngagement?: boolean | Engagement$parentEngagementArgs<ExtArgs>
     childEngagements?: boolean | Engagement$childEngagementsArgs<ExtArgs>
+    stepCompletions?: boolean | Engagement$stepCompletionsArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $EngagementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Engagement"
     objects: {
-      ligneCredit: Prisma.$LigneCreditPayload<ExtArgs>
+      ligneCredit: Prisma.$LigneCreditPayload<ExtArgs> | null
       workflowTemplate: Prisma.$WorkflowTemplatePayload<ExtArgs> | null
       workflowStep: Prisma.$WorkflowStepPayload<ExtArgs> | null
       parentEngagement: Prisma.$EngagementPayload<ExtArgs> | null
       childEngagements: Prisma.$EngagementPayload<ExtArgs>[]
+      stepCompletions: Prisma.$StepCompletionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      ligneCreditId: string
+      ligneCreditId: string | null
       typeFinancement: string
-      montant: number
-      devise: string
-      dateEngagement: Date
-      dateEcheance: Date
+      montant: number | null
+      devise: string | null
+      dateEngagement: Date | null
+      dateEcheance: Date | null
       statut: string
       referenceDossier: string
       createdAt: Date
@@ -9182,11 +9318,12 @@ export namespace Prisma {
    */
   export interface Prisma__EngagementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    ligneCredit<T extends LigneCreditDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LigneCreditDefaultArgs<ExtArgs>>): Prisma__LigneCreditClient<$Result.GetResult<Prisma.$LigneCreditPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    ligneCredit<T extends Engagement$ligneCreditArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$ligneCreditArgs<ExtArgs>>): Prisma__LigneCreditClient<$Result.GetResult<Prisma.$LigneCreditPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     workflowTemplate<T extends Engagement$workflowTemplateArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$workflowTemplateArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     workflowStep<T extends Engagement$workflowStepArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$workflowStepArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     parentEngagement<T extends Engagement$parentEngagementArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$parentEngagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     childEngagements<T extends Engagement$childEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$childEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    stepCompletions<T extends Engagement$stepCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$stepCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9529,6 +9666,21 @@ export namespace Prisma {
   }
 
   /**
+   * Engagement.ligneCredit
+   */
+  export type Engagement$ligneCreditArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LigneCredit
+     */
+    select?: LigneCreditSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LigneCreditInclude<ExtArgs> | null
+    where?: LigneCreditWhereInput
+  }
+
+  /**
    * Engagement.workflowTemplate
    */
   export type Engagement$workflowTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9594,6 +9746,26 @@ export namespace Prisma {
   }
 
   /**
+   * Engagement.stepCompletions
+   */
+  export type Engagement$stepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    where?: StepCompletionWhereInput
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    cursor?: StepCompletionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
+  }
+
+  /**
    * Engagement without action
    */
   export type EngagementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9605,6 +9777,963 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EngagementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StepCompletion
+   */
+
+  export type AggregateStepCompletion = {
+    _count: StepCompletionCountAggregateOutputType | null
+    _min: StepCompletionMinAggregateOutputType | null
+    _max: StepCompletionMaxAggregateOutputType | null
+  }
+
+  export type StepCompletionMinAggregateOutputType = {
+    id: string | null
+    engagementId: string | null
+    workflowStepId: string | null
+    fieldData: string | null
+    documents: string | null
+    completedBy: string | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    notes: string | null
+  }
+
+  export type StepCompletionMaxAggregateOutputType = {
+    id: string | null
+    engagementId: string | null
+    workflowStepId: string | null
+    fieldData: string | null
+    documents: string | null
+    completedBy: string | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    notes: string | null
+  }
+
+  export type StepCompletionCountAggregateOutputType = {
+    id: number
+    engagementId: number
+    workflowStepId: number
+    fieldData: number
+    documents: number
+    completedBy: number
+    completedAt: number
+    createdAt: number
+    updatedAt: number
+    notes: number
+    _all: number
+  }
+
+
+  export type StepCompletionMinAggregateInputType = {
+    id?: true
+    engagementId?: true
+    workflowStepId?: true
+    fieldData?: true
+    documents?: true
+    completedBy?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    notes?: true
+  }
+
+  export type StepCompletionMaxAggregateInputType = {
+    id?: true
+    engagementId?: true
+    workflowStepId?: true
+    fieldData?: true
+    documents?: true
+    completedBy?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    notes?: true
+  }
+
+  export type StepCompletionCountAggregateInputType = {
+    id?: true
+    engagementId?: true
+    workflowStepId?: true
+    fieldData?: true
+    documents?: true
+    completedBy?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    notes?: true
+    _all?: true
+  }
+
+  export type StepCompletionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StepCompletion to aggregate.
+     */
+    where?: StepCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StepCompletions to fetch.
+     */
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StepCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StepCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StepCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StepCompletions
+    **/
+    _count?: true | StepCompletionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StepCompletionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StepCompletionMaxAggregateInputType
+  }
+
+  export type GetStepCompletionAggregateType<T extends StepCompletionAggregateArgs> = {
+        [P in keyof T & keyof AggregateStepCompletion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStepCompletion[P]>
+      : GetScalarType<T[P], AggregateStepCompletion[P]>
+  }
+
+
+
+
+  export type StepCompletionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StepCompletionWhereInput
+    orderBy?: StepCompletionOrderByWithAggregationInput | StepCompletionOrderByWithAggregationInput[]
+    by: StepCompletionScalarFieldEnum[] | StepCompletionScalarFieldEnum
+    having?: StepCompletionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StepCompletionCountAggregateInputType | true
+    _min?: StepCompletionMinAggregateInputType
+    _max?: StepCompletionMaxAggregateInputType
+  }
+
+  export type StepCompletionGroupByOutputType = {
+    id: string
+    engagementId: string
+    workflowStepId: string
+    fieldData: string | null
+    documents: string | null
+    completedBy: string | null
+    completedAt: Date
+    createdAt: Date
+    updatedAt: Date
+    notes: string | null
+    _count: StepCompletionCountAggregateOutputType | null
+    _min: StepCompletionMinAggregateOutputType | null
+    _max: StepCompletionMaxAggregateOutputType | null
+  }
+
+  type GetStepCompletionGroupByPayload<T extends StepCompletionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StepCompletionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StepCompletionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StepCompletionGroupByOutputType[P]>
+            : GetScalarType<T[P], StepCompletionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StepCompletionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    engagementId?: boolean
+    workflowStepId?: boolean
+    fieldData?: boolean
+    documents?: boolean
+    completedBy?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    notes?: boolean
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    workflowStep?: boolean | WorkflowStepDefaultArgs<ExtArgs>
+    user?: boolean | StepCompletion$userArgs<ExtArgs>
+  }, ExtArgs["result"]["stepCompletion"]>
+
+
+  export type StepCompletionSelectScalar = {
+    id?: boolean
+    engagementId?: boolean
+    workflowStepId?: boolean
+    fieldData?: boolean
+    documents?: boolean
+    completedBy?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    notes?: boolean
+  }
+
+  export type StepCompletionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | EngagementDefaultArgs<ExtArgs>
+    workflowStep?: boolean | WorkflowStepDefaultArgs<ExtArgs>
+    user?: boolean | StepCompletion$userArgs<ExtArgs>
+  }
+
+  export type $StepCompletionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StepCompletion"
+    objects: {
+      engagement: Prisma.$EngagementPayload<ExtArgs>
+      workflowStep: Prisma.$WorkflowStepPayload<ExtArgs>
+      user: Prisma.$userPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      engagementId: string
+      workflowStepId: string
+      fieldData: string | null
+      documents: string | null
+      completedBy: string | null
+      completedAt: Date
+      createdAt: Date
+      updatedAt: Date
+      notes: string | null
+    }, ExtArgs["result"]["stepCompletion"]>
+    composites: {}
+  }
+
+  type StepCompletionGetPayload<S extends boolean | null | undefined | StepCompletionDefaultArgs> = $Result.GetResult<Prisma.$StepCompletionPayload, S>
+
+  type StepCompletionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StepCompletionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StepCompletionCountAggregateInputType | true
+    }
+
+  export interface StepCompletionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StepCompletion'], meta: { name: 'StepCompletion' } }
+    /**
+     * Find zero or one StepCompletion that matches the filter.
+     * @param {StepCompletionFindUniqueArgs} args - Arguments to find a StepCompletion
+     * @example
+     * // Get one StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StepCompletionFindUniqueArgs>(args: SelectSubset<T, StepCompletionFindUniqueArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one StepCompletion that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {StepCompletionFindUniqueOrThrowArgs} args - Arguments to find a StepCompletion
+     * @example
+     * // Get one StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StepCompletionFindUniqueOrThrowArgs>(args: SelectSubset<T, StepCompletionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first StepCompletion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionFindFirstArgs} args - Arguments to find a StepCompletion
+     * @example
+     * // Get one StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StepCompletionFindFirstArgs>(args?: SelectSubset<T, StepCompletionFindFirstArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first StepCompletion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionFindFirstOrThrowArgs} args - Arguments to find a StepCompletion
+     * @example
+     * // Get one StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StepCompletionFindFirstOrThrowArgs>(args?: SelectSubset<T, StepCompletionFindFirstOrThrowArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more StepCompletions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StepCompletions
+     * const stepCompletions = await prisma.stepCompletion.findMany()
+     * 
+     * // Get first 10 StepCompletions
+     * const stepCompletions = await prisma.stepCompletion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stepCompletionWithIdOnly = await prisma.stepCompletion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StepCompletionFindManyArgs>(args?: SelectSubset<T, StepCompletionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a StepCompletion.
+     * @param {StepCompletionCreateArgs} args - Arguments to create a StepCompletion.
+     * @example
+     * // Create one StepCompletion
+     * const StepCompletion = await prisma.stepCompletion.create({
+     *   data: {
+     *     // ... data to create a StepCompletion
+     *   }
+     * })
+     * 
+     */
+    create<T extends StepCompletionCreateArgs>(args: SelectSubset<T, StepCompletionCreateArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many StepCompletions.
+     * @param {StepCompletionCreateManyArgs} args - Arguments to create many StepCompletions.
+     * @example
+     * // Create many StepCompletions
+     * const stepCompletion = await prisma.stepCompletion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StepCompletionCreateManyArgs>(args?: SelectSubset<T, StepCompletionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a StepCompletion.
+     * @param {StepCompletionDeleteArgs} args - Arguments to delete one StepCompletion.
+     * @example
+     * // Delete one StepCompletion
+     * const StepCompletion = await prisma.stepCompletion.delete({
+     *   where: {
+     *     // ... filter to delete one StepCompletion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StepCompletionDeleteArgs>(args: SelectSubset<T, StepCompletionDeleteArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one StepCompletion.
+     * @param {StepCompletionUpdateArgs} args - Arguments to update one StepCompletion.
+     * @example
+     * // Update one StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StepCompletionUpdateArgs>(args: SelectSubset<T, StepCompletionUpdateArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more StepCompletions.
+     * @param {StepCompletionDeleteManyArgs} args - Arguments to filter StepCompletions to delete.
+     * @example
+     * // Delete a few StepCompletions
+     * const { count } = await prisma.stepCompletion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StepCompletionDeleteManyArgs>(args?: SelectSubset<T, StepCompletionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StepCompletions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StepCompletions
+     * const stepCompletion = await prisma.stepCompletion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StepCompletionUpdateManyArgs>(args: SelectSubset<T, StepCompletionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one StepCompletion.
+     * @param {StepCompletionUpsertArgs} args - Arguments to update or create a StepCompletion.
+     * @example
+     * // Update or create a StepCompletion
+     * const stepCompletion = await prisma.stepCompletion.upsert({
+     *   create: {
+     *     // ... data to create a StepCompletion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StepCompletion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StepCompletionUpsertArgs>(args: SelectSubset<T, StepCompletionUpsertArgs<ExtArgs>>): Prisma__StepCompletionClient<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of StepCompletions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionCountArgs} args - Arguments to filter StepCompletions to count.
+     * @example
+     * // Count the number of StepCompletions
+     * const count = await prisma.stepCompletion.count({
+     *   where: {
+     *     // ... the filter for the StepCompletions we want to count
+     *   }
+     * })
+    **/
+    count<T extends StepCompletionCountArgs>(
+      args?: Subset<T, StepCompletionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StepCompletionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StepCompletion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StepCompletionAggregateArgs>(args: Subset<T, StepCompletionAggregateArgs>): Prisma.PrismaPromise<GetStepCompletionAggregateType<T>>
+
+    /**
+     * Group by StepCompletion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StepCompletionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StepCompletionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StepCompletionGroupByArgs['orderBy'] }
+        : { orderBy?: StepCompletionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StepCompletionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStepCompletionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StepCompletion model
+   */
+  readonly fields: StepCompletionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StepCompletion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StepCompletionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    engagement<T extends EngagementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EngagementDefaultArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    workflowStep<T extends WorkflowStepDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowStepDefaultArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends StepCompletion$userArgs<ExtArgs> = {}>(args?: Subset<T, StepCompletion$userArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StepCompletion model
+   */ 
+  interface StepCompletionFieldRefs {
+    readonly id: FieldRef<"StepCompletion", 'String'>
+    readonly engagementId: FieldRef<"StepCompletion", 'String'>
+    readonly workflowStepId: FieldRef<"StepCompletion", 'String'>
+    readonly fieldData: FieldRef<"StepCompletion", 'String'>
+    readonly documents: FieldRef<"StepCompletion", 'String'>
+    readonly completedBy: FieldRef<"StepCompletion", 'String'>
+    readonly completedAt: FieldRef<"StepCompletion", 'DateTime'>
+    readonly createdAt: FieldRef<"StepCompletion", 'DateTime'>
+    readonly updatedAt: FieldRef<"StepCompletion", 'DateTime'>
+    readonly notes: FieldRef<"StepCompletion", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StepCompletion findUnique
+   */
+  export type StepCompletionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter, which StepCompletion to fetch.
+     */
+    where: StepCompletionWhereUniqueInput
+  }
+
+  /**
+   * StepCompletion findUniqueOrThrow
+   */
+  export type StepCompletionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter, which StepCompletion to fetch.
+     */
+    where: StepCompletionWhereUniqueInput
+  }
+
+  /**
+   * StepCompletion findFirst
+   */
+  export type StepCompletionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter, which StepCompletion to fetch.
+     */
+    where?: StepCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StepCompletions to fetch.
+     */
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StepCompletions.
+     */
+    cursor?: StepCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StepCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StepCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StepCompletions.
+     */
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * StepCompletion findFirstOrThrow
+   */
+  export type StepCompletionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter, which StepCompletion to fetch.
+     */
+    where?: StepCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StepCompletions to fetch.
+     */
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StepCompletions.
+     */
+    cursor?: StepCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StepCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StepCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StepCompletions.
+     */
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * StepCompletion findMany
+   */
+  export type StepCompletionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter, which StepCompletions to fetch.
+     */
+    where?: StepCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StepCompletions to fetch.
+     */
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StepCompletions.
+     */
+    cursor?: StepCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StepCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StepCompletions.
+     */
+    skip?: number
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * StepCompletion create
+   */
+  export type StepCompletionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StepCompletion.
+     */
+    data: XOR<StepCompletionCreateInput, StepCompletionUncheckedCreateInput>
+  }
+
+  /**
+   * StepCompletion createMany
+   */
+  export type StepCompletionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StepCompletions.
+     */
+    data: StepCompletionCreateManyInput | StepCompletionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StepCompletion update
+   */
+  export type StepCompletionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StepCompletion.
+     */
+    data: XOR<StepCompletionUpdateInput, StepCompletionUncheckedUpdateInput>
+    /**
+     * Choose, which StepCompletion to update.
+     */
+    where: StepCompletionWhereUniqueInput
+  }
+
+  /**
+   * StepCompletion updateMany
+   */
+  export type StepCompletionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StepCompletions.
+     */
+    data: XOR<StepCompletionUpdateManyMutationInput, StepCompletionUncheckedUpdateManyInput>
+    /**
+     * Filter which StepCompletions to update
+     */
+    where?: StepCompletionWhereInput
+  }
+
+  /**
+   * StepCompletion upsert
+   */
+  export type StepCompletionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StepCompletion to update in case it exists.
+     */
+    where: StepCompletionWhereUniqueInput
+    /**
+     * In case the StepCompletion found by the `where` argument doesn't exist, create a new StepCompletion with this data.
+     */
+    create: XOR<StepCompletionCreateInput, StepCompletionUncheckedCreateInput>
+    /**
+     * In case the StepCompletion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StepCompletionUpdateInput, StepCompletionUncheckedUpdateInput>
+  }
+
+  /**
+   * StepCompletion delete
+   */
+  export type StepCompletionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    /**
+     * Filter which StepCompletion to delete.
+     */
+    where: StepCompletionWhereUniqueInput
+  }
+
+  /**
+   * StepCompletion deleteMany
+   */
+  export type StepCompletionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StepCompletions to delete
+     */
+    where?: StepCompletionWhereInput
+  }
+
+  /**
+   * StepCompletion.user
+   */
+  export type StepCompletion$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user
+     */
+    select?: userSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    where?: userWhereInput
+  }
+
+  /**
+   * StepCompletion without action
+   */
+  export type StepCompletionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
   }
 
 
@@ -22602,7 +23731,7 @@ export namespace Prisma {
 
   export type WorkflowStepMinAggregateOutputType = {
     id: string | null
-    templateId: string | null
+    workflowTemplateId: string | null
     stepOrder: number | null
     code: string | null
     label: string | null
@@ -22617,7 +23746,7 @@ export namespace Prisma {
 
   export type WorkflowStepMaxAggregateOutputType = {
     id: string | null
-    templateId: string | null
+    workflowTemplateId: string | null
     stepOrder: number | null
     code: string | null
     label: string | null
@@ -22632,7 +23761,7 @@ export namespace Prisma {
 
   export type WorkflowStepCountAggregateOutputType = {
     id: number
-    templateId: number
+    workflowTemplateId: number
     stepOrder: number
     code: number
     label: number
@@ -22661,7 +23790,7 @@ export namespace Prisma {
 
   export type WorkflowStepMinAggregateInputType = {
     id?: true
-    templateId?: true
+    workflowTemplateId?: true
     stepOrder?: true
     code?: true
     label?: true
@@ -22676,7 +23805,7 @@ export namespace Prisma {
 
   export type WorkflowStepMaxAggregateInputType = {
     id?: true
-    templateId?: true
+    workflowTemplateId?: true
     stepOrder?: true
     code?: true
     label?: true
@@ -22691,7 +23820,7 @@ export namespace Prisma {
 
   export type WorkflowStepCountAggregateInputType = {
     id?: true
-    templateId?: true
+    workflowTemplateId?: true
     stepOrder?: true
     code?: true
     label?: true
@@ -22797,7 +23926,7 @@ export namespace Prisma {
 
   export type WorkflowStepGroupByOutputType = {
     id: string
-    templateId: string
+    workflowTemplateId: string
     stepOrder: number
     code: string
     label: string
@@ -22835,7 +23964,7 @@ export namespace Prisma {
 
   export type WorkflowStepSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    templateId?: boolean
+    workflowTemplateId?: boolean
     stepOrder?: boolean
     code?: boolean
     label?: boolean
@@ -22852,13 +23981,14 @@ export namespace Prisma {
     updatedAt?: boolean
     template?: boolean | WorkflowTemplateDefaultArgs<ExtArgs>
     engagements?: boolean | WorkflowStep$engagementsArgs<ExtArgs>
+    stepCompletions?: boolean | WorkflowStep$stepCompletionsArgs<ExtArgs>
     _count?: boolean | WorkflowStepCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflowStep"]>
 
 
   export type WorkflowStepSelectScalar = {
     id?: boolean
-    templateId?: boolean
+    workflowTemplateId?: boolean
     stepOrder?: boolean
     code?: boolean
     label?: boolean
@@ -22878,6 +24008,7 @@ export namespace Prisma {
   export type WorkflowStepInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     template?: boolean | WorkflowTemplateDefaultArgs<ExtArgs>
     engagements?: boolean | WorkflowStep$engagementsArgs<ExtArgs>
+    stepCompletions?: boolean | WorkflowStep$stepCompletionsArgs<ExtArgs>
     _count?: boolean | WorkflowStepCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -22886,10 +24017,11 @@ export namespace Prisma {
     objects: {
       template: Prisma.$WorkflowTemplatePayload<ExtArgs>
       engagements: Prisma.$EngagementPayload<ExtArgs>[]
+      stepCompletions: Prisma.$StepCompletionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      templateId: string
+      workflowTemplateId: string
       stepOrder: number
       code: string
       label: string
@@ -23246,6 +24378,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     template<T extends WorkflowTemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowTemplateDefaultArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     engagements<T extends WorkflowStep$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowStep$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    stepCompletions<T extends WorkflowStep$stepCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowStep$stepCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StepCompletionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23276,7 +24409,7 @@ export namespace Prisma {
    */ 
   interface WorkflowStepFieldRefs {
     readonly id: FieldRef<"WorkflowStep", 'String'>
-    readonly templateId: FieldRef<"WorkflowStep", 'String'>
+    readonly workflowTemplateId: FieldRef<"WorkflowStep", 'String'>
     readonly stepOrder: FieldRef<"WorkflowStep", 'Int'>
     readonly code: FieldRef<"WorkflowStep", 'String'>
     readonly label: FieldRef<"WorkflowStep", 'String'>
@@ -23610,6 +24743,26 @@ export namespace Prisma {
   }
 
   /**
+   * WorkflowStep.stepCompletions
+   */
+  export type WorkflowStep$stepCompletionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StepCompletion
+     */
+    select?: StepCompletionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StepCompletionInclude<ExtArgs> | null
+    where?: StepCompletionWhereInput
+    orderBy?: StepCompletionOrderByWithRelationInput | StepCompletionOrderByWithRelationInput[]
+    cursor?: StepCompletionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StepCompletionScalarFieldEnum | StepCompletionScalarFieldEnum[]
+  }
+
+  /**
    * WorkflowStep without action
    */
   export type WorkflowStepDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23780,6 +24933,22 @@ export namespace Prisma {
   };
 
   export type EngagementScalarFieldEnum = (typeof EngagementScalarFieldEnum)[keyof typeof EngagementScalarFieldEnum]
+
+
+  export const StepCompletionScalarFieldEnum: {
+    id: 'id',
+    engagementId: 'engagementId',
+    workflowStepId: 'workflowStepId',
+    fieldData: 'fieldData',
+    documents: 'documents',
+    completedBy: 'completedBy',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    notes: 'notes'
+  };
+
+  export type StepCompletionScalarFieldEnum = (typeof StepCompletionScalarFieldEnum)[keyof typeof StepCompletionScalarFieldEnum]
 
 
   export const SwiftMessageScalarFieldEnum: {
@@ -23970,7 +25139,7 @@ export namespace Prisma {
 
   export const WorkflowStepScalarFieldEnum: {
     id: 'id',
-    templateId: 'templateId',
+    workflowTemplateId: 'workflowTemplateId',
     stepOrder: 'stepOrder',
     code: 'code',
     label: 'label',
@@ -24097,6 +25266,7 @@ export namespace Prisma {
     businessUnit?: XOR<BusinessUnitNullableRelationFilter, BusinessUnitWhereInput> | null
     userRoles?: UserRoleListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    stepCompletions?: StepCompletionListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
@@ -24120,6 +25290,7 @@ export namespace Prisma {
     businessUnit?: BusinessUnitOrderByWithRelationInput
     userRoles?: UserRoleOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
+    stepCompletions?: StepCompletionOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -24146,6 +25317,7 @@ export namespace Prisma {
     businessUnit?: XOR<BusinessUnitNullableRelationFilter, BusinessUnitWhereInput> | null
     userRoles?: UserRoleListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    stepCompletions?: StepCompletionListRelationFilter
   }, "id" | "email">
 
   export type userOrderByWithAggregationInput = {
@@ -24725,12 +25897,12 @@ export namespace Prisma {
     OR?: EngagementWhereInput[]
     NOT?: EngagementWhereInput | EngagementWhereInput[]
     id?: StringFilter<"Engagement"> | string
-    ligneCreditId?: StringFilter<"Engagement"> | string
+    ligneCreditId?: StringNullableFilter<"Engagement"> | string | null
     typeFinancement?: StringFilter<"Engagement"> | string
-    montant?: FloatFilter<"Engagement"> | number
-    devise?: StringFilter<"Engagement"> | string
-    dateEngagement?: DateTimeFilter<"Engagement"> | Date | string
-    dateEcheance?: DateTimeFilter<"Engagement"> | Date | string
+    montant?: FloatNullableFilter<"Engagement"> | number | null
+    devise?: StringNullableFilter<"Engagement"> | string | null
+    dateEngagement?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    dateEcheance?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     statut?: StringFilter<"Engagement"> | string
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
@@ -24738,21 +25910,22 @@ export namespace Prisma {
     workflowTemplateId?: StringNullableFilter<"Engagement"> | string | null
     workflowStepId?: StringNullableFilter<"Engagement"> | string | null
     parentEngagementId?: StringNullableFilter<"Engagement"> | string | null
-    ligneCredit?: XOR<LigneCreditRelationFilter, LigneCreditWhereInput>
+    ligneCredit?: XOR<LigneCreditNullableRelationFilter, LigneCreditWhereInput> | null
     workflowTemplate?: XOR<WorkflowTemplateNullableRelationFilter, WorkflowTemplateWhereInput> | null
     workflowStep?: XOR<WorkflowStepNullableRelationFilter, WorkflowStepWhereInput> | null
     parentEngagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
     childEngagements?: EngagementListRelationFilter
+    stepCompletions?: StepCompletionListRelationFilter
   }
 
   export type EngagementOrderByWithRelationInput = {
     id?: SortOrder
-    ligneCreditId?: SortOrder
+    ligneCreditId?: SortOrderInput | SortOrder
     typeFinancement?: SortOrder
-    montant?: SortOrder
-    devise?: SortOrder
-    dateEngagement?: SortOrder
-    dateEcheance?: SortOrder
+    montant?: SortOrderInput | SortOrder
+    devise?: SortOrderInput | SortOrder
+    dateEngagement?: SortOrderInput | SortOrder
+    dateEcheance?: SortOrderInput | SortOrder
     statut?: SortOrder
     referenceDossier?: SortOrder
     createdAt?: SortOrder
@@ -24765,6 +25938,7 @@ export namespace Prisma {
     workflowStep?: WorkflowStepOrderByWithRelationInput
     parentEngagement?: EngagementOrderByWithRelationInput
     childEngagements?: EngagementOrderByRelationAggregateInput
+    stepCompletions?: StepCompletionOrderByRelationAggregateInput
   }
 
   export type EngagementWhereUniqueInput = Prisma.AtLeast<{
@@ -24772,12 +25946,12 @@ export namespace Prisma {
     AND?: EngagementWhereInput | EngagementWhereInput[]
     OR?: EngagementWhereInput[]
     NOT?: EngagementWhereInput | EngagementWhereInput[]
-    ligneCreditId?: StringFilter<"Engagement"> | string
+    ligneCreditId?: StringNullableFilter<"Engagement"> | string | null
     typeFinancement?: StringFilter<"Engagement"> | string
-    montant?: FloatFilter<"Engagement"> | number
-    devise?: StringFilter<"Engagement"> | string
-    dateEngagement?: DateTimeFilter<"Engagement"> | Date | string
-    dateEcheance?: DateTimeFilter<"Engagement"> | Date | string
+    montant?: FloatNullableFilter<"Engagement"> | number | null
+    devise?: StringNullableFilter<"Engagement"> | string | null
+    dateEngagement?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    dateEcheance?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     statut?: StringFilter<"Engagement"> | string
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
@@ -24785,21 +25959,22 @@ export namespace Prisma {
     workflowTemplateId?: StringNullableFilter<"Engagement"> | string | null
     workflowStepId?: StringNullableFilter<"Engagement"> | string | null
     parentEngagementId?: StringNullableFilter<"Engagement"> | string | null
-    ligneCredit?: XOR<LigneCreditRelationFilter, LigneCreditWhereInput>
+    ligneCredit?: XOR<LigneCreditNullableRelationFilter, LigneCreditWhereInput> | null
     workflowTemplate?: XOR<WorkflowTemplateNullableRelationFilter, WorkflowTemplateWhereInput> | null
     workflowStep?: XOR<WorkflowStepNullableRelationFilter, WorkflowStepWhereInput> | null
     parentEngagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
     childEngagements?: EngagementListRelationFilter
+    stepCompletions?: StepCompletionListRelationFilter
   }, "id">
 
   export type EngagementOrderByWithAggregationInput = {
     id?: SortOrder
-    ligneCreditId?: SortOrder
+    ligneCreditId?: SortOrderInput | SortOrder
     typeFinancement?: SortOrder
-    montant?: SortOrder
-    devise?: SortOrder
-    dateEngagement?: SortOrder
-    dateEcheance?: SortOrder
+    montant?: SortOrderInput | SortOrder
+    devise?: SortOrderInput | SortOrder
+    dateEngagement?: SortOrderInput | SortOrder
+    dateEcheance?: SortOrderInput | SortOrder
     statut?: SortOrder
     referenceDossier?: SortOrder
     createdAt?: SortOrder
@@ -24819,12 +25994,12 @@ export namespace Prisma {
     OR?: EngagementScalarWhereWithAggregatesInput[]
     NOT?: EngagementScalarWhereWithAggregatesInput | EngagementScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Engagement"> | string
-    ligneCreditId?: StringWithAggregatesFilter<"Engagement"> | string
+    ligneCreditId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
     typeFinancement?: StringWithAggregatesFilter<"Engagement"> | string
-    montant?: FloatWithAggregatesFilter<"Engagement"> | number
-    devise?: StringWithAggregatesFilter<"Engagement"> | string
-    dateEngagement?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
-    dateEcheance?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
+    montant?: FloatNullableWithAggregatesFilter<"Engagement"> | number | null
+    devise?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    dateEngagement?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
+    dateEcheance?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
     statut?: StringWithAggregatesFilter<"Engagement"> | string
     referenceDossier?: StringWithAggregatesFilter<"Engagement"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
@@ -24832,6 +26007,92 @@ export namespace Prisma {
     workflowTemplateId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
     workflowStepId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
     parentEngagementId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+  }
+
+  export type StepCompletionWhereInput = {
+    AND?: StepCompletionWhereInput | StepCompletionWhereInput[]
+    OR?: StepCompletionWhereInput[]
+    NOT?: StepCompletionWhereInput | StepCompletionWhereInput[]
+    id?: StringFilter<"StepCompletion"> | string
+    engagementId?: StringFilter<"StepCompletion"> | string
+    workflowStepId?: StringFilter<"StepCompletion"> | string
+    fieldData?: StringNullableFilter<"StepCompletion"> | string | null
+    documents?: StringNullableFilter<"StepCompletion"> | string | null
+    completedBy?: StringNullableFilter<"StepCompletion"> | string | null
+    completedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    createdAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    updatedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    notes?: StringNullableFilter<"StepCompletion"> | string | null
+    engagement?: XOR<EngagementRelationFilter, EngagementWhereInput>
+    workflowStep?: XOR<WorkflowStepRelationFilter, WorkflowStepWhereInput>
+    user?: XOR<UserNullableRelationFilter, userWhereInput> | null
+  }
+
+  export type StepCompletionOrderByWithRelationInput = {
+    id?: SortOrder
+    engagementId?: SortOrder
+    workflowStepId?: SortOrder
+    fieldData?: SortOrderInput | SortOrder
+    documents?: SortOrderInput | SortOrder
+    completedBy?: SortOrderInput | SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    engagement?: EngagementOrderByWithRelationInput
+    workflowStep?: WorkflowStepOrderByWithRelationInput
+    user?: userOrderByWithRelationInput
+  }
+
+  export type StepCompletionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StepCompletionWhereInput | StepCompletionWhereInput[]
+    OR?: StepCompletionWhereInput[]
+    NOT?: StepCompletionWhereInput | StepCompletionWhereInput[]
+    engagementId?: StringFilter<"StepCompletion"> | string
+    workflowStepId?: StringFilter<"StepCompletion"> | string
+    fieldData?: StringNullableFilter<"StepCompletion"> | string | null
+    documents?: StringNullableFilter<"StepCompletion"> | string | null
+    completedBy?: StringNullableFilter<"StepCompletion"> | string | null
+    completedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    createdAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    updatedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    notes?: StringNullableFilter<"StepCompletion"> | string | null
+    engagement?: XOR<EngagementRelationFilter, EngagementWhereInput>
+    workflowStep?: XOR<WorkflowStepRelationFilter, WorkflowStepWhereInput>
+    user?: XOR<UserNullableRelationFilter, userWhereInput> | null
+  }, "id">
+
+  export type StepCompletionOrderByWithAggregationInput = {
+    id?: SortOrder
+    engagementId?: SortOrder
+    workflowStepId?: SortOrder
+    fieldData?: SortOrderInput | SortOrder
+    documents?: SortOrderInput | SortOrder
+    completedBy?: SortOrderInput | SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    _count?: StepCompletionCountOrderByAggregateInput
+    _max?: StepCompletionMaxOrderByAggregateInput
+    _min?: StepCompletionMinOrderByAggregateInput
+  }
+
+  export type StepCompletionScalarWhereWithAggregatesInput = {
+    AND?: StepCompletionScalarWhereWithAggregatesInput | StepCompletionScalarWhereWithAggregatesInput[]
+    OR?: StepCompletionScalarWhereWithAggregatesInput[]
+    NOT?: StepCompletionScalarWhereWithAggregatesInput | StepCompletionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StepCompletion"> | string
+    engagementId?: StringWithAggregatesFilter<"StepCompletion"> | string
+    workflowStepId?: StringWithAggregatesFilter<"StepCompletion"> | string
+    fieldData?: StringNullableWithAggregatesFilter<"StepCompletion"> | string | null
+    documents?: StringNullableWithAggregatesFilter<"StepCompletion"> | string | null
+    completedBy?: StringNullableWithAggregatesFilter<"StepCompletion"> | string | null
+    completedAt?: DateTimeWithAggregatesFilter<"StepCompletion"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"StepCompletion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StepCompletion"> | Date | string
+    notes?: StringNullableWithAggregatesFilter<"StepCompletion"> | string | null
   }
 
   export type SwiftMessageWhereInput = {
@@ -25816,7 +27077,7 @@ export namespace Prisma {
     OR?: WorkflowStepWhereInput[]
     NOT?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
     id?: StringFilter<"WorkflowStep"> | string
-    templateId?: StringFilter<"WorkflowStep"> | string
+    workflowTemplateId?: StringFilter<"WorkflowStep"> | string
     stepOrder?: IntFilter<"WorkflowStep"> | number
     code?: StringFilter<"WorkflowStep"> | string
     label?: StringFilter<"WorkflowStep"> | string
@@ -25833,11 +27094,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"WorkflowStep"> | Date | string
     template?: XOR<WorkflowTemplateRelationFilter, WorkflowTemplateWhereInput>
     engagements?: EngagementListRelationFilter
+    stepCompletions?: StepCompletionListRelationFilter
   }
 
   export type WorkflowStepOrderByWithRelationInput = {
     id?: SortOrder
-    templateId?: SortOrder
+    workflowTemplateId?: SortOrder
     stepOrder?: SortOrder
     code?: SortOrder
     label?: SortOrder
@@ -25854,15 +27116,16 @@ export namespace Prisma {
     updatedAt?: SortOrder
     template?: WorkflowTemplateOrderByWithRelationInput
     engagements?: EngagementOrderByRelationAggregateInput
+    stepCompletions?: StepCompletionOrderByRelationAggregateInput
   }
 
   export type WorkflowStepWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    templateId_stepOrder?: WorkflowStepTemplateIdStepOrderCompoundUniqueInput
+    workflowTemplateId_stepOrder?: WorkflowStepWorkflowTemplateIdStepOrderCompoundUniqueInput
     AND?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
     OR?: WorkflowStepWhereInput[]
     NOT?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
-    templateId?: StringFilter<"WorkflowStep"> | string
+    workflowTemplateId?: StringFilter<"WorkflowStep"> | string
     stepOrder?: IntFilter<"WorkflowStep"> | number
     code?: StringFilter<"WorkflowStep"> | string
     label?: StringFilter<"WorkflowStep"> | string
@@ -25879,11 +27142,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"WorkflowStep"> | Date | string
     template?: XOR<WorkflowTemplateRelationFilter, WorkflowTemplateWhereInput>
     engagements?: EngagementListRelationFilter
-  }, "id" | "templateId_stepOrder">
+    stepCompletions?: StepCompletionListRelationFilter
+  }, "id" | "workflowTemplateId_stepOrder">
 
   export type WorkflowStepOrderByWithAggregationInput = {
     id?: SortOrder
-    templateId?: SortOrder
+    workflowTemplateId?: SortOrder
     stepOrder?: SortOrder
     code?: SortOrder
     label?: SortOrder
@@ -25910,7 +27174,7 @@ export namespace Prisma {
     OR?: WorkflowStepScalarWhereWithAggregatesInput[]
     NOT?: WorkflowStepScalarWhereWithAggregatesInput | WorkflowStepScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"WorkflowStep"> | string
-    templateId?: StringWithAggregatesFilter<"WorkflowStep"> | string
+    workflowTemplateId?: StringWithAggregatesFilter<"WorkflowStep"> | string
     stepOrder?: IntWithAggregatesFilter<"WorkflowStep"> | number
     code?: StringWithAggregatesFilter<"WorkflowStep"> | string
     label?: StringWithAggregatesFilter<"WorkflowStep"> | string
@@ -25946,6 +27210,7 @@ export namespace Prisma {
     businessUnit?: BusinessUnitCreateNestedOneWithoutUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -25967,6 +27232,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
@@ -25988,6 +27254,7 @@ export namespace Prisma {
     businessUnit?: BusinessUnitUpdateOneWithoutUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -26009,6 +27276,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -26716,29 +27984,30 @@ export namespace Prisma {
   export type EngagementCreateInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
     workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
     workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
     parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
     childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -26747,34 +28016,36 @@ export namespace Prisma {
     workflowStepId?: string | null
     parentEngagementId?: string | null
     childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
     workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
     workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
     parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
     childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26783,16 +28054,17 @@ export namespace Prisma {
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
     childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementCreateManyInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -26805,10 +28077,10 @@ export namespace Prisma {
   export type EngagementUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26817,12 +28089,12 @@ export namespace Prisma {
 
   export type EngagementUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26830,6 +28102,94 @@ export namespace Prisma {
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionCreateInput = {
+    id?: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+    engagement: EngagementCreateNestedOneWithoutStepCompletionsInput
+    workflowStep: WorkflowStepCreateNestedOneWithoutStepCompletionsInput
+    user?: userCreateNestedOneWithoutStepCompletionsInput
+  }
+
+  export type StepCompletionUncheckedCreateInput = {
+    id?: string
+    engagementId: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
+  export type StepCompletionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    engagement?: EngagementUpdateOneRequiredWithoutStepCompletionsNestedInput
+    workflowStep?: WorkflowStepUpdateOneRequiredWithoutStepCompletionsNestedInput
+    user?: userUpdateOneWithoutStepCompletionsNestedInput
+  }
+
+  export type StepCompletionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionCreateManyInput = {
+    id?: string
+    engagementId: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
+  export type StepCompletionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwiftMessageCreateInput = {
@@ -27901,11 +29261,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     template: WorkflowTemplateCreateNestedOneWithoutStepsInput
     engagements?: EngagementCreateNestedManyWithoutWorkflowStepInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepUncheckedCreateInput = {
     id?: string
-    templateId: string
+    workflowTemplateId: string
     stepOrder: number
     code: string
     label: string
@@ -27921,6 +29282,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepUpdateInput = {
@@ -27941,11 +29303,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     template?: WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput
     engagements?: EngagementUpdateManyWithoutWorkflowStepNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type WorkflowStepUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    workflowTemplateId?: StringFieldUpdateOperationsInput | string
     stepOrder?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
@@ -27961,11 +29324,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type WorkflowStepCreateManyInput = {
     id?: string
-    templateId: string
+    workflowTemplateId: string
     stepOrder: number
     code: string
     label: string
@@ -28002,7 +29366,7 @@ export namespace Prisma {
 
   export type WorkflowStepUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    workflowTemplateId?: StringFieldUpdateOperationsInput | string
     stepOrder?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
@@ -28107,6 +29471,12 @@ export namespace Prisma {
     none?: AuditLogWhereInput
   }
 
+  export type StepCompletionListRelationFilter = {
+    every?: StepCompletionWhereInput
+    some?: StepCompletionWhereInput
+    none?: StepCompletionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -28117,6 +29487,10 @@ export namespace Prisma {
   }
 
   export type AuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StepCompletionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28708,6 +30082,22 @@ export namespace Prisma {
     montant?: SortOrder
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type LigneCreditNullableRelationFilter = {
+    is?: LigneCreditWhereInput | null
+    isNot?: LigneCreditWhereInput | null
+  }
+
   export type WorkflowTemplateNullableRelationFilter = {
     is?: WorkflowTemplateWhereInput | null
     isNot?: WorkflowTemplateWhereInput | null
@@ -28780,6 +30170,76 @@ export namespace Prisma {
 
   export type EngagementSumOrderByAggregateInput = {
     montant?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EngagementRelationFilter = {
+    is?: EngagementWhereInput
+    isNot?: EngagementWhereInput
+  }
+
+  export type WorkflowStepRelationFilter = {
+    is?: WorkflowStepWhereInput
+    isNot?: WorkflowStepWhereInput
+  }
+
+  export type UserNullableRelationFilter = {
+    is?: userWhereInput | null
+    isNot?: userWhereInput | null
+  }
+
+  export type StepCompletionCountOrderByAggregateInput = {
+    id?: SortOrder
+    engagementId?: SortOrder
+    workflowStepId?: SortOrder
+    fieldData?: SortOrder
+    documents?: SortOrder
+    completedBy?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    notes?: SortOrder
+  }
+
+  export type StepCompletionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    engagementId?: SortOrder
+    workflowStepId?: SortOrder
+    fieldData?: SortOrder
+    documents?: SortOrder
+    completedBy?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    notes?: SortOrder
+  }
+
+  export type StepCompletionMinOrderByAggregateInput = {
+    id?: SortOrder
+    engagementId?: SortOrder
+    workflowStepId?: SortOrder
+    fieldData?: SortOrder
+    documents?: SortOrder
+    completedBy?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    notes?: SortOrder
   }
 
   export type SwiftMessageCountOrderByAggregateInput = {
@@ -29280,11 +30740,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type UserNullableRelationFilter = {
-    is?: userWhereInput | null
-    isNot?: userWhereInput | null
-  }
-
   export type AuditLogCountOrderByAggregateInput = {
     id?: SortOrder
     action?: SortOrder
@@ -29407,14 +30862,14 @@ export namespace Prisma {
     isNot?: WorkflowTemplateWhereInput
   }
 
-  export type WorkflowStepTemplateIdStepOrderCompoundUniqueInput = {
-    templateId: string
+  export type WorkflowStepWorkflowTemplateIdStepOrderCompoundUniqueInput = {
+    workflowTemplateId: string
     stepOrder: number
   }
 
   export type WorkflowStepCountOrderByAggregateInput = {
     id?: SortOrder
-    templateId?: SortOrder
+    workflowTemplateId?: SortOrder
     stepOrder?: SortOrder
     code?: SortOrder
     label?: SortOrder
@@ -29437,7 +30892,7 @@ export namespace Prisma {
 
   export type WorkflowStepMaxOrderByAggregateInput = {
     id?: SortOrder
-    templateId?: SortOrder
+    workflowTemplateId?: SortOrder
     stepOrder?: SortOrder
     code?: SortOrder
     label?: SortOrder
@@ -29452,7 +30907,7 @@ export namespace Prisma {
 
   export type WorkflowStepMinOrderByAggregateInput = {
     id?: SortOrder
-    templateId?: SortOrder
+    workflowTemplateId?: SortOrder
     stepOrder?: SortOrder
     code?: SortOrder
     label?: SortOrder
@@ -29495,6 +30950,13 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
+  export type StepCompletionCreateNestedManyWithoutUserInput = {
+    create?: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput> | StepCompletionCreateWithoutUserInput[] | StepCompletionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutUserInput | StepCompletionCreateOrConnectWithoutUserInput[]
+    createMany?: StepCompletionCreateManyUserInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -29507,6 +30969,13 @@ export namespace Prisma {
     connectOrCreate?: AuditLogCreateOrConnectWithoutUserInput | AuditLogCreateOrConnectWithoutUserInput[]
     createMany?: AuditLogCreateManyUserInputEnvelope
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+  }
+
+  export type StepCompletionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput> | StepCompletionCreateWithoutUserInput[] | StepCompletionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutUserInput | StepCompletionCreateOrConnectWithoutUserInput[]
+    createMany?: StepCompletionCreateManyUserInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -29585,6 +31054,20 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
+  export type StepCompletionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput> | StepCompletionCreateWithoutUserInput[] | StepCompletionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutUserInput | StepCompletionCreateOrConnectWithoutUserInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutUserInput | StepCompletionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StepCompletionCreateManyUserInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutUserInput | StepCompletionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutUserInput | StepCompletionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -29611,6 +31094,20 @@ export namespace Prisma {
     update?: AuditLogUpdateWithWhereUniqueWithoutUserInput | AuditLogUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AuditLogUpdateManyWithWhereWithoutUserInput | AuditLogUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput> | StepCompletionCreateWithoutUserInput[] | StepCompletionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutUserInput | StepCompletionCreateOrConnectWithoutUserInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutUserInput | StepCompletionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StepCompletionCreateManyUserInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutUserInput | StepCompletionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutUserInput | StepCompletionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
   }
 
   export type LigneCreditCreateNestedManyWithoutBanqueInput = {
@@ -29904,6 +31401,13 @@ export namespace Prisma {
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
+  export type StepCompletionCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput> | StepCompletionCreateWithoutEngagementInput[] | StepCompletionUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutEngagementInput | StepCompletionCreateOrConnectWithoutEngagementInput[]
+    createMany?: StepCompletionCreateManyEngagementInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+  }
+
   export type EngagementUncheckedCreateNestedManyWithoutParentEngagementInput = {
     create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
     connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
@@ -29911,10 +31415,27 @@ export namespace Prisma {
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
-  export type LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput = {
+  export type StepCompletionUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput> | StepCompletionCreateWithoutEngagementInput[] | StepCompletionUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutEngagementInput | StepCompletionCreateOrConnectWithoutEngagementInput[]
+    createMany?: StepCompletionCreateManyEngagementInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type LigneCreditUpdateOneWithoutEngagementsNestedInput = {
     create?: XOR<LigneCreditCreateWithoutEngagementsInput, LigneCreditUncheckedCreateWithoutEngagementsInput>
     connectOrCreate?: LigneCreditCreateOrConnectWithoutEngagementsInput
     upsert?: LigneCreditUpsertWithoutEngagementsInput
+    disconnect?: LigneCreditWhereInput | boolean
+    delete?: LigneCreditWhereInput | boolean
     connect?: LigneCreditWhereUniqueInput
     update?: XOR<XOR<LigneCreditUpdateToOneWithWhereWithoutEngagementsInput, LigneCreditUpdateWithoutEngagementsInput>, LigneCreditUncheckedUpdateWithoutEngagementsInput>
   }
@@ -29963,6 +31484,20 @@ export namespace Prisma {
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
+  export type StepCompletionUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput> | StepCompletionCreateWithoutEngagementInput[] | StepCompletionUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutEngagementInput | StepCompletionCreateOrConnectWithoutEngagementInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutEngagementInput | StepCompletionUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: StepCompletionCreateManyEngagementInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutEngagementInput | StepCompletionUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutEngagementInput | StepCompletionUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+  }
+
   export type EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput = {
     create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
     connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
@@ -29975,6 +31510,64 @@ export namespace Prisma {
     update?: EngagementUpdateWithWhereUniqueWithoutParentEngagementInput | EngagementUpdateWithWhereUniqueWithoutParentEngagementInput[]
     updateMany?: EngagementUpdateManyWithWhereWithoutParentEngagementInput | EngagementUpdateManyWithWhereWithoutParentEngagementInput[]
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput> | StepCompletionCreateWithoutEngagementInput[] | StepCompletionUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutEngagementInput | StepCompletionCreateOrConnectWithoutEngagementInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutEngagementInput | StepCompletionUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: StepCompletionCreateManyEngagementInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutEngagementInput | StepCompletionUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutEngagementInput | StepCompletionUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+  }
+
+  export type EngagementCreateNestedOneWithoutStepCompletionsInput = {
+    create?: XOR<EngagementCreateWithoutStepCompletionsInput, EngagementUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutStepCompletionsInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type WorkflowStepCreateNestedOneWithoutStepCompletionsInput = {
+    create?: XOR<WorkflowStepCreateWithoutStepCompletionsInput, WorkflowStepUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutStepCompletionsInput
+    connect?: WorkflowStepWhereUniqueInput
+  }
+
+  export type userCreateNestedOneWithoutStepCompletionsInput = {
+    create?: XOR<userCreateWithoutStepCompletionsInput, userUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: userCreateOrConnectWithoutStepCompletionsInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type EngagementUpdateOneRequiredWithoutStepCompletionsNestedInput = {
+    create?: XOR<EngagementCreateWithoutStepCompletionsInput, EngagementUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutStepCompletionsInput
+    upsert?: EngagementUpsertWithoutStepCompletionsInput
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutStepCompletionsInput, EngagementUpdateWithoutStepCompletionsInput>, EngagementUncheckedUpdateWithoutStepCompletionsInput>
+  }
+
+  export type WorkflowStepUpdateOneRequiredWithoutStepCompletionsNestedInput = {
+    create?: XOR<WorkflowStepCreateWithoutStepCompletionsInput, WorkflowStepUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutStepCompletionsInput
+    upsert?: WorkflowStepUpsertWithoutStepCompletionsInput
+    connect?: WorkflowStepWhereUniqueInput
+    update?: XOR<XOR<WorkflowStepUpdateToOneWithWhereWithoutStepCompletionsInput, WorkflowStepUpdateWithoutStepCompletionsInput>, WorkflowStepUncheckedUpdateWithoutStepCompletionsInput>
+  }
+
+  export type userUpdateOneWithoutStepCompletionsNestedInput = {
+    create?: XOR<userCreateWithoutStepCompletionsInput, userUncheckedCreateWithoutStepCompletionsInput>
+    connectOrCreate?: userCreateOrConnectWithoutStepCompletionsInput
+    upsert?: userUpsertWithoutStepCompletionsInput
+    disconnect?: userWhereInput | boolean
+    delete?: userWhereInput | boolean
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutStepCompletionsInput, userUpdateWithoutStepCompletionsInput>, userUncheckedUpdateWithoutStepCompletionsInput>
   }
 
   export type CompanyCreateNestedOneWithoutSubCompaniesInput = {
@@ -30764,11 +32357,25 @@ export namespace Prisma {
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
+  export type StepCompletionCreateNestedManyWithoutWorkflowStepInput = {
+    create?: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput> | StepCompletionCreateWithoutWorkflowStepInput[] | StepCompletionUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutWorkflowStepInput | StepCompletionCreateOrConnectWithoutWorkflowStepInput[]
+    createMany?: StepCompletionCreateManyWorkflowStepInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+  }
+
   export type EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput = {
     create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
     connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
     createMany?: EngagementCreateManyWorkflowStepInputEnvelope
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type StepCompletionUncheckedCreateNestedManyWithoutWorkflowStepInput = {
+    create?: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput> | StepCompletionCreateWithoutWorkflowStepInput[] | StepCompletionUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutWorkflowStepInput | StepCompletionCreateOrConnectWithoutWorkflowStepInput[]
+    createMany?: StepCompletionCreateManyWorkflowStepInputEnvelope
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
   }
 
   export type WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput = {
@@ -30793,6 +32400,20 @@ export namespace Prisma {
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
+  export type StepCompletionUpdateManyWithoutWorkflowStepNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput> | StepCompletionCreateWithoutWorkflowStepInput[] | StepCompletionUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutWorkflowStepInput | StepCompletionCreateOrConnectWithoutWorkflowStepInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutWorkflowStepInput | StepCompletionUpsertWithWhereUniqueWithoutWorkflowStepInput[]
+    createMany?: StepCompletionCreateManyWorkflowStepInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutWorkflowStepInput | StepCompletionUpdateWithWhereUniqueWithoutWorkflowStepInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutWorkflowStepInput | StepCompletionUpdateManyWithWhereWithoutWorkflowStepInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+  }
+
   export type EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput = {
     create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
     connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
@@ -30805,6 +32426,20 @@ export namespace Prisma {
     update?: EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput | EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput[]
     updateMany?: EngagementUpdateManyWithWhereWithoutWorkflowStepInput | EngagementUpdateManyWithWhereWithoutWorkflowStepInput[]
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutWorkflowStepNestedInput = {
+    create?: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput> | StepCompletionCreateWithoutWorkflowStepInput[] | StepCompletionUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: StepCompletionCreateOrConnectWithoutWorkflowStepInput | StepCompletionCreateOrConnectWithoutWorkflowStepInput[]
+    upsert?: StepCompletionUpsertWithWhereUniqueWithoutWorkflowStepInput | StepCompletionUpsertWithWhereUniqueWithoutWorkflowStepInput[]
+    createMany?: StepCompletionCreateManyWorkflowStepInputEnvelope
+    set?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    disconnect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    delete?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    connect?: StepCompletionWhereUniqueInput | StepCompletionWhereUniqueInput[]
+    update?: StepCompletionUpdateWithWhereUniqueWithoutWorkflowStepInput | StepCompletionUpdateWithWhereUniqueWithoutWorkflowStepInput[]
+    updateMany?: StepCompletionUpdateManyWithWhereWithoutWorkflowStepInput | StepCompletionUpdateManyWithWhereWithoutWorkflowStepInput[]
+    deleteMany?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -30996,6 +32631,33 @@ export namespace Prisma {
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
   }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -31147,6 +32809,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type StepCompletionCreateWithoutUserInput = {
+    id?: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+    engagement: EngagementCreateNestedOneWithoutStepCompletionsInput
+    workflowStep: WorkflowStepCreateNestedOneWithoutStepCompletionsInput
+  }
+
+  export type StepCompletionUncheckedCreateWithoutUserInput = {
+    id?: string
+    engagementId: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
+  export type StepCompletionCreateOrConnectWithoutUserInput = {
+    where: StepCompletionWhereUniqueInput
+    create: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput>
+  }
+
+  export type StepCompletionCreateManyUserInputEnvelope = {
+    data: StepCompletionCreateManyUserInput | StepCompletionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CompanyUpsertWithoutUsersInput = {
     update: XOR<CompanyUpdateWithoutUsersInput, CompanyUncheckedUpdateWithoutUsersInput>
     create: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
@@ -31285,6 +32981,38 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"AuditLog"> | string | null
     userAgent?: StringNullableFilter<"AuditLog"> | string | null
     createdAt?: DateTimeFilter<"AuditLog"> | Date | string
+  }
+
+  export type StepCompletionUpsertWithWhereUniqueWithoutUserInput = {
+    where: StepCompletionWhereUniqueInput
+    update: XOR<StepCompletionUpdateWithoutUserInput, StepCompletionUncheckedUpdateWithoutUserInput>
+    create: XOR<StepCompletionCreateWithoutUserInput, StepCompletionUncheckedCreateWithoutUserInput>
+  }
+
+  export type StepCompletionUpdateWithWhereUniqueWithoutUserInput = {
+    where: StepCompletionWhereUniqueInput
+    data: XOR<StepCompletionUpdateWithoutUserInput, StepCompletionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StepCompletionUpdateManyWithWhereWithoutUserInput = {
+    where: StepCompletionScalarWhereInput
+    data: XOR<StepCompletionUpdateManyMutationInput, StepCompletionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StepCompletionScalarWhereInput = {
+    AND?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+    OR?: StepCompletionScalarWhereInput[]
+    NOT?: StepCompletionScalarWhereInput | StepCompletionScalarWhereInput[]
+    id?: StringFilter<"StepCompletion"> | string
+    engagementId?: StringFilter<"StepCompletion"> | string
+    workflowStepId?: StringFilter<"StepCompletion"> | string
+    fieldData?: StringNullableFilter<"StepCompletion"> | string | null
+    documents?: StringNullableFilter<"StepCompletion"> | string | null
+    completedBy?: StringNullableFilter<"StepCompletion"> | string | null
+    completedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    createdAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    updatedAt?: DateTimeFilter<"StepCompletion"> | Date | string
+    notes?: StringNullableFilter<"StepCompletion"> | string | null
   }
 
   export type LigneCreditCreateWithoutBanqueInput = {
@@ -31733,10 +33461,10 @@ export namespace Prisma {
   export type EngagementCreateWithoutLigneCreditInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -31745,15 +33473,16 @@ export namespace Prisma {
     workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
     parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
     childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutLigneCreditInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -31762,6 +33491,7 @@ export namespace Prisma {
     workflowStepId?: string | null
     parentEngagementId?: string | null
     childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutLigneCreditInput = {
@@ -31863,12 +33593,12 @@ export namespace Prisma {
     OR?: EngagementScalarWhereInput[]
     NOT?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
     id?: StringFilter<"Engagement"> | string
-    ligneCreditId?: StringFilter<"Engagement"> | string
+    ligneCreditId?: StringNullableFilter<"Engagement"> | string | null
     typeFinancement?: StringFilter<"Engagement"> | string
-    montant?: FloatFilter<"Engagement"> | number
-    devise?: StringFilter<"Engagement"> | string
-    dateEngagement?: DateTimeFilter<"Engagement"> | Date | string
-    dateEcheance?: DateTimeFilter<"Engagement"> | Date | string
+    montant?: FloatNullableFilter<"Engagement"> | number | null
+    devise?: StringNullableFilter<"Engagement"> | string | null
+    dateEngagement?: DateTimeNullableFilter<"Engagement"> | Date | string | null
+    dateEcheance?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     statut?: StringFilter<"Engagement"> | string
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
@@ -32269,11 +33999,12 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     template: WorkflowTemplateCreateNestedOneWithoutStepsInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepUncheckedCreateWithoutEngagementsInput = {
     id?: string
-    templateId: string
+    workflowTemplateId: string
     stepOrder: number
     code: string
     label: string
@@ -32288,6 +34019,7 @@ export namespace Prisma {
     allowedRoles?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepCreateOrConnectWithoutEngagementsInput = {
@@ -32298,28 +34030,29 @@ export namespace Prisma {
   export type EngagementCreateWithoutChildEngagementsInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
     workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
     workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
     parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutChildEngagementsInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -32327,6 +34060,7 @@ export namespace Prisma {
     workflowTemplateId?: string | null
     workflowStepId?: string | null
     parentEngagementId?: string | null
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutChildEngagementsInput = {
@@ -32337,28 +34071,29 @@ export namespace Prisma {
   export type EngagementCreateWithoutParentEngagementInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
     workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
     workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
     childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutParentEngagementInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -32366,6 +34101,7 @@ export namespace Prisma {
     workflowTemplateId?: string | null
     workflowStepId?: string | null
     childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutParentEngagementInput = {
@@ -32375,6 +34111,40 @@ export namespace Prisma {
 
   export type EngagementCreateManyParentEngagementInputEnvelope = {
     data: EngagementCreateManyParentEngagementInput | EngagementCreateManyParentEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StepCompletionCreateWithoutEngagementInput = {
+    id?: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+    workflowStep: WorkflowStepCreateNestedOneWithoutStepCompletionsInput
+    user?: userCreateNestedOneWithoutStepCompletionsInput
+  }
+
+  export type StepCompletionUncheckedCreateWithoutEngagementInput = {
+    id?: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
+  export type StepCompletionCreateOrConnectWithoutEngagementInput = {
+    where: StepCompletionWhereUniqueInput
+    create: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type StepCompletionCreateManyEngagementInputEnvelope = {
+    data: StepCompletionCreateManyEngagementInput | StepCompletionCreateManyEngagementInput[]
     skipDuplicates?: boolean
   }
 
@@ -32564,11 +34334,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     template?: WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type WorkflowStepUncheckedUpdateWithoutEngagementsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    templateId?: StringFieldUpdateOperationsInput | string
+    workflowTemplateId?: StringFieldUpdateOperationsInput | string
     stepOrder?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
@@ -32583,6 +34354,7 @@ export namespace Prisma {
     allowedRoles?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type EngagementUpsertWithoutChildEngagementsInput = {
@@ -32599,28 +34371,29 @@ export namespace Prisma {
   export type EngagementUpdateWithoutChildEngagementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
     workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
     workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
     parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutChildEngagementsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32628,6 +34401,7 @@ export namespace Prisma {
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUpsertWithWhereUniqueWithoutParentEngagementInput = {
@@ -32644,6 +34418,306 @@ export namespace Prisma {
   export type EngagementUpdateManyWithWhereWithoutParentEngagementInput = {
     where: EngagementScalarWhereInput
     data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutParentEngagementInput>
+  }
+
+  export type StepCompletionUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: StepCompletionWhereUniqueInput
+    update: XOR<StepCompletionUpdateWithoutEngagementInput, StepCompletionUncheckedUpdateWithoutEngagementInput>
+    create: XOR<StepCompletionCreateWithoutEngagementInput, StepCompletionUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type StepCompletionUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: StepCompletionWhereUniqueInput
+    data: XOR<StepCompletionUpdateWithoutEngagementInput, StepCompletionUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type StepCompletionUpdateManyWithWhereWithoutEngagementInput = {
+    where: StepCompletionScalarWhereInput
+    data: XOR<StepCompletionUpdateManyMutationInput, StepCompletionUncheckedUpdateManyWithoutEngagementInput>
+  }
+
+  export type EngagementCreateWithoutStepCompletionsInput = {
+    id?: string
+    typeFinancement: string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutStepCompletionsInput = {
+    id?: string
+    ligneCreditId?: string | null
+    typeFinancement: string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutStepCompletionsInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutStepCompletionsInput, EngagementUncheckedCreateWithoutStepCompletionsInput>
+  }
+
+  export type WorkflowStepCreateWithoutStepCompletionsInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    template: WorkflowTemplateCreateNestedOneWithoutStepsInput
+    engagements?: EngagementCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepUncheckedCreateWithoutStepCompletionsInput = {
+    id?: string
+    workflowTemplateId: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepCreateOrConnectWithoutStepCompletionsInput = {
+    where: WorkflowStepWhereUniqueInput
+    create: XOR<WorkflowStepCreateWithoutStepCompletionsInput, WorkflowStepUncheckedCreateWithoutStepCompletionsInput>
+  }
+
+  export type userCreateWithoutStepCompletionsInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    password: string
+    role?: string
+    status?: string
+    emailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    failedLoginAttempts?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    businessUnit?: BusinessUnitCreateNestedOneWithoutUsersInput
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutStepCompletionsInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    password: string
+    role?: string
+    status?: string
+    emailVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    failedLoginAttempts?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    companyId?: string | null
+    businessUnitId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutStepCompletionsInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutStepCompletionsInput, userUncheckedCreateWithoutStepCompletionsInput>
+  }
+
+  export type EngagementUpsertWithoutStepCompletionsInput = {
+    update: XOR<EngagementUpdateWithoutStepCompletionsInput, EngagementUncheckedUpdateWithoutStepCompletionsInput>
+    create: XOR<EngagementCreateWithoutStepCompletionsInput, EngagementUncheckedCreateWithoutStepCompletionsInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutStepCompletionsInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutStepCompletionsInput, EngagementUncheckedUpdateWithoutStepCompletionsInput>
+  }
+
+  export type EngagementUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type WorkflowStepUpsertWithoutStepCompletionsInput = {
+    update: XOR<WorkflowStepUpdateWithoutStepCompletionsInput, WorkflowStepUncheckedUpdateWithoutStepCompletionsInput>
+    create: XOR<WorkflowStepCreateWithoutStepCompletionsInput, WorkflowStepUncheckedCreateWithoutStepCompletionsInput>
+    where?: WorkflowStepWhereInput
+  }
+
+  export type WorkflowStepUpdateToOneWithWhereWithoutStepCompletionsInput = {
+    where?: WorkflowStepWhereInput
+    data: XOR<WorkflowStepUpdateWithoutStepCompletionsInput, WorkflowStepUncheckedUpdateWithoutStepCompletionsInput>
+  }
+
+  export type WorkflowStepUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    template?: WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput
+    engagements?: EngagementUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type WorkflowStepUncheckedUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowTemplateId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type userUpsertWithoutStepCompletionsInput = {
+    update: XOR<userUpdateWithoutStepCompletionsInput, userUncheckedUpdateWithoutStepCompletionsInput>
+    create: XOR<userCreateWithoutStepCompletionsInput, userUncheckedCreateWithoutStepCompletionsInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutStepCompletionsInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutStepCompletionsInput, userUncheckedUpdateWithoutStepCompletionsInput>
+  }
+
+  export type userUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    businessUnit?: BusinessUnitUpdateOneWithoutUsersNestedInput
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutStepCompletionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessUnitId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyCreateWithoutSubCompaniesInput = {
@@ -32781,6 +34855,7 @@ export namespace Prisma {
     businessUnit?: BusinessUnitCreateNestedOneWithoutUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutCompanyInput = {
@@ -32801,6 +34876,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutCompanyInput = {
@@ -33101,6 +35177,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutBusinessUnitInput = {
@@ -33121,6 +35198,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutBusinessUnitInput = {
@@ -33906,6 +35984,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutUsersInput
     businessUnit?: BusinessUnitCreateNestedOneWithoutUsersInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUserRolesInput = {
@@ -33926,6 +36005,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUserRolesInput = {
@@ -33989,6 +36069,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutUsersNestedInput
     businessUnit?: BusinessUnitUpdateOneWithoutUsersNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUserRolesInput = {
@@ -34009,6 +36090,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -34186,6 +36268,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutUsersInput
     businessUnit?: BusinessUnitCreateNestedOneWithoutUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutAuditLogsInput = {
@@ -34206,6 +36289,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutAuditLogsInput = {
@@ -34242,6 +36326,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutUsersNestedInput
     businessUnit?: BusinessUnitUpdateOneWithoutUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutAuditLogsInput = {
@@ -34262,6 +36347,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WorkflowStepCreateWithoutTemplateInput = {
@@ -34281,6 +36367,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     engagements?: EngagementCreateNestedManyWithoutWorkflowStepInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepUncheckedCreateWithoutTemplateInput = {
@@ -34300,6 +36387,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutWorkflowStepInput
   }
 
   export type WorkflowStepCreateOrConnectWithoutTemplateInput = {
@@ -34315,28 +36403,29 @@ export namespace Prisma {
   export type EngagementCreateWithoutWorkflowTemplateInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
     workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
     parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
     childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutWorkflowTemplateInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -34344,6 +36433,7 @@ export namespace Prisma {
     workflowStepId?: string | null
     parentEngagementId?: string | null
     childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutWorkflowTemplateInput = {
@@ -34377,7 +36467,7 @@ export namespace Prisma {
     OR?: WorkflowStepScalarWhereInput[]
     NOT?: WorkflowStepScalarWhereInput | WorkflowStepScalarWhereInput[]
     id?: StringFilter<"WorkflowStep"> | string
-    templateId?: StringFilter<"WorkflowStep"> | string
+    workflowTemplateId?: StringFilter<"WorkflowStep"> | string
     stepOrder?: IntFilter<"WorkflowStep"> | number
     code?: StringFilter<"WorkflowStep"> | string
     label?: StringFilter<"WorkflowStep"> | string
@@ -34448,28 +36538,29 @@ export namespace Prisma {
   export type EngagementCreateWithoutWorkflowStepInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    ligneCredit?: LigneCreditCreateNestedOneWithoutEngagementsInput
     workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
     parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
     childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutWorkflowStepInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -34477,6 +36568,7 @@ export namespace Prisma {
     workflowTemplateId?: string | null
     parentEngagementId?: string | null
     childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+    stepCompletions?: StepCompletionUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutWorkflowStepInput = {
@@ -34486,6 +36578,40 @@ export namespace Prisma {
 
   export type EngagementCreateManyWorkflowStepInputEnvelope = {
     data: EngagementCreateManyWorkflowStepInput | EngagementCreateManyWorkflowStepInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StepCompletionCreateWithoutWorkflowStepInput = {
+    id?: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+    engagement: EngagementCreateNestedOneWithoutStepCompletionsInput
+    user?: userCreateNestedOneWithoutStepCompletionsInput
+  }
+
+  export type StepCompletionUncheckedCreateWithoutWorkflowStepInput = {
+    id?: string
+    engagementId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
+  export type StepCompletionCreateOrConnectWithoutWorkflowStepInput = {
+    where: StepCompletionWhereUniqueInput
+    create: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput>
+  }
+
+  export type StepCompletionCreateManyWorkflowStepInputEnvelope = {
+    data: StepCompletionCreateManyWorkflowStepInput | StepCompletionCreateManyWorkflowStepInput[]
     skipDuplicates?: boolean
   }
 
@@ -34546,6 +36672,22 @@ export namespace Prisma {
     data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutWorkflowStepInput>
   }
 
+  export type StepCompletionUpsertWithWhereUniqueWithoutWorkflowStepInput = {
+    where: StepCompletionWhereUniqueInput
+    update: XOR<StepCompletionUpdateWithoutWorkflowStepInput, StepCompletionUncheckedUpdateWithoutWorkflowStepInput>
+    create: XOR<StepCompletionCreateWithoutWorkflowStepInput, StepCompletionUncheckedCreateWithoutWorkflowStepInput>
+  }
+
+  export type StepCompletionUpdateWithWhereUniqueWithoutWorkflowStepInput = {
+    where: StepCompletionWhereUniqueInput
+    data: XOR<StepCompletionUpdateWithoutWorkflowStepInput, StepCompletionUncheckedUpdateWithoutWorkflowStepInput>
+  }
+
+  export type StepCompletionUpdateManyWithWhereWithoutWorkflowStepInput = {
+    where: StepCompletionScalarWhereInput
+    data: XOR<StepCompletionUpdateManyMutationInput, StepCompletionUncheckedUpdateManyWithoutWorkflowStepInput>
+  }
+
   export type UserRoleCreateManyUserInput = {
     id?: string
     roleId: string
@@ -34564,6 +36706,18 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
+  }
+
+  export type StepCompletionCreateManyUserInput = {
+    id?: string
+    engagementId: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
   }
 
   export type UserRoleUpdateWithoutUserInput = {
@@ -34624,6 +36778,42 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StepCompletionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    engagement?: EngagementUpdateOneRequiredWithoutStepCompletionsNestedInput
+    workflowStep?: WorkflowStepUpdateOneRequiredWithoutStepCompletionsNestedInput
+  }
+
+  export type StepCompletionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LigneCreditCreateManyBanqueInput = {
@@ -34930,10 +37120,10 @@ export namespace Prisma {
   export type EngagementCreateManyLigneCreditInput = {
     id?: string
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -34973,10 +37163,10 @@ export namespace Prisma {
   export type EngagementUpdateWithoutLigneCreditInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34985,15 +37175,16 @@ export namespace Prisma {
     workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
     parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
     childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutLigneCreditInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35002,15 +37193,16 @@ export namespace Prisma {
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
     childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutLigneCreditInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35022,12 +37214,12 @@ export namespace Prisma {
 
   export type EngagementCreateManyParentEngagementInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -35036,31 +37228,44 @@ export namespace Prisma {
     workflowStepId?: string | null
   }
 
+  export type StepCompletionCreateManyEngagementInput = {
+    id?: string
+    workflowStepId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
   export type EngagementUpdateWithoutParentEngagementInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
     workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
     workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
     childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutParentEngagementInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35068,22 +37273,59 @@ export namespace Prisma {
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutParentEngagementInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStep?: WorkflowStepUpdateOneRequiredWithoutStepCompletionsNestedInput
+    user?: userUpdateOneWithoutStepCompletionsNestedInput
+  }
+
+  export type StepCompletionUncheckedUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowStepId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyCreateManyParentCompanyInput = {
@@ -35236,6 +37478,7 @@ export namespace Prisma {
     businessUnit?: BusinessUnitUpdateOneWithoutUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutCompanyInput = {
@@ -35256,6 +37499,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateManyWithoutCompanyInput = {
@@ -35354,6 +37598,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutBusinessUnitInput = {
@@ -35374,6 +37619,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateManyWithoutBusinessUnitInput = {
@@ -35564,12 +37810,12 @@ export namespace Prisma {
 
   export type EngagementCreateManyWorkflowTemplateInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -35595,6 +37841,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: EngagementUpdateManyWithoutWorkflowStepNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type WorkflowStepUncheckedUpdateWithoutTemplateInput = {
@@ -35614,6 +37861,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutWorkflowStepNestedInput
   }
 
   export type WorkflowStepUncheckedUpdateManyWithoutTemplateInput = {
@@ -35637,28 +37885,29 @@ export namespace Prisma {
   export type EngagementUpdateWithoutWorkflowTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
     workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
     parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
     childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutWorkflowTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35666,16 +37915,17 @@ export namespace Prisma {
     workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
     childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutWorkflowTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35686,12 +37936,12 @@ export namespace Prisma {
 
   export type EngagementCreateManyWorkflowStepInput = {
     id?: string
-    ligneCreditId: string
+    ligneCreditId?: string | null
     typeFinancement: string
-    montant: number
-    devise: string
-    dateEngagement: Date | string
-    dateEcheance: Date | string
+    montant?: number | null
+    devise?: string | null
+    dateEngagement?: Date | string | null
+    dateEcheance?: Date | string | null
     statut: string
     referenceDossier: string
     createdAt?: Date | string
@@ -35700,31 +37950,44 @@ export namespace Prisma {
     parentEngagementId?: string | null
   }
 
+  export type StepCompletionCreateManyWorkflowStepInput = {
+    id?: string
+    engagementId: string
+    fieldData?: string | null
+    documents?: string | null
+    completedBy?: string | null
+    completedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: string | null
+  }
+
   export type EngagementUpdateWithoutWorkflowStepInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    ligneCredit?: LigneCreditUpdateOneWithoutEngagementsNestedInput
     workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
     parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
     childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutWorkflowStepInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35732,22 +37995,59 @@ export namespace Prisma {
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
     childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+    stepCompletions?: StepCompletionUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutWorkflowStepInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: NullableStringFieldUpdateOperationsInput | string | null
     typeFinancement?: StringFieldUpdateOperationsInput | string
-    montant?: FloatFieldUpdateOperationsInput | number
-    devise?: StringFieldUpdateOperationsInput | string
-    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    devise?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEngagement?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateEcheance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: StringFieldUpdateOperationsInput | string
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUpdateWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    engagement?: EngagementUpdateOneRequiredWithoutStepCompletionsNestedInput
+    user?: userUpdateOneWithoutStepCompletionsNestedInput
+  }
+
+  export type StepCompletionUncheckedUpdateWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StepCompletionUncheckedUpdateManyWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    engagementId?: StringFieldUpdateOperationsInput | string
+    fieldData?: NullableStringFieldUpdateOperationsInput | string | null
+    documents?: NullableStringFieldUpdateOperationsInput | string | null
+    completedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
@@ -35823,6 +38123,10 @@ export namespace Prisma {
      * @deprecated Use EngagementDefaultArgs instead
      */
     export type EngagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StepCompletionDefaultArgs instead
+     */
+    export type StepCompletionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StepCompletionDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SwiftMessageDefaultArgs instead
      */

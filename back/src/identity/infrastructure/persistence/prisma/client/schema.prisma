@@ -33,10 +33,11 @@ model user {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
-  company      Company?      @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  businessUnit BusinessUnit? @relation(fields: [businessUnitId], references: [id], onDelete: SetNull)
-  userRoles    UserRole[]
-  auditLogs    AuditLog[]
+  company         Company?         @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  businessUnit    BusinessUnit?    @relation(fields: [businessUnitId], references: [id], onDelete: SetNull)
+  userRoles       UserRole[]
+  auditLogs       AuditLog[]
+  stepCompletions StepCompletion[]
 
   @@index([email])
   @@index([status])
@@ -182,17 +183,17 @@ model Garantie {
 }
 
 model Engagement {
-  id               String   @id @default(uuid())
-  ligneCreditId    String
+  id               String    @id @default(uuid())
+  ligneCreditId    String?
   typeFinancement  String // 'LC' or 'AS' - will map to template
-  montant          Float
-  devise           String
-  dateEngagement   DateTime
-  dateEcheance     DateTime
+  montant          Float?
+  devise           String?
+  dateEngagement   DateTime?
+  dateEcheance     DateTime?
   statut           String // EN_COURS, REGLE, ANNULE
   referenceDossier String
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   // Workflow Tracking
   workflowTemplateId String?
@@ -201,13 +202,16 @@ model Engagement {
   // LC → AS Conversion Bridge
   parentEngagementId String? // Set when AS is created from LC
 
-  ligneCredit      LigneCredit       @relation(fields: [ligneCreditId], references: [id])
+  ligneCredit      LigneCredit?      @relation(fields: [ligneCreditId], references: [id])
   workflowTemplate WorkflowTemplate? @relation(fields: [workflowTemplateId], references: [id])
   workflowStep     WorkflowStep?     @relation(fields: [workflowStepId], references: [id])
 
   // Self-relation for LC → AS bridge
   parentEngagement Engagement?  @relation("LCtoASBridge", fields: [parentEngagementId], references: [id], onDelete: SetNull)
   childEngagements Engagement[] @relation("LCtoASBridge")
+
+  // Step completion history
+  stepCompletions StepCompletion[]
 
   @@index([ligneCreditId])
   @@index([statut])
@@ -216,6 +220,29 @@ model Engagement {
   @@index([workflowStepId])
   @@index([parentEngagementId])
   @@map("engagements")
+}
+
+// Step Completion History - stores data filled for each step
+model StepCompletion {
+  id             String   @id @default(uuid())
+  engagementId   String
+  workflowStepId String
+  fieldData      String?  @db.Text
+  documents      String?  @db.Text
+  completedBy    String? // User ID who completed the step
+  completedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  notes          String?  @db.Text
+
+  engagement   Engagement   @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  workflowStep WorkflowStep @relation(fields: [workflowStepId], references: [id], onDelete: Cascade)
+  user         user?        @relation(fields: [completedBy], references: [id], onDelete: SetNull)
+
+  @@index([engagementId])
+  @@index([workflowStepId])
+  @@index([completedBy])
+  @@map("step_completions")
 }
 
 model SwiftMessage {
@@ -486,12 +513,12 @@ model WorkflowTemplate {
 }
 
 model WorkflowStep {
-  id          String  @id @default(uuid())
-  templateId  String
-  stepOrder   Int // 1, 2, 3, 4... (sequential order)
-  code        String // 'OUVERTURE', 'EMISSION_SWIFT', 'PAIEMENT'
-  label       String // 'Demande LC', 'Émission SWIFT MT700'
-  description String? @db.Text
+  id                 String  @id @default(uuid())
+  workflowTemplateId String
+  stepOrder          Int // 1, 2, 3, 4... (sequential order)
+  code               String // 'OUVERTURE', 'EMISSION_SWIFT', 'PAIEMENT'
+  label              String // 'Demande LC', 'Émission SWIFT MT700'
+  description        String? @db.Text
 
   // Dynamic Requirements (stored as JSON arrays)
   requiredFields    Json? // Array of field names: ["montant", "fournisseurNom", "dateEcheance"]
@@ -514,11 +541,12 @@ model WorkflowStep {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  template    WorkflowTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
-  engagements Engagement[] // Engagements currently at this step
+  template        WorkflowTemplate @relation(fields: [workflowTemplateId], references: [id], onDelete: Cascade)
+  engagements     Engagement[] // Engagements currently at this step
+  stepCompletions StepCompletion[]
 
-  @@unique([templateId, stepOrder])
-  @@index([templateId])
+  @@unique([workflowTemplateId, stepOrder])
+  @@index([workflowTemplateId])
   @@index([code])
   @@map("workflow_steps")
 }

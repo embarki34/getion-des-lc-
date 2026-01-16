@@ -70,7 +70,7 @@ export class PrismaWorkflowTemplateRepository implements IWorkflowTemplateReposi
 
     async findStepsByTemplateId(templateId: string): Promise<WorkflowStep[]> {
         const steps = await this.prisma.workflowStep.findMany({
-            where: { templateId },
+            where: { workflowTemplateId: templateId },
             orderBy: { stepOrder: 'asc' },
         });
         return steps.map(s => this.stepToDomain(s));
@@ -85,7 +85,7 @@ export class PrismaWorkflowTemplateRepository implements IWorkflowTemplateReposi
         const created = await this.prisma.workflowStep.create({
             data: {
                 id: step.id,
-                templateId: step.templateId,
+                workflowTemplateId: step.templateId,
                 stepOrder: step.stepOrder,
                 code: step.code,
                 label: step.label,
@@ -148,12 +148,12 @@ export class PrismaWorkflowTemplateRepository implements IWorkflowTemplateReposi
     private stepToDomain(prismaStep: any): WorkflowStep {
         return new WorkflowStep(
             prismaStep.id,
-            prismaStep.templateId,
+            prismaStep.workflowTemplateId,
             prismaStep.stepOrder,
             prismaStep.code,
             prismaStep.label,
             prismaStep.description,
-            prismaStep.requiredFields as string[] | null,
+            prismaStep.requiredFields as (import('../../domain/WorkflowTemplate').StepFieldConfig[] | string[] | null),
             prismaStep.requiredDocuments as string[] | null,
             prismaStep.requiresApproval,
             prismaStep.approvalRoles as string[] | null,

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { WorkflowTemplateService, WorkflowTemplate } from '@/lib/services/workflow/WorkflowTemplateService';
+import { EngagementsService } from '@/lib/services/engagements.service';
 import { DynamicForm } from '@/components/dynamic-form/DynamicForm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -26,9 +27,21 @@ export default function NewEngagementPage() {
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
 
+    const searchParams = useSearchParams();
+    const templateIdParam = searchParams.get('templateId');
+
     useEffect(() => {
         loadTemplates();
     }, []);
+
+    useEffect(() => {
+        if (templates.length > 0 && templateIdParam && step === 'select') {
+            const preselected = templates.find(t => t.id === templateIdParam);
+            if (preselected) {
+                handleTemplateSelect(preselected);
+            }
+        }
+    }, [templates, templateIdParam, step]);
 
     const loadTemplates = async () => {
         try {
@@ -52,16 +65,53 @@ export default function NewEngagementPage() {
         try {
             setSubmitting(true);
 
-            // TODO: Call engagement creation API
-            console.log('Creating engagement:', {
-                templateId: selectedTemplate?.id,
-                templateCode: selectedTemplate?.code,
-                data: formData,
+            if (!selectedTemplate) {
+                throw new Error('No template selected');
+            }
+
+            // DEBUG: Log what we received
+            console.log('Form Data Received:', formData);
+            console.log('Form Data Keys:', Object.keys(formData));
+
+            // Extract fields from formData - use flexible field names
+            // First try standard field names, then check all keys for matches
+            let ligneCreditId = formData.ligneCreditId || formData.creditLineId || formData.ligneCredit;
+
+            // If not found, search for any field containing "credit" or "ligne"
+            if (!ligneCreditId) {
+                const creditField = Object.keys(formData).find(key =>
+                    key.toLowerCase().includes('credit') ||
+                    key.toLowerCase().includes('ligne')
+                );
+                if (creditField) {
+                    ligneCreditId = formData[creditField];
+                    console.log(`Found credit line in field: ${creditField} = ${ligneCreditId}`);
+                }
+            }
+
+            const montant = formData.montant ? Number(formData.montant) : (formData.amount ? Number(formData.amount) : undefined);
+            const devise = formData.devise || formData.currency || 'USD';
+            const dateEngagement = formData.dateEngagement || formData.startDate || new Date().toISOString().split('T')[0];
+            const dateEcheance = formData.dateEcheance || formData.endDate || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+            // Validation removed as per user request - data is driven by template schema
+            // if (!ligneCreditId) { ... }
+            // if (!montant || isNaN(montant)) { ... }
+
+            console.log('Extracted values (optional):', { ligneCreditId, montant, devise, dateEngagement, dateEcheance });
+
+            // Create engagement via API
+            const engagement = await EngagementsService.createEngagement({
+                ligneCreditId,
+                workflowTemplateId: selectedTemplate.id,
+                montant,
+                devise,
+                dateEngagement,
+                dateEcheance,
+                formData, // Pass all form data as additional metadata
             });
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
+            console.log('Engagement created successfully:', engagement);
             setStep('confirmation');
         } catch (err: any) {
             console.error('Failed to create engagement:', err);

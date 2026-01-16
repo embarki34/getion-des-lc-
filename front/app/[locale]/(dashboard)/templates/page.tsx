@@ -114,7 +114,7 @@ export default function TemplatesPage() {
                                 <Link href={`/templates/${template.id}`} className="flex-1">
                                     <Button variant="outline" className="w-full" size="sm">
                                         <Settings className="mr-2 h-3 w-3" />
-                                        Edit
+                                        Details
                                     </Button>
                                 </Link>
                                 <Link href={`/templates/${template.id}/preview`} className="flex-1">

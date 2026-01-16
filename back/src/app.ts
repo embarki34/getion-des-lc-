@@ -13,6 +13,8 @@ import { createBusinessUnitRoutes } from './company/infrastructure/routes/busine
 import { createSupplierRoutes } from './company/infrastructure/routes/supplier.routes';
 import { createAuditRoutes } from './system/infrastructure/express/routes/audit.routes';
 import workflowRoutes from './workflow/infrastructure/api/workflow.routes';
+import engagementRoutes from './utilization/infrastructure/api/engagement.routes';
+import documentRoutes from './utilization/infrastructure/api/document.routes';
 import { ErrorHandlerMiddleware } from './identity/infrastructure/express/middleware/ErrorHandlerMiddleware';
 import { errorHandler, logger } from './shared/infrastructure/middleware/error.middleware';
 import { setupSwagger } from './shared/infrastructure/swagger/swagger.setup';
@@ -106,6 +108,8 @@ export class App {
 
     // Workflow Template Engine Routes
     this.app.use('/api/v1/workflows', workflowRoutes);
+    this.app.use('/api/v1/engagements', engagementRoutes);
+    this.app.use('/api/v1/documents', documentRoutes);
 
     // Credit Line Module Routes
     const creditLineContainer = CreditLineDIContainer.getInstance();
