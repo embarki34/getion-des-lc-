@@ -126,6 +126,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
     navSecondary: [
       {
+        title: "Workflows",
+        url: "/workflows",
+        icon: FileText, // Reuse FileText or finding another icon like GitBranch if available, utilizing FileText for now or Workflow if imported
+        isActive: pathname.startsWith("/workflows"),
+      },
+      {
         title: t("settings"),
         url: "/system/audit-logs",
         icon: Settings,

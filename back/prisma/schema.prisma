@@ -12,6 +12,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model user {
@@ -183,7 +184,7 @@ model Garantie {
 model Engagement {
   id               String   @id @default(uuid())
   ligneCreditId    String
-  typeFinancement  String
+  typeFinancement  String // 'LC' or 'AS' - will map to template
   montant          Float
   devise           String
   dateEngagement   DateTime
@@ -193,11 +194,27 @@ model Engagement {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  ligneCredit LigneCredit @relation(fields: [ligneCreditId], references: [id])
+  // Workflow Tracking
+  workflowTemplateId String?
+  workflowStepId     String?
+
+  // LC → AS Conversion Bridge
+  parentEngagementId String? // Set when AS is created from LC
+
+  ligneCredit      LigneCredit       @relation(fields: [ligneCreditId], references: [id])
+  workflowTemplate WorkflowTemplate? @relation(fields: [workflowTemplateId], references: [id])
+  workflowStep     WorkflowStep?     @relation(fields: [workflowStepId], references: [id])
+
+  // Self-relation for LC → AS bridge
+  parentEngagement Engagement?  @relation("LCtoASBridge", fields: [parentEngagementId], references: [id], onDelete: SetNull)
+  childEngagements Engagement[] @relation("LCtoASBridge")
 
   @@index([ligneCreditId])
   @@index([statut])
   @@index([referenceDossier])
+  @@index([workflowTemplateId])
+  @@index([workflowStepId])
+  @@index([parentEngagementId])
   @@map("engagements")
 }
 
@@ -433,4 +450,75 @@ model AuditLog {
   @@index([action])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+// --- DYNAMIC WORKFLOW TEMPLATE SYSTEM ---
+// Supports configurable financial instrument templates (LC, AS, AF, RD, CMT)
+// Admin can create new templates and define custom fields via JSON schema
+
+model WorkflowTemplate {
+  id          String  @id @default(uuid())
+  code        String  @unique // 'LC', 'AS', 'AF', 'RD', 'CMT' - unique identifier
+  label       String // 'Lettre de Crédit', 'Avance sur Stock'
+  description String? @db.Text
+
+  // UI Metadata
+  icon         String? // Icon name for UI (e.g., 'CreditCard', 'Package')
+  color        String? // Color for badges/cards (e.g., '#3B82F6')
+  displayOrder Int     @default(0) // Sort order in UI
+
+  // Dynamic Form Configuration (JSON Schema)
+  // Defines custom fields for this instrument type
+  // Example: { "fields": [{ "name": "montant", "type": "number", "label": "Montant", "required": true }] }
+  formSchema Json? // JSON Schema for dynamic form fields
+
+  // Status
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  steps       WorkflowStep[]
+  engagements Engagement[]
+
+  @@index([code])
+  @@index([isActive])
+  @@map("workflow_templates")
+}
+
+model WorkflowStep {
+  id          String  @id @default(uuid())
+  templateId  String
+  stepOrder   Int // 1, 2, 3, 4... (sequential order)
+  code        String // 'OUVERTURE', 'EMISSION_SWIFT', 'PAIEMENT'
+  label       String // 'Demande LC', 'Émission SWIFT MT700'
+  description String? @db.Text
+
+  // Dynamic Requirements (stored as JSON arrays)
+  requiredFields    Json? // Array of field names: ["montant", "fournisseurNom", "dateEcheance"]
+  requiredDocuments Json? // Array of document types: ["PROFORMA", "BON_COMMANDE", "FACTURE"]
+
+  // Approval Configuration
+  requiresApproval Boolean @default(false) // Does this step need approval?
+  approvalRoles    Json? // Array of role codes: ["FINANCE_MANAGER", "COMITE_CREDIT"]
+
+  // Automated Actions
+  triggerAction String? // 'CREATE_AS_FROM_LC', 'SEND_MT700', 'GENERATE_AMORTIZATION'
+
+  // UI Metadata
+  icon  String? // Icon for this step
+  color String? // Color for step indicator
+
+  // RBAC - Who can work on this step
+  allowedRoles Json? // Array of role codes that can perform actions at this step
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  template    WorkflowTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  engagements Engagement[] // Engagements currently at this step
+
+  @@unique([templateId, stepOrder])
+  @@index([templateId])
+  @@index([code])
+  @@map("workflow_steps")
 }

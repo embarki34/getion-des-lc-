@@ -108,6 +108,16 @@ export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayl
  * 
  */
 export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
+/**
+ * Model WorkflowTemplate
+ * 
+ */
+export type WorkflowTemplate = $Result.DefaultSelection<Prisma.$WorkflowTemplatePayload>
+/**
+ * Model WorkflowStep
+ * 
+ */
+export type WorkflowStep = $Result.DefaultSelection<Prisma.$WorkflowStepPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -421,6 +431,26 @@ export class PrismaClient<
     * ```
     */
   get auditLog(): Prisma.AuditLogDelegate<ExtArgs>;
+
+  /**
+   * `prisma.workflowTemplate`: Exposes CRUD operations for the **WorkflowTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WorkflowTemplates
+    * const workflowTemplates = await prisma.workflowTemplate.findMany()
+    * ```
+    */
+  get workflowTemplate(): Prisma.WorkflowTemplateDelegate<ExtArgs>;
+
+  /**
+   * `prisma.workflowStep`: Exposes CRUD operations for the **WorkflowStep** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WorkflowSteps
+    * const workflowSteps = await prisma.workflowStep.findMany()
+    * ```
+    */
+  get workflowStep(): Prisma.WorkflowStepDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -878,7 +908,9 @@ export namespace Prisma {
     Permission: 'Permission',
     UserRole: 'UserRole',
     RolePermission: 'RolePermission',
-    AuditLog: 'AuditLog'
+    AuditLog: 'AuditLog',
+    WorkflowTemplate: 'WorkflowTemplate',
+    WorkflowStep: 'WorkflowStep'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -894,7 +926,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "banque" | "bankAccount" | "ligneCredit" | "garantie" | "engagement" | "swiftMessage" | "documentImport" | "company" | "businessUnit" | "supplier" | "companySupplier" | "businessUnitSupplier" | "companyBanque" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog"
+      modelProps: "user" | "banque" | "bankAccount" | "ligneCredit" | "garantie" | "engagement" | "swiftMessage" | "documentImport" | "company" | "businessUnit" | "supplier" | "companySupplier" | "businessUnitSupplier" | "companyBanque" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "workflowTemplate" | "workflowStep"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2152,6 +2184,138 @@ export namespace Prisma {
           }
         }
       }
+      WorkflowTemplate: {
+        payload: Prisma.$WorkflowTemplatePayload<ExtArgs>
+        fields: Prisma.WorkflowTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WorkflowTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WorkflowTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.WorkflowTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WorkflowTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.WorkflowTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.WorkflowTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.WorkflowTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.WorkflowTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          update: {
+            args: Prisma.WorkflowTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.WorkflowTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WorkflowTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.WorkflowTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.WorkflowTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWorkflowTemplate>
+          }
+          groupBy: {
+            args: Prisma.WorkflowTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WorkflowTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WorkflowTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<WorkflowTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      WorkflowStep: {
+        payload: Prisma.$WorkflowStepPayload<ExtArgs>
+        fields: Prisma.WorkflowStepFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WorkflowStepFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WorkflowStepFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          findFirst: {
+            args: Prisma.WorkflowStepFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WorkflowStepFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          findMany: {
+            args: Prisma.WorkflowStepFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>[]
+          }
+          create: {
+            args: Prisma.WorkflowStepCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          createMany: {
+            args: Prisma.WorkflowStepCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.WorkflowStepDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          update: {
+            args: Prisma.WorkflowStepUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          deleteMany: {
+            args: Prisma.WorkflowStepDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WorkflowStepUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.WorkflowStepUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkflowStepPayload>
+          }
+          aggregate: {
+            args: Prisma.WorkflowStepAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWorkflowStep>
+          }
+          groupBy: {
+            args: Prisma.WorkflowStepGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WorkflowStepGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WorkflowStepCountArgs<ExtArgs>
+            result: $Utils.Optional<WorkflowStepCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2438,6 +2602,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type EngagementCountOutputType
+   */
+
+  export type EngagementCountOutputType = {
+    childEngagements: number
+  }
+
+  export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    childEngagements?: boolean | EngagementCountOutputTypeCountChildEngagementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EngagementCountOutputType
+     */
+    select?: EngagementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountChildEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+
+  /**
    * Count Type CompanyCountOutputType
    */
 
@@ -2652,6 +2847,77 @@ export namespace Prisma {
    */
   export type PermissionCountOutputTypeCountRolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RolePermissionWhereInput
+  }
+
+
+  /**
+   * Count Type WorkflowTemplateCountOutputType
+   */
+
+  export type WorkflowTemplateCountOutputType = {
+    steps: number
+    engagements: number
+  }
+
+  export type WorkflowTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    steps?: boolean | WorkflowTemplateCountOutputTypeCountStepsArgs
+    engagements?: boolean | WorkflowTemplateCountOutputTypeCountEngagementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WorkflowTemplateCountOutputType without action
+   */
+  export type WorkflowTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplateCountOutputType
+     */
+    select?: WorkflowTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WorkflowTemplateCountOutputType without action
+   */
+  export type WorkflowTemplateCountOutputTypeCountStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkflowStepWhereInput
+  }
+
+  /**
+   * WorkflowTemplateCountOutputType without action
+   */
+  export type WorkflowTemplateCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
+  }
+
+
+  /**
+   * Count Type WorkflowStepCountOutputType
+   */
+
+  export type WorkflowStepCountOutputType = {
+    engagements: number
+  }
+
+  export type WorkflowStepCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagements?: boolean | WorkflowStepCountOutputTypeCountEngagementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WorkflowStepCountOutputType without action
+   */
+  export type WorkflowStepCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStepCountOutputType
+     */
+    select?: WorkflowStepCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WorkflowStepCountOutputType without action
+   */
+  export type WorkflowStepCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EngagementWhereInput
   }
 
 
@@ -8279,6 +8545,9 @@ export namespace Prisma {
     referenceDossier: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    workflowTemplateId: string | null
+    workflowStepId: string | null
+    parentEngagementId: string | null
   }
 
   export type EngagementMaxAggregateOutputType = {
@@ -8293,6 +8562,9 @@ export namespace Prisma {
     referenceDossier: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    workflowTemplateId: string | null
+    workflowStepId: string | null
+    parentEngagementId: string | null
   }
 
   export type EngagementCountAggregateOutputType = {
@@ -8307,6 +8579,9 @@ export namespace Prisma {
     referenceDossier: number
     createdAt: number
     updatedAt: number
+    workflowTemplateId: number
+    workflowStepId: number
+    parentEngagementId: number
     _all: number
   }
 
@@ -8331,6 +8606,9 @@ export namespace Prisma {
     referenceDossier?: true
     createdAt?: true
     updatedAt?: true
+    workflowTemplateId?: true
+    workflowStepId?: true
+    parentEngagementId?: true
   }
 
   export type EngagementMaxAggregateInputType = {
@@ -8345,6 +8623,9 @@ export namespace Prisma {
     referenceDossier?: true
     createdAt?: true
     updatedAt?: true
+    workflowTemplateId?: true
+    workflowStepId?: true
+    parentEngagementId?: true
   }
 
   export type EngagementCountAggregateInputType = {
@@ -8359,6 +8640,9 @@ export namespace Prisma {
     referenceDossier?: true
     createdAt?: true
     updatedAt?: true
+    workflowTemplateId?: true
+    workflowStepId?: true
+    parentEngagementId?: true
     _all?: true
   }
 
@@ -8460,6 +8744,9 @@ export namespace Prisma {
     referenceDossier: string
     createdAt: Date
     updatedAt: Date
+    workflowTemplateId: string | null
+    workflowStepId: string | null
+    parentEngagementId: string | null
     _count: EngagementCountAggregateOutputType | null
     _avg: EngagementAvgAggregateOutputType | null
     _sum: EngagementSumAggregateOutputType | null
@@ -8493,7 +8780,15 @@ export namespace Prisma {
     referenceDossier?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    workflowTemplateId?: boolean
+    workflowStepId?: boolean
+    parentEngagementId?: boolean
     ligneCredit?: boolean | LigneCreditDefaultArgs<ExtArgs>
+    workflowTemplate?: boolean | Engagement$workflowTemplateArgs<ExtArgs>
+    workflowStep?: boolean | Engagement$workflowStepArgs<ExtArgs>
+    parentEngagement?: boolean | Engagement$parentEngagementArgs<ExtArgs>
+    childEngagements?: boolean | Engagement$childEngagementsArgs<ExtArgs>
+    _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["engagement"]>
 
 
@@ -8509,16 +8804,28 @@ export namespace Prisma {
     referenceDossier?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    workflowTemplateId?: boolean
+    workflowStepId?: boolean
+    parentEngagementId?: boolean
   }
 
   export type EngagementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ligneCredit?: boolean | LigneCreditDefaultArgs<ExtArgs>
+    workflowTemplate?: boolean | Engagement$workflowTemplateArgs<ExtArgs>
+    workflowStep?: boolean | Engagement$workflowStepArgs<ExtArgs>
+    parentEngagement?: boolean | Engagement$parentEngagementArgs<ExtArgs>
+    childEngagements?: boolean | Engagement$childEngagementsArgs<ExtArgs>
+    _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $EngagementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Engagement"
     objects: {
       ligneCredit: Prisma.$LigneCreditPayload<ExtArgs>
+      workflowTemplate: Prisma.$WorkflowTemplatePayload<ExtArgs> | null
+      workflowStep: Prisma.$WorkflowStepPayload<ExtArgs> | null
+      parentEngagement: Prisma.$EngagementPayload<ExtArgs> | null
+      childEngagements: Prisma.$EngagementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8532,6 +8839,9 @@ export namespace Prisma {
       referenceDossier: string
       createdAt: Date
       updatedAt: Date
+      workflowTemplateId: string | null
+      workflowStepId: string | null
+      parentEngagementId: string | null
     }, ExtArgs["result"]["engagement"]>
     composites: {}
   }
@@ -8873,6 +9183,10 @@ export namespace Prisma {
   export interface Prisma__EngagementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ligneCredit<T extends LigneCreditDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LigneCreditDefaultArgs<ExtArgs>>): Prisma__LigneCreditClient<$Result.GetResult<Prisma.$LigneCreditPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    workflowTemplate<T extends Engagement$workflowTemplateArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$workflowTemplateArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    workflowStep<T extends Engagement$workflowStepArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$workflowStepArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    parentEngagement<T extends Engagement$parentEngagementArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$parentEngagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    childEngagements<T extends Engagement$childEngagementsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$childEngagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8913,6 +9227,9 @@ export namespace Prisma {
     readonly referenceDossier: FieldRef<"Engagement", 'String'>
     readonly createdAt: FieldRef<"Engagement", 'DateTime'>
     readonly updatedAt: FieldRef<"Engagement", 'DateTime'>
+    readonly workflowTemplateId: FieldRef<"Engagement", 'String'>
+    readonly workflowStepId: FieldRef<"Engagement", 'String'>
+    readonly parentEngagementId: FieldRef<"Engagement", 'String'>
   }
     
 
@@ -9209,6 +9526,71 @@ export namespace Prisma {
      * Filter which Engagements to delete
      */
     where?: EngagementWhereInput
+  }
+
+  /**
+   * Engagement.workflowTemplate
+   */
+  export type Engagement$workflowTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    where?: WorkflowTemplateWhereInput
+  }
+
+  /**
+   * Engagement.workflowStep
+   */
+  export type Engagement$workflowStepArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    where?: WorkflowStepWhereInput
+  }
+
+  /**
+   * Engagement.parentEngagement
+   */
+  export type Engagement$parentEngagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * Engagement.childEngagements
+   */
+  export type Engagement$childEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
   }
 
   /**
@@ -21178,6 +21560,2071 @@ export namespace Prisma {
 
 
   /**
+   * Model WorkflowTemplate
+   */
+
+  export type AggregateWorkflowTemplate = {
+    _count: WorkflowTemplateCountAggregateOutputType | null
+    _avg: WorkflowTemplateAvgAggregateOutputType | null
+    _sum: WorkflowTemplateSumAggregateOutputType | null
+    _min: WorkflowTemplateMinAggregateOutputType | null
+    _max: WorkflowTemplateMaxAggregateOutputType | null
+  }
+
+  export type WorkflowTemplateAvgAggregateOutputType = {
+    displayOrder: number | null
+  }
+
+  export type WorkflowTemplateSumAggregateOutputType = {
+    displayOrder: number | null
+  }
+
+  export type WorkflowTemplateMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    label: string | null
+    description: string | null
+    icon: string | null
+    color: string | null
+    displayOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkflowTemplateMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    label: string | null
+    description: string | null
+    icon: string | null
+    color: string | null
+    displayOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkflowTemplateCountAggregateOutputType = {
+    id: number
+    code: number
+    label: number
+    description: number
+    icon: number
+    color: number
+    displayOrder: number
+    formSchema: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WorkflowTemplateAvgAggregateInputType = {
+    displayOrder?: true
+  }
+
+  export type WorkflowTemplateSumAggregateInputType = {
+    displayOrder?: true
+  }
+
+  export type WorkflowTemplateMinAggregateInputType = {
+    id?: true
+    code?: true
+    label?: true
+    description?: true
+    icon?: true
+    color?: true
+    displayOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkflowTemplateMaxAggregateInputType = {
+    id?: true
+    code?: true
+    label?: true
+    description?: true
+    icon?: true
+    color?: true
+    displayOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkflowTemplateCountAggregateInputType = {
+    id?: true
+    code?: true
+    label?: true
+    description?: true
+    icon?: true
+    color?: true
+    displayOrder?: true
+    formSchema?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WorkflowTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkflowTemplate to aggregate.
+     */
+    where?: WorkflowTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowTemplates to fetch.
+     */
+    orderBy?: WorkflowTemplateOrderByWithRelationInput | WorkflowTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WorkflowTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WorkflowTemplates
+    **/
+    _count?: true | WorkflowTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WorkflowTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WorkflowTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WorkflowTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WorkflowTemplateMaxAggregateInputType
+  }
+
+  export type GetWorkflowTemplateAggregateType<T extends WorkflowTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateWorkflowTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkflowTemplate[P]>
+      : GetScalarType<T[P], AggregateWorkflowTemplate[P]>
+  }
+
+
+
+
+  export type WorkflowTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkflowTemplateWhereInput
+    orderBy?: WorkflowTemplateOrderByWithAggregationInput | WorkflowTemplateOrderByWithAggregationInput[]
+    by: WorkflowTemplateScalarFieldEnum[] | WorkflowTemplateScalarFieldEnum
+    having?: WorkflowTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WorkflowTemplateCountAggregateInputType | true
+    _avg?: WorkflowTemplateAvgAggregateInputType
+    _sum?: WorkflowTemplateSumAggregateInputType
+    _min?: WorkflowTemplateMinAggregateInputType
+    _max?: WorkflowTemplateMaxAggregateInputType
+  }
+
+  export type WorkflowTemplateGroupByOutputType = {
+    id: string
+    code: string
+    label: string
+    description: string | null
+    icon: string | null
+    color: string | null
+    displayOrder: number
+    formSchema: JsonValue | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WorkflowTemplateCountAggregateOutputType | null
+    _avg: WorkflowTemplateAvgAggregateOutputType | null
+    _sum: WorkflowTemplateSumAggregateOutputType | null
+    _min: WorkflowTemplateMinAggregateOutputType | null
+    _max: WorkflowTemplateMaxAggregateOutputType | null
+  }
+
+  type GetWorkflowTemplateGroupByPayload<T extends WorkflowTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkflowTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkflowTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkflowTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkflowTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WorkflowTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    label?: boolean
+    description?: boolean
+    icon?: boolean
+    color?: boolean
+    displayOrder?: boolean
+    formSchema?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    steps?: boolean | WorkflowTemplate$stepsArgs<ExtArgs>
+    engagements?: boolean | WorkflowTemplate$engagementsArgs<ExtArgs>
+    _count?: boolean | WorkflowTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workflowTemplate"]>
+
+
+  export type WorkflowTemplateSelectScalar = {
+    id?: boolean
+    code?: boolean
+    label?: boolean
+    description?: boolean
+    icon?: boolean
+    color?: boolean
+    displayOrder?: boolean
+    formSchema?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WorkflowTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    steps?: boolean | WorkflowTemplate$stepsArgs<ExtArgs>
+    engagements?: boolean | WorkflowTemplate$engagementsArgs<ExtArgs>
+    _count?: boolean | WorkflowTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $WorkflowTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WorkflowTemplate"
+    objects: {
+      steps: Prisma.$WorkflowStepPayload<ExtArgs>[]
+      engagements: Prisma.$EngagementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      label: string
+      description: string | null
+      icon: string | null
+      color: string | null
+      displayOrder: number
+      formSchema: Prisma.JsonValue | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["workflowTemplate"]>
+    composites: {}
+  }
+
+  type WorkflowTemplateGetPayload<S extends boolean | null | undefined | WorkflowTemplateDefaultArgs> = $Result.GetResult<Prisma.$WorkflowTemplatePayload, S>
+
+  type WorkflowTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<WorkflowTemplateFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: WorkflowTemplateCountAggregateInputType | true
+    }
+
+  export interface WorkflowTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WorkflowTemplate'], meta: { name: 'WorkflowTemplate' } }
+    /**
+     * Find zero or one WorkflowTemplate that matches the filter.
+     * @param {WorkflowTemplateFindUniqueArgs} args - Arguments to find a WorkflowTemplate
+     * @example
+     * // Get one WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WorkflowTemplateFindUniqueArgs>(args: SelectSubset<T, WorkflowTemplateFindUniqueArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one WorkflowTemplate that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {WorkflowTemplateFindUniqueOrThrowArgs} args - Arguments to find a WorkflowTemplate
+     * @example
+     * // Get one WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WorkflowTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, WorkflowTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first WorkflowTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateFindFirstArgs} args - Arguments to find a WorkflowTemplate
+     * @example
+     * // Get one WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WorkflowTemplateFindFirstArgs>(args?: SelectSubset<T, WorkflowTemplateFindFirstArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first WorkflowTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateFindFirstOrThrowArgs} args - Arguments to find a WorkflowTemplate
+     * @example
+     * // Get one WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WorkflowTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, WorkflowTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more WorkflowTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkflowTemplates
+     * const workflowTemplates = await prisma.workflowTemplate.findMany()
+     * 
+     * // Get first 10 WorkflowTemplates
+     * const workflowTemplates = await prisma.workflowTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const workflowTemplateWithIdOnly = await prisma.workflowTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WorkflowTemplateFindManyArgs>(args?: SelectSubset<T, WorkflowTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a WorkflowTemplate.
+     * @param {WorkflowTemplateCreateArgs} args - Arguments to create a WorkflowTemplate.
+     * @example
+     * // Create one WorkflowTemplate
+     * const WorkflowTemplate = await prisma.workflowTemplate.create({
+     *   data: {
+     *     // ... data to create a WorkflowTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends WorkflowTemplateCreateArgs>(args: SelectSubset<T, WorkflowTemplateCreateArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many WorkflowTemplates.
+     * @param {WorkflowTemplateCreateManyArgs} args - Arguments to create many WorkflowTemplates.
+     * @example
+     * // Create many WorkflowTemplates
+     * const workflowTemplate = await prisma.workflowTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WorkflowTemplateCreateManyArgs>(args?: SelectSubset<T, WorkflowTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a WorkflowTemplate.
+     * @param {WorkflowTemplateDeleteArgs} args - Arguments to delete one WorkflowTemplate.
+     * @example
+     * // Delete one WorkflowTemplate
+     * const WorkflowTemplate = await prisma.workflowTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one WorkflowTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WorkflowTemplateDeleteArgs>(args: SelectSubset<T, WorkflowTemplateDeleteArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one WorkflowTemplate.
+     * @param {WorkflowTemplateUpdateArgs} args - Arguments to update one WorkflowTemplate.
+     * @example
+     * // Update one WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WorkflowTemplateUpdateArgs>(args: SelectSubset<T, WorkflowTemplateUpdateArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more WorkflowTemplates.
+     * @param {WorkflowTemplateDeleteManyArgs} args - Arguments to filter WorkflowTemplates to delete.
+     * @example
+     * // Delete a few WorkflowTemplates
+     * const { count } = await prisma.workflowTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WorkflowTemplateDeleteManyArgs>(args?: SelectSubset<T, WorkflowTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkflowTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkflowTemplates
+     * const workflowTemplate = await prisma.workflowTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WorkflowTemplateUpdateManyArgs>(args: SelectSubset<T, WorkflowTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one WorkflowTemplate.
+     * @param {WorkflowTemplateUpsertArgs} args - Arguments to update or create a WorkflowTemplate.
+     * @example
+     * // Update or create a WorkflowTemplate
+     * const workflowTemplate = await prisma.workflowTemplate.upsert({
+     *   create: {
+     *     // ... data to create a WorkflowTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkflowTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WorkflowTemplateUpsertArgs>(args: SelectSubset<T, WorkflowTemplateUpsertArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of WorkflowTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateCountArgs} args - Arguments to filter WorkflowTemplates to count.
+     * @example
+     * // Count the number of WorkflowTemplates
+     * const count = await prisma.workflowTemplate.count({
+     *   where: {
+     *     // ... the filter for the WorkflowTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends WorkflowTemplateCountArgs>(
+      args?: Subset<T, WorkflowTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WorkflowTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WorkflowTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WorkflowTemplateAggregateArgs>(args: Subset<T, WorkflowTemplateAggregateArgs>): Prisma.PrismaPromise<GetWorkflowTemplateAggregateType<T>>
+
+    /**
+     * Group by WorkflowTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WorkflowTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WorkflowTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: WorkflowTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WorkflowTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkflowTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WorkflowTemplate model
+   */
+  readonly fields: WorkflowTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WorkflowTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WorkflowTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    steps<T extends WorkflowTemplate$stepsArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowTemplate$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findMany"> | Null>
+    engagements<T extends WorkflowTemplate$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowTemplate$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WorkflowTemplate model
+   */ 
+  interface WorkflowTemplateFieldRefs {
+    readonly id: FieldRef<"WorkflowTemplate", 'String'>
+    readonly code: FieldRef<"WorkflowTemplate", 'String'>
+    readonly label: FieldRef<"WorkflowTemplate", 'String'>
+    readonly description: FieldRef<"WorkflowTemplate", 'String'>
+    readonly icon: FieldRef<"WorkflowTemplate", 'String'>
+    readonly color: FieldRef<"WorkflowTemplate", 'String'>
+    readonly displayOrder: FieldRef<"WorkflowTemplate", 'Int'>
+    readonly formSchema: FieldRef<"WorkflowTemplate", 'Json'>
+    readonly isActive: FieldRef<"WorkflowTemplate", 'Boolean'>
+    readonly createdAt: FieldRef<"WorkflowTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"WorkflowTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WorkflowTemplate findUnique
+   */
+  export type WorkflowTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowTemplate to fetch.
+     */
+    where: WorkflowTemplateWhereUniqueInput
+  }
+
+  /**
+   * WorkflowTemplate findUniqueOrThrow
+   */
+  export type WorkflowTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowTemplate to fetch.
+     */
+    where: WorkflowTemplateWhereUniqueInput
+  }
+
+  /**
+   * WorkflowTemplate findFirst
+   */
+  export type WorkflowTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowTemplate to fetch.
+     */
+    where?: WorkflowTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowTemplates to fetch.
+     */
+    orderBy?: WorkflowTemplateOrderByWithRelationInput | WorkflowTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkflowTemplates.
+     */
+    cursor?: WorkflowTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkflowTemplates.
+     */
+    distinct?: WorkflowTemplateScalarFieldEnum | WorkflowTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowTemplate findFirstOrThrow
+   */
+  export type WorkflowTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowTemplate to fetch.
+     */
+    where?: WorkflowTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowTemplates to fetch.
+     */
+    orderBy?: WorkflowTemplateOrderByWithRelationInput | WorkflowTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkflowTemplates.
+     */
+    cursor?: WorkflowTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkflowTemplates.
+     */
+    distinct?: WorkflowTemplateScalarFieldEnum | WorkflowTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowTemplate findMany
+   */
+  export type WorkflowTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowTemplates to fetch.
+     */
+    where?: WorkflowTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowTemplates to fetch.
+     */
+    orderBy?: WorkflowTemplateOrderByWithRelationInput | WorkflowTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WorkflowTemplates.
+     */
+    cursor?: WorkflowTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowTemplates.
+     */
+    skip?: number
+    distinct?: WorkflowTemplateScalarFieldEnum | WorkflowTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowTemplate create
+   */
+  export type WorkflowTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WorkflowTemplate.
+     */
+    data: XOR<WorkflowTemplateCreateInput, WorkflowTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * WorkflowTemplate createMany
+   */
+  export type WorkflowTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WorkflowTemplates.
+     */
+    data: WorkflowTemplateCreateManyInput | WorkflowTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WorkflowTemplate update
+   */
+  export type WorkflowTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WorkflowTemplate.
+     */
+    data: XOR<WorkflowTemplateUpdateInput, WorkflowTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which WorkflowTemplate to update.
+     */
+    where: WorkflowTemplateWhereUniqueInput
+  }
+
+  /**
+   * WorkflowTemplate updateMany
+   */
+  export type WorkflowTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WorkflowTemplates.
+     */
+    data: XOR<WorkflowTemplateUpdateManyMutationInput, WorkflowTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkflowTemplates to update
+     */
+    where?: WorkflowTemplateWhereInput
+  }
+
+  /**
+   * WorkflowTemplate upsert
+   */
+  export type WorkflowTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WorkflowTemplate to update in case it exists.
+     */
+    where: WorkflowTemplateWhereUniqueInput
+    /**
+     * In case the WorkflowTemplate found by the `where` argument doesn't exist, create a new WorkflowTemplate with this data.
+     */
+    create: XOR<WorkflowTemplateCreateInput, WorkflowTemplateUncheckedCreateInput>
+    /**
+     * In case the WorkflowTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WorkflowTemplateUpdateInput, WorkflowTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * WorkflowTemplate delete
+   */
+  export type WorkflowTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which WorkflowTemplate to delete.
+     */
+    where: WorkflowTemplateWhereUniqueInput
+  }
+
+  /**
+   * WorkflowTemplate deleteMany
+   */
+  export type WorkflowTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkflowTemplates to delete
+     */
+    where?: WorkflowTemplateWhereInput
+  }
+
+  /**
+   * WorkflowTemplate.steps
+   */
+  export type WorkflowTemplate$stepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    where?: WorkflowStepWhereInput
+    orderBy?: WorkflowStepOrderByWithRelationInput | WorkflowStepOrderByWithRelationInput[]
+    cursor?: WorkflowStepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkflowStepScalarFieldEnum | WorkflowStepScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowTemplate.engagements
+   */
+  export type WorkflowTemplate$engagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowTemplate without action
+   */
+  export type WorkflowTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowTemplate
+     */
+    select?: WorkflowTemplateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WorkflowStep
+   */
+
+  export type AggregateWorkflowStep = {
+    _count: WorkflowStepCountAggregateOutputType | null
+    _avg: WorkflowStepAvgAggregateOutputType | null
+    _sum: WorkflowStepSumAggregateOutputType | null
+    _min: WorkflowStepMinAggregateOutputType | null
+    _max: WorkflowStepMaxAggregateOutputType | null
+  }
+
+  export type WorkflowStepAvgAggregateOutputType = {
+    stepOrder: number | null
+  }
+
+  export type WorkflowStepSumAggregateOutputType = {
+    stepOrder: number | null
+  }
+
+  export type WorkflowStepMinAggregateOutputType = {
+    id: string | null
+    templateId: string | null
+    stepOrder: number | null
+    code: string | null
+    label: string | null
+    description: string | null
+    requiresApproval: boolean | null
+    triggerAction: string | null
+    icon: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkflowStepMaxAggregateOutputType = {
+    id: string | null
+    templateId: string | null
+    stepOrder: number | null
+    code: string | null
+    label: string | null
+    description: string | null
+    requiresApproval: boolean | null
+    triggerAction: string | null
+    icon: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkflowStepCountAggregateOutputType = {
+    id: number
+    templateId: number
+    stepOrder: number
+    code: number
+    label: number
+    description: number
+    requiredFields: number
+    requiredDocuments: number
+    requiresApproval: number
+    approvalRoles: number
+    triggerAction: number
+    icon: number
+    color: number
+    allowedRoles: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WorkflowStepAvgAggregateInputType = {
+    stepOrder?: true
+  }
+
+  export type WorkflowStepSumAggregateInputType = {
+    stepOrder?: true
+  }
+
+  export type WorkflowStepMinAggregateInputType = {
+    id?: true
+    templateId?: true
+    stepOrder?: true
+    code?: true
+    label?: true
+    description?: true
+    requiresApproval?: true
+    triggerAction?: true
+    icon?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkflowStepMaxAggregateInputType = {
+    id?: true
+    templateId?: true
+    stepOrder?: true
+    code?: true
+    label?: true
+    description?: true
+    requiresApproval?: true
+    triggerAction?: true
+    icon?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkflowStepCountAggregateInputType = {
+    id?: true
+    templateId?: true
+    stepOrder?: true
+    code?: true
+    label?: true
+    description?: true
+    requiredFields?: true
+    requiredDocuments?: true
+    requiresApproval?: true
+    approvalRoles?: true
+    triggerAction?: true
+    icon?: true
+    color?: true
+    allowedRoles?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WorkflowStepAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkflowStep to aggregate.
+     */
+    where?: WorkflowStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowSteps to fetch.
+     */
+    orderBy?: WorkflowStepOrderByWithRelationInput | WorkflowStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WorkflowStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WorkflowSteps
+    **/
+    _count?: true | WorkflowStepCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WorkflowStepAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WorkflowStepSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WorkflowStepMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WorkflowStepMaxAggregateInputType
+  }
+
+  export type GetWorkflowStepAggregateType<T extends WorkflowStepAggregateArgs> = {
+        [P in keyof T & keyof AggregateWorkflowStep]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkflowStep[P]>
+      : GetScalarType<T[P], AggregateWorkflowStep[P]>
+  }
+
+
+
+
+  export type WorkflowStepGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkflowStepWhereInput
+    orderBy?: WorkflowStepOrderByWithAggregationInput | WorkflowStepOrderByWithAggregationInput[]
+    by: WorkflowStepScalarFieldEnum[] | WorkflowStepScalarFieldEnum
+    having?: WorkflowStepScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WorkflowStepCountAggregateInputType | true
+    _avg?: WorkflowStepAvgAggregateInputType
+    _sum?: WorkflowStepSumAggregateInputType
+    _min?: WorkflowStepMinAggregateInputType
+    _max?: WorkflowStepMaxAggregateInputType
+  }
+
+  export type WorkflowStepGroupByOutputType = {
+    id: string
+    templateId: string
+    stepOrder: number
+    code: string
+    label: string
+    description: string | null
+    requiredFields: JsonValue | null
+    requiredDocuments: JsonValue | null
+    requiresApproval: boolean
+    approvalRoles: JsonValue | null
+    triggerAction: string | null
+    icon: string | null
+    color: string | null
+    allowedRoles: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WorkflowStepCountAggregateOutputType | null
+    _avg: WorkflowStepAvgAggregateOutputType | null
+    _sum: WorkflowStepSumAggregateOutputType | null
+    _min: WorkflowStepMinAggregateOutputType | null
+    _max: WorkflowStepMaxAggregateOutputType | null
+  }
+
+  type GetWorkflowStepGroupByPayload<T extends WorkflowStepGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkflowStepGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkflowStepGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkflowStepGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkflowStepGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WorkflowStepSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    templateId?: boolean
+    stepOrder?: boolean
+    code?: boolean
+    label?: boolean
+    description?: boolean
+    requiredFields?: boolean
+    requiredDocuments?: boolean
+    requiresApproval?: boolean
+    approvalRoles?: boolean
+    triggerAction?: boolean
+    icon?: boolean
+    color?: boolean
+    allowedRoles?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    template?: boolean | WorkflowTemplateDefaultArgs<ExtArgs>
+    engagements?: boolean | WorkflowStep$engagementsArgs<ExtArgs>
+    _count?: boolean | WorkflowStepCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workflowStep"]>
+
+
+  export type WorkflowStepSelectScalar = {
+    id?: boolean
+    templateId?: boolean
+    stepOrder?: boolean
+    code?: boolean
+    label?: boolean
+    description?: boolean
+    requiredFields?: boolean
+    requiredDocuments?: boolean
+    requiresApproval?: boolean
+    approvalRoles?: boolean
+    triggerAction?: boolean
+    icon?: boolean
+    color?: boolean
+    allowedRoles?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WorkflowStepInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    template?: boolean | WorkflowTemplateDefaultArgs<ExtArgs>
+    engagements?: boolean | WorkflowStep$engagementsArgs<ExtArgs>
+    _count?: boolean | WorkflowStepCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $WorkflowStepPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WorkflowStep"
+    objects: {
+      template: Prisma.$WorkflowTemplatePayload<ExtArgs>
+      engagements: Prisma.$EngagementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      templateId: string
+      stepOrder: number
+      code: string
+      label: string
+      description: string | null
+      requiredFields: Prisma.JsonValue | null
+      requiredDocuments: Prisma.JsonValue | null
+      requiresApproval: boolean
+      approvalRoles: Prisma.JsonValue | null
+      triggerAction: string | null
+      icon: string | null
+      color: string | null
+      allowedRoles: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["workflowStep"]>
+    composites: {}
+  }
+
+  type WorkflowStepGetPayload<S extends boolean | null | undefined | WorkflowStepDefaultArgs> = $Result.GetResult<Prisma.$WorkflowStepPayload, S>
+
+  type WorkflowStepCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<WorkflowStepFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: WorkflowStepCountAggregateInputType | true
+    }
+
+  export interface WorkflowStepDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WorkflowStep'], meta: { name: 'WorkflowStep' } }
+    /**
+     * Find zero or one WorkflowStep that matches the filter.
+     * @param {WorkflowStepFindUniqueArgs} args - Arguments to find a WorkflowStep
+     * @example
+     * // Get one WorkflowStep
+     * const workflowStep = await prisma.workflowStep.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WorkflowStepFindUniqueArgs>(args: SelectSubset<T, WorkflowStepFindUniqueArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one WorkflowStep that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {WorkflowStepFindUniqueOrThrowArgs} args - Arguments to find a WorkflowStep
+     * @example
+     * // Get one WorkflowStep
+     * const workflowStep = await prisma.workflowStep.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WorkflowStepFindUniqueOrThrowArgs>(args: SelectSubset<T, WorkflowStepFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first WorkflowStep that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepFindFirstArgs} args - Arguments to find a WorkflowStep
+     * @example
+     * // Get one WorkflowStep
+     * const workflowStep = await prisma.workflowStep.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WorkflowStepFindFirstArgs>(args?: SelectSubset<T, WorkflowStepFindFirstArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first WorkflowStep that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepFindFirstOrThrowArgs} args - Arguments to find a WorkflowStep
+     * @example
+     * // Get one WorkflowStep
+     * const workflowStep = await prisma.workflowStep.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WorkflowStepFindFirstOrThrowArgs>(args?: SelectSubset<T, WorkflowStepFindFirstOrThrowArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more WorkflowSteps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkflowSteps
+     * const workflowSteps = await prisma.workflowStep.findMany()
+     * 
+     * // Get first 10 WorkflowSteps
+     * const workflowSteps = await prisma.workflowStep.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const workflowStepWithIdOnly = await prisma.workflowStep.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WorkflowStepFindManyArgs>(args?: SelectSubset<T, WorkflowStepFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a WorkflowStep.
+     * @param {WorkflowStepCreateArgs} args - Arguments to create a WorkflowStep.
+     * @example
+     * // Create one WorkflowStep
+     * const WorkflowStep = await prisma.workflowStep.create({
+     *   data: {
+     *     // ... data to create a WorkflowStep
+     *   }
+     * })
+     * 
+     */
+    create<T extends WorkflowStepCreateArgs>(args: SelectSubset<T, WorkflowStepCreateArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many WorkflowSteps.
+     * @param {WorkflowStepCreateManyArgs} args - Arguments to create many WorkflowSteps.
+     * @example
+     * // Create many WorkflowSteps
+     * const workflowStep = await prisma.workflowStep.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WorkflowStepCreateManyArgs>(args?: SelectSubset<T, WorkflowStepCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a WorkflowStep.
+     * @param {WorkflowStepDeleteArgs} args - Arguments to delete one WorkflowStep.
+     * @example
+     * // Delete one WorkflowStep
+     * const WorkflowStep = await prisma.workflowStep.delete({
+     *   where: {
+     *     // ... filter to delete one WorkflowStep
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WorkflowStepDeleteArgs>(args: SelectSubset<T, WorkflowStepDeleteArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one WorkflowStep.
+     * @param {WorkflowStepUpdateArgs} args - Arguments to update one WorkflowStep.
+     * @example
+     * // Update one WorkflowStep
+     * const workflowStep = await prisma.workflowStep.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WorkflowStepUpdateArgs>(args: SelectSubset<T, WorkflowStepUpdateArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more WorkflowSteps.
+     * @param {WorkflowStepDeleteManyArgs} args - Arguments to filter WorkflowSteps to delete.
+     * @example
+     * // Delete a few WorkflowSteps
+     * const { count } = await prisma.workflowStep.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WorkflowStepDeleteManyArgs>(args?: SelectSubset<T, WorkflowStepDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkflowSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkflowSteps
+     * const workflowStep = await prisma.workflowStep.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WorkflowStepUpdateManyArgs>(args: SelectSubset<T, WorkflowStepUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one WorkflowStep.
+     * @param {WorkflowStepUpsertArgs} args - Arguments to update or create a WorkflowStep.
+     * @example
+     * // Update or create a WorkflowStep
+     * const workflowStep = await prisma.workflowStep.upsert({
+     *   create: {
+     *     // ... data to create a WorkflowStep
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkflowStep we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WorkflowStepUpsertArgs>(args: SelectSubset<T, WorkflowStepUpsertArgs<ExtArgs>>): Prisma__WorkflowStepClient<$Result.GetResult<Prisma.$WorkflowStepPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of WorkflowSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepCountArgs} args - Arguments to filter WorkflowSteps to count.
+     * @example
+     * // Count the number of WorkflowSteps
+     * const count = await prisma.workflowStep.count({
+     *   where: {
+     *     // ... the filter for the WorkflowSteps we want to count
+     *   }
+     * })
+    **/
+    count<T extends WorkflowStepCountArgs>(
+      args?: Subset<T, WorkflowStepCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WorkflowStepCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WorkflowStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WorkflowStepAggregateArgs>(args: Subset<T, WorkflowStepAggregateArgs>): Prisma.PrismaPromise<GetWorkflowStepAggregateType<T>>
+
+    /**
+     * Group by WorkflowStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkflowStepGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WorkflowStepGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WorkflowStepGroupByArgs['orderBy'] }
+        : { orderBy?: WorkflowStepGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WorkflowStepGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkflowStepGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WorkflowStep model
+   */
+  readonly fields: WorkflowStepFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WorkflowStep.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WorkflowStepClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    template<T extends WorkflowTemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowTemplateDefaultArgs<ExtArgs>>): Prisma__WorkflowTemplateClient<$Result.GetResult<Prisma.$WorkflowTemplatePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    engagements<T extends WorkflowStep$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowStep$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WorkflowStep model
+   */ 
+  interface WorkflowStepFieldRefs {
+    readonly id: FieldRef<"WorkflowStep", 'String'>
+    readonly templateId: FieldRef<"WorkflowStep", 'String'>
+    readonly stepOrder: FieldRef<"WorkflowStep", 'Int'>
+    readonly code: FieldRef<"WorkflowStep", 'String'>
+    readonly label: FieldRef<"WorkflowStep", 'String'>
+    readonly description: FieldRef<"WorkflowStep", 'String'>
+    readonly requiredFields: FieldRef<"WorkflowStep", 'Json'>
+    readonly requiredDocuments: FieldRef<"WorkflowStep", 'Json'>
+    readonly requiresApproval: FieldRef<"WorkflowStep", 'Boolean'>
+    readonly approvalRoles: FieldRef<"WorkflowStep", 'Json'>
+    readonly triggerAction: FieldRef<"WorkflowStep", 'String'>
+    readonly icon: FieldRef<"WorkflowStep", 'String'>
+    readonly color: FieldRef<"WorkflowStep", 'String'>
+    readonly allowedRoles: FieldRef<"WorkflowStep", 'Json'>
+    readonly createdAt: FieldRef<"WorkflowStep", 'DateTime'>
+    readonly updatedAt: FieldRef<"WorkflowStep", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WorkflowStep findUnique
+   */
+  export type WorkflowStepFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowStep to fetch.
+     */
+    where: WorkflowStepWhereUniqueInput
+  }
+
+  /**
+   * WorkflowStep findUniqueOrThrow
+   */
+  export type WorkflowStepFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowStep to fetch.
+     */
+    where: WorkflowStepWhereUniqueInput
+  }
+
+  /**
+   * WorkflowStep findFirst
+   */
+  export type WorkflowStepFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowStep to fetch.
+     */
+    where?: WorkflowStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowSteps to fetch.
+     */
+    orderBy?: WorkflowStepOrderByWithRelationInput | WorkflowStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkflowSteps.
+     */
+    cursor?: WorkflowStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkflowSteps.
+     */
+    distinct?: WorkflowStepScalarFieldEnum | WorkflowStepScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowStep findFirstOrThrow
+   */
+  export type WorkflowStepFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowStep to fetch.
+     */
+    where?: WorkflowStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowSteps to fetch.
+     */
+    orderBy?: WorkflowStepOrderByWithRelationInput | WorkflowStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkflowSteps.
+     */
+    cursor?: WorkflowStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkflowSteps.
+     */
+    distinct?: WorkflowStepScalarFieldEnum | WorkflowStepScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowStep findMany
+   */
+  export type WorkflowStepFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkflowSteps to fetch.
+     */
+    where?: WorkflowStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkflowSteps to fetch.
+     */
+    orderBy?: WorkflowStepOrderByWithRelationInput | WorkflowStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WorkflowSteps.
+     */
+    cursor?: WorkflowStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkflowSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkflowSteps.
+     */
+    skip?: number
+    distinct?: WorkflowStepScalarFieldEnum | WorkflowStepScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowStep create
+   */
+  export type WorkflowStepCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WorkflowStep.
+     */
+    data: XOR<WorkflowStepCreateInput, WorkflowStepUncheckedCreateInput>
+  }
+
+  /**
+   * WorkflowStep createMany
+   */
+  export type WorkflowStepCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WorkflowSteps.
+     */
+    data: WorkflowStepCreateManyInput | WorkflowStepCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WorkflowStep update
+   */
+  export type WorkflowStepUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WorkflowStep.
+     */
+    data: XOR<WorkflowStepUpdateInput, WorkflowStepUncheckedUpdateInput>
+    /**
+     * Choose, which WorkflowStep to update.
+     */
+    where: WorkflowStepWhereUniqueInput
+  }
+
+  /**
+   * WorkflowStep updateMany
+   */
+  export type WorkflowStepUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WorkflowSteps.
+     */
+    data: XOR<WorkflowStepUpdateManyMutationInput, WorkflowStepUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkflowSteps to update
+     */
+    where?: WorkflowStepWhereInput
+  }
+
+  /**
+   * WorkflowStep upsert
+   */
+  export type WorkflowStepUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WorkflowStep to update in case it exists.
+     */
+    where: WorkflowStepWhereUniqueInput
+    /**
+     * In case the WorkflowStep found by the `where` argument doesn't exist, create a new WorkflowStep with this data.
+     */
+    create: XOR<WorkflowStepCreateInput, WorkflowStepUncheckedCreateInput>
+    /**
+     * In case the WorkflowStep was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WorkflowStepUpdateInput, WorkflowStepUncheckedUpdateInput>
+  }
+
+  /**
+   * WorkflowStep delete
+   */
+  export type WorkflowStepDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+    /**
+     * Filter which WorkflowStep to delete.
+     */
+    where: WorkflowStepWhereUniqueInput
+  }
+
+  /**
+   * WorkflowStep deleteMany
+   */
+  export type WorkflowStepDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkflowSteps to delete
+     */
+    where?: WorkflowStepWhereInput
+  }
+
+  /**
+   * WorkflowStep.engagements
+   */
+  export type WorkflowStep$engagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+    orderBy?: EngagementOrderByWithRelationInput | EngagementOrderByWithRelationInput[]
+    cursor?: EngagementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * WorkflowStep without action
+   */
+  export type WorkflowStepDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkflowStep
+     */
+    select?: WorkflowStepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkflowStepInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21326,7 +23773,10 @@ export namespace Prisma {
     statut: 'statut',
     referenceDossier: 'referenceDossier',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    workflowTemplateId: 'workflowTemplateId',
+    workflowStepId: 'workflowStepId',
+    parentEngagementId: 'parentEngagementId'
   };
 
   export type EngagementScalarFieldEnum = (typeof EngagementScalarFieldEnum)[keyof typeof EngagementScalarFieldEnum]
@@ -21499,6 +23949,45 @@ export namespace Prisma {
   };
 
   export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+  export const WorkflowTemplateScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    label: 'label',
+    description: 'description',
+    icon: 'icon',
+    color: 'color',
+    displayOrder: 'displayOrder',
+    formSchema: 'formSchema',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WorkflowTemplateScalarFieldEnum = (typeof WorkflowTemplateScalarFieldEnum)[keyof typeof WorkflowTemplateScalarFieldEnum]
+
+
+  export const WorkflowStepScalarFieldEnum: {
+    id: 'id',
+    templateId: 'templateId',
+    stepOrder: 'stepOrder',
+    code: 'code',
+    label: 'label',
+    description: 'description',
+    requiredFields: 'requiredFields',
+    requiredDocuments: 'requiredDocuments',
+    requiresApproval: 'requiresApproval',
+    approvalRoles: 'approvalRoles',
+    triggerAction: 'triggerAction',
+    icon: 'icon',
+    color: 'color',
+    allowedRoles: 'allowedRoles',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WorkflowStepScalarFieldEnum = (typeof WorkflowStepScalarFieldEnum)[keyof typeof WorkflowStepScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -22246,7 +24735,14 @@ export namespace Prisma {
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
     updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+    workflowTemplateId?: StringNullableFilter<"Engagement"> | string | null
+    workflowStepId?: StringNullableFilter<"Engagement"> | string | null
+    parentEngagementId?: StringNullableFilter<"Engagement"> | string | null
     ligneCredit?: XOR<LigneCreditRelationFilter, LigneCreditWhereInput>
+    workflowTemplate?: XOR<WorkflowTemplateNullableRelationFilter, WorkflowTemplateWhereInput> | null
+    workflowStep?: XOR<WorkflowStepNullableRelationFilter, WorkflowStepWhereInput> | null
+    parentEngagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    childEngagements?: EngagementListRelationFilter
   }
 
   export type EngagementOrderByWithRelationInput = {
@@ -22261,7 +24757,14 @@ export namespace Prisma {
     referenceDossier?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workflowTemplateId?: SortOrderInput | SortOrder
+    workflowStepId?: SortOrderInput | SortOrder
+    parentEngagementId?: SortOrderInput | SortOrder
     ligneCredit?: LigneCreditOrderByWithRelationInput
+    workflowTemplate?: WorkflowTemplateOrderByWithRelationInput
+    workflowStep?: WorkflowStepOrderByWithRelationInput
+    parentEngagement?: EngagementOrderByWithRelationInput
+    childEngagements?: EngagementOrderByRelationAggregateInput
   }
 
   export type EngagementWhereUniqueInput = Prisma.AtLeast<{
@@ -22279,7 +24782,14 @@ export namespace Prisma {
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
     updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+    workflowTemplateId?: StringNullableFilter<"Engagement"> | string | null
+    workflowStepId?: StringNullableFilter<"Engagement"> | string | null
+    parentEngagementId?: StringNullableFilter<"Engagement"> | string | null
     ligneCredit?: XOR<LigneCreditRelationFilter, LigneCreditWhereInput>
+    workflowTemplate?: XOR<WorkflowTemplateNullableRelationFilter, WorkflowTemplateWhereInput> | null
+    workflowStep?: XOR<WorkflowStepNullableRelationFilter, WorkflowStepWhereInput> | null
+    parentEngagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    childEngagements?: EngagementListRelationFilter
   }, "id">
 
   export type EngagementOrderByWithAggregationInput = {
@@ -22294,6 +24804,9 @@ export namespace Prisma {
     referenceDossier?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workflowTemplateId?: SortOrderInput | SortOrder
+    workflowStepId?: SortOrderInput | SortOrder
+    parentEngagementId?: SortOrderInput | SortOrder
     _count?: EngagementCountOrderByAggregateInput
     _avg?: EngagementAvgOrderByAggregateInput
     _max?: EngagementMaxOrderByAggregateInput
@@ -22316,6 +24829,9 @@ export namespace Prisma {
     referenceDossier?: StringWithAggregatesFilter<"Engagement"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Engagement"> | Date | string
+    workflowTemplateId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    workflowStepId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    parentEngagementId?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
   }
 
   export type SwiftMessageWhereInput = {
@@ -23205,6 +25721,212 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AuditLog"> | Date | string
   }
 
+  export type WorkflowTemplateWhereInput = {
+    AND?: WorkflowTemplateWhereInput | WorkflowTemplateWhereInput[]
+    OR?: WorkflowTemplateWhereInput[]
+    NOT?: WorkflowTemplateWhereInput | WorkflowTemplateWhereInput[]
+    id?: StringFilter<"WorkflowTemplate"> | string
+    code?: StringFilter<"WorkflowTemplate"> | string
+    label?: StringFilter<"WorkflowTemplate"> | string
+    description?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    icon?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    color?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    displayOrder?: IntFilter<"WorkflowTemplate"> | number
+    formSchema?: JsonNullableFilter<"WorkflowTemplate">
+    isActive?: BoolFilter<"WorkflowTemplate"> | boolean
+    createdAt?: DateTimeFilter<"WorkflowTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkflowTemplate"> | Date | string
+    steps?: WorkflowStepListRelationFilter
+    engagements?: EngagementListRelationFilter
+  }
+
+  export type WorkflowTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    displayOrder?: SortOrder
+    formSchema?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    steps?: WorkflowStepOrderByRelationAggregateInput
+    engagements?: EngagementOrderByRelationAggregateInput
+  }
+
+  export type WorkflowTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: WorkflowTemplateWhereInput | WorkflowTemplateWhereInput[]
+    OR?: WorkflowTemplateWhereInput[]
+    NOT?: WorkflowTemplateWhereInput | WorkflowTemplateWhereInput[]
+    label?: StringFilter<"WorkflowTemplate"> | string
+    description?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    icon?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    color?: StringNullableFilter<"WorkflowTemplate"> | string | null
+    displayOrder?: IntFilter<"WorkflowTemplate"> | number
+    formSchema?: JsonNullableFilter<"WorkflowTemplate">
+    isActive?: BoolFilter<"WorkflowTemplate"> | boolean
+    createdAt?: DateTimeFilter<"WorkflowTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkflowTemplate"> | Date | string
+    steps?: WorkflowStepListRelationFilter
+    engagements?: EngagementListRelationFilter
+  }, "id" | "code">
+
+  export type WorkflowTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    displayOrder?: SortOrder
+    formSchema?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WorkflowTemplateCountOrderByAggregateInput
+    _avg?: WorkflowTemplateAvgOrderByAggregateInput
+    _max?: WorkflowTemplateMaxOrderByAggregateInput
+    _min?: WorkflowTemplateMinOrderByAggregateInput
+    _sum?: WorkflowTemplateSumOrderByAggregateInput
+  }
+
+  export type WorkflowTemplateScalarWhereWithAggregatesInput = {
+    AND?: WorkflowTemplateScalarWhereWithAggregatesInput | WorkflowTemplateScalarWhereWithAggregatesInput[]
+    OR?: WorkflowTemplateScalarWhereWithAggregatesInput[]
+    NOT?: WorkflowTemplateScalarWhereWithAggregatesInput | WorkflowTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WorkflowTemplate"> | string
+    code?: StringWithAggregatesFilter<"WorkflowTemplate"> | string
+    label?: StringWithAggregatesFilter<"WorkflowTemplate"> | string
+    description?: StringNullableWithAggregatesFilter<"WorkflowTemplate"> | string | null
+    icon?: StringNullableWithAggregatesFilter<"WorkflowTemplate"> | string | null
+    color?: StringNullableWithAggregatesFilter<"WorkflowTemplate"> | string | null
+    displayOrder?: IntWithAggregatesFilter<"WorkflowTemplate"> | number
+    formSchema?: JsonNullableWithAggregatesFilter<"WorkflowTemplate">
+    isActive?: BoolWithAggregatesFilter<"WorkflowTemplate"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"WorkflowTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WorkflowTemplate"> | Date | string
+  }
+
+  export type WorkflowStepWhereInput = {
+    AND?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
+    OR?: WorkflowStepWhereInput[]
+    NOT?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
+    id?: StringFilter<"WorkflowStep"> | string
+    templateId?: StringFilter<"WorkflowStep"> | string
+    stepOrder?: IntFilter<"WorkflowStep"> | number
+    code?: StringFilter<"WorkflowStep"> | string
+    label?: StringFilter<"WorkflowStep"> | string
+    description?: StringNullableFilter<"WorkflowStep"> | string | null
+    requiredFields?: JsonNullableFilter<"WorkflowStep">
+    requiredDocuments?: JsonNullableFilter<"WorkflowStep">
+    requiresApproval?: BoolFilter<"WorkflowStep"> | boolean
+    approvalRoles?: JsonNullableFilter<"WorkflowStep">
+    triggerAction?: StringNullableFilter<"WorkflowStep"> | string | null
+    icon?: StringNullableFilter<"WorkflowStep"> | string | null
+    color?: StringNullableFilter<"WorkflowStep"> | string | null
+    allowedRoles?: JsonNullableFilter<"WorkflowStep">
+    createdAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+    template?: XOR<WorkflowTemplateRelationFilter, WorkflowTemplateWhereInput>
+    engagements?: EngagementListRelationFilter
+  }
+
+  export type WorkflowStepOrderByWithRelationInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    stepOrder?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrderInput | SortOrder
+    requiredFields?: SortOrderInput | SortOrder
+    requiredDocuments?: SortOrderInput | SortOrder
+    requiresApproval?: SortOrder
+    approvalRoles?: SortOrderInput | SortOrder
+    triggerAction?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    allowedRoles?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    template?: WorkflowTemplateOrderByWithRelationInput
+    engagements?: EngagementOrderByRelationAggregateInput
+  }
+
+  export type WorkflowStepWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    templateId_stepOrder?: WorkflowStepTemplateIdStepOrderCompoundUniqueInput
+    AND?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
+    OR?: WorkflowStepWhereInput[]
+    NOT?: WorkflowStepWhereInput | WorkflowStepWhereInput[]
+    templateId?: StringFilter<"WorkflowStep"> | string
+    stepOrder?: IntFilter<"WorkflowStep"> | number
+    code?: StringFilter<"WorkflowStep"> | string
+    label?: StringFilter<"WorkflowStep"> | string
+    description?: StringNullableFilter<"WorkflowStep"> | string | null
+    requiredFields?: JsonNullableFilter<"WorkflowStep">
+    requiredDocuments?: JsonNullableFilter<"WorkflowStep">
+    requiresApproval?: BoolFilter<"WorkflowStep"> | boolean
+    approvalRoles?: JsonNullableFilter<"WorkflowStep">
+    triggerAction?: StringNullableFilter<"WorkflowStep"> | string | null
+    icon?: StringNullableFilter<"WorkflowStep"> | string | null
+    color?: StringNullableFilter<"WorkflowStep"> | string | null
+    allowedRoles?: JsonNullableFilter<"WorkflowStep">
+    createdAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+    template?: XOR<WorkflowTemplateRelationFilter, WorkflowTemplateWhereInput>
+    engagements?: EngagementListRelationFilter
+  }, "id" | "templateId_stepOrder">
+
+  export type WorkflowStepOrderByWithAggregationInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    stepOrder?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrderInput | SortOrder
+    requiredFields?: SortOrderInput | SortOrder
+    requiredDocuments?: SortOrderInput | SortOrder
+    requiresApproval?: SortOrder
+    approvalRoles?: SortOrderInput | SortOrder
+    triggerAction?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    allowedRoles?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WorkflowStepCountOrderByAggregateInput
+    _avg?: WorkflowStepAvgOrderByAggregateInput
+    _max?: WorkflowStepMaxOrderByAggregateInput
+    _min?: WorkflowStepMinOrderByAggregateInput
+    _sum?: WorkflowStepSumOrderByAggregateInput
+  }
+
+  export type WorkflowStepScalarWhereWithAggregatesInput = {
+    AND?: WorkflowStepScalarWhereWithAggregatesInput | WorkflowStepScalarWhereWithAggregatesInput[]
+    OR?: WorkflowStepScalarWhereWithAggregatesInput[]
+    NOT?: WorkflowStepScalarWhereWithAggregatesInput | WorkflowStepScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WorkflowStep"> | string
+    templateId?: StringWithAggregatesFilter<"WorkflowStep"> | string
+    stepOrder?: IntWithAggregatesFilter<"WorkflowStep"> | number
+    code?: StringWithAggregatesFilter<"WorkflowStep"> | string
+    label?: StringWithAggregatesFilter<"WorkflowStep"> | string
+    description?: StringNullableWithAggregatesFilter<"WorkflowStep"> | string | null
+    requiredFields?: JsonNullableWithAggregatesFilter<"WorkflowStep">
+    requiredDocuments?: JsonNullableWithAggregatesFilter<"WorkflowStep">
+    requiresApproval?: BoolWithAggregatesFilter<"WorkflowStep"> | boolean
+    approvalRoles?: JsonNullableWithAggregatesFilter<"WorkflowStep">
+    triggerAction?: StringNullableWithAggregatesFilter<"WorkflowStep"> | string | null
+    icon?: StringNullableWithAggregatesFilter<"WorkflowStep"> | string | null
+    color?: StringNullableWithAggregatesFilter<"WorkflowStep"> | string | null
+    allowedRoles?: JsonNullableWithAggregatesFilter<"WorkflowStep">
+    createdAt?: DateTimeWithAggregatesFilter<"WorkflowStep"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WorkflowStep"> | Date | string
+  }
+
   export type userCreateInput = {
     id?: string
     name: string
@@ -24003,6 +26725,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
   }
 
   export type EngagementUncheckedCreateInput = {
@@ -24017,6 +26743,10 @@ export namespace Prisma {
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
   }
 
   export type EngagementUpdateInput = {
@@ -24031,6 +26761,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateInput = {
@@ -24045,6 +26779,10 @@ export namespace Prisma {
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
   }
 
   export type EngagementCreateManyInput = {
@@ -24059,6 +26797,9 @@ export namespace Prisma {
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
   }
 
   export type EngagementUpdateManyMutationInput = {
@@ -24086,6 +26827,9 @@ export namespace Prisma {
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwiftMessageCreateInput = {
@@ -25033,6 +27777,248 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WorkflowTemplateCreateInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: WorkflowStepCreateNestedManyWithoutTemplateInput
+    engagements?: EngagementCreateNestedManyWithoutWorkflowTemplateInput
+  }
+
+  export type WorkflowTemplateUncheckedCreateInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: WorkflowStepUncheckedCreateNestedManyWithoutTemplateInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowTemplateInput
+  }
+
+  export type WorkflowTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: WorkflowStepUpdateManyWithoutTemplateNestedInput
+    engagements?: EngagementUpdateManyWithoutWorkflowTemplateNestedInput
+  }
+
+  export type WorkflowTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: WorkflowStepUncheckedUpdateManyWithoutTemplateNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutWorkflowTemplateNestedInput
+  }
+
+  export type WorkflowTemplateCreateManyInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkflowTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkflowTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkflowStepCreateInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    template: WorkflowTemplateCreateNestedOneWithoutStepsInput
+    engagements?: EngagementCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepUncheckedCreateInput = {
+    id?: string
+    templateId: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    template?: WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput
+    engagements?: EngagementUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type WorkflowStepUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type WorkflowStepCreateManyInput = {
+    id?: string
+    templateId: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkflowStepUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkflowStepUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -25722,6 +28708,21 @@ export namespace Prisma {
     montant?: SortOrder
   }
 
+  export type WorkflowTemplateNullableRelationFilter = {
+    is?: WorkflowTemplateWhereInput | null
+    isNot?: WorkflowTemplateWhereInput | null
+  }
+
+  export type WorkflowStepNullableRelationFilter = {
+    is?: WorkflowStepWhereInput | null
+    isNot?: WorkflowStepWhereInput | null
+  }
+
+  export type EngagementNullableRelationFilter = {
+    is?: EngagementWhereInput | null
+    isNot?: EngagementWhereInput | null
+  }
+
   export type EngagementCountOrderByAggregateInput = {
     id?: SortOrder
     ligneCreditId?: SortOrder
@@ -25734,6 +28735,9 @@ export namespace Prisma {
     referenceDossier?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workflowTemplateId?: SortOrder
+    workflowStepId?: SortOrder
+    parentEngagementId?: SortOrder
   }
 
   export type EngagementAvgOrderByAggregateInput = {
@@ -25752,6 +28756,9 @@ export namespace Prisma {
     referenceDossier?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workflowTemplateId?: SortOrder
+    workflowStepId?: SortOrder
+    parentEngagementId?: SortOrder
   }
 
   export type EngagementMinOrderByAggregateInput = {
@@ -25766,6 +28773,9 @@ export namespace Prisma {
     referenceDossier?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workflowTemplateId?: SortOrder
+    workflowStepId?: SortOrder
+    parentEngagementId?: SortOrder
   }
 
   export type EngagementSumOrderByAggregateInput = {
@@ -26334,6 +29344,131 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type WorkflowStepListRelationFilter = {
+    every?: WorkflowStepWhereInput
+    some?: WorkflowStepWhereInput
+    none?: WorkflowStepWhereInput
+  }
+
+  export type WorkflowStepOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WorkflowTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    displayOrder?: SortOrder
+    formSchema?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowTemplateAvgOrderByAggregateInput = {
+    displayOrder?: SortOrder
+  }
+
+  export type WorkflowTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    displayOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    displayOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowTemplateSumOrderByAggregateInput = {
+    displayOrder?: SortOrder
+  }
+
+  export type WorkflowTemplateRelationFilter = {
+    is?: WorkflowTemplateWhereInput
+    isNot?: WorkflowTemplateWhereInput
+  }
+
+  export type WorkflowStepTemplateIdStepOrderCompoundUniqueInput = {
+    templateId: string
+    stepOrder: number
+  }
+
+  export type WorkflowStepCountOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    stepOrder?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    requiredFields?: SortOrder
+    requiredDocuments?: SortOrder
+    requiresApproval?: SortOrder
+    approvalRoles?: SortOrder
+    triggerAction?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    allowedRoles?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowStepAvgOrderByAggregateInput = {
+    stepOrder?: SortOrder
+  }
+
+  export type WorkflowStepMaxOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    stepOrder?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    requiresApproval?: SortOrder
+    triggerAction?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowStepMinOrderByAggregateInput = {
+    id?: SortOrder
+    templateId?: SortOrder
+    stepOrder?: SortOrder
+    code?: SortOrder
+    label?: SortOrder
+    description?: SortOrder
+    requiresApproval?: SortOrder
+    triggerAction?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkflowStepSumOrderByAggregateInput = {
+    stepOrder?: SortOrder
+  }
+
   export type CompanyCreateNestedOneWithoutUsersInput = {
     create?: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutUsersInput
@@ -26744,12 +29879,102 @@ export namespace Prisma {
     connect?: LigneCreditWhereUniqueInput
   }
 
+  export type WorkflowTemplateCreateNestedOneWithoutEngagementsInput = {
+    create?: XOR<WorkflowTemplateCreateWithoutEngagementsInput, WorkflowTemplateUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: WorkflowTemplateCreateOrConnectWithoutEngagementsInput
+    connect?: WorkflowTemplateWhereUniqueInput
+  }
+
+  export type WorkflowStepCreateNestedOneWithoutEngagementsInput = {
+    create?: XOR<WorkflowStepCreateWithoutEngagementsInput, WorkflowStepUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutEngagementsInput
+    connect?: WorkflowStepWhereUniqueInput
+  }
+
+  export type EngagementCreateNestedOneWithoutChildEngagementsInput = {
+    create?: XOR<EngagementCreateWithoutChildEngagementsInput, EngagementUncheckedCreateWithoutChildEngagementsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutChildEngagementsInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type EngagementCreateNestedManyWithoutParentEngagementInput = {
+    create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
+    createMany?: EngagementCreateManyParentEngagementInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutParentEngagementInput = {
+    create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
+    createMany?: EngagementCreateManyParentEngagementInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
   export type LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput = {
     create?: XOR<LigneCreditCreateWithoutEngagementsInput, LigneCreditUncheckedCreateWithoutEngagementsInput>
     connectOrCreate?: LigneCreditCreateOrConnectWithoutEngagementsInput
     upsert?: LigneCreditUpsertWithoutEngagementsInput
     connect?: LigneCreditWhereUniqueInput
     update?: XOR<XOR<LigneCreditUpdateToOneWithWhereWithoutEngagementsInput, LigneCreditUpdateWithoutEngagementsInput>, LigneCreditUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type WorkflowTemplateUpdateOneWithoutEngagementsNestedInput = {
+    create?: XOR<WorkflowTemplateCreateWithoutEngagementsInput, WorkflowTemplateUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: WorkflowTemplateCreateOrConnectWithoutEngagementsInput
+    upsert?: WorkflowTemplateUpsertWithoutEngagementsInput
+    disconnect?: WorkflowTemplateWhereInput | boolean
+    delete?: WorkflowTemplateWhereInput | boolean
+    connect?: WorkflowTemplateWhereUniqueInput
+    update?: XOR<XOR<WorkflowTemplateUpdateToOneWithWhereWithoutEngagementsInput, WorkflowTemplateUpdateWithoutEngagementsInput>, WorkflowTemplateUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type WorkflowStepUpdateOneWithoutEngagementsNestedInput = {
+    create?: XOR<WorkflowStepCreateWithoutEngagementsInput, WorkflowStepUncheckedCreateWithoutEngagementsInput>
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutEngagementsInput
+    upsert?: WorkflowStepUpsertWithoutEngagementsInput
+    disconnect?: WorkflowStepWhereInput | boolean
+    delete?: WorkflowStepWhereInput | boolean
+    connect?: WorkflowStepWhereUniqueInput
+    update?: XOR<XOR<WorkflowStepUpdateToOneWithWhereWithoutEngagementsInput, WorkflowStepUpdateWithoutEngagementsInput>, WorkflowStepUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type EngagementUpdateOneWithoutChildEngagementsNestedInput = {
+    create?: XOR<EngagementCreateWithoutChildEngagementsInput, EngagementUncheckedCreateWithoutChildEngagementsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutChildEngagementsInput
+    upsert?: EngagementUpsertWithoutChildEngagementsInput
+    disconnect?: EngagementWhereInput | boolean
+    delete?: EngagementWhereInput | boolean
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutChildEngagementsInput, EngagementUpdateWithoutChildEngagementsInput>, EngagementUncheckedUpdateWithoutChildEngagementsInput>
+  }
+
+  export type EngagementUpdateManyWithoutParentEngagementNestedInput = {
+    create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutParentEngagementInput | EngagementUpsertWithWhereUniqueWithoutParentEngagementInput[]
+    createMany?: EngagementCreateManyParentEngagementInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutParentEngagementInput | EngagementUpdateWithWhereUniqueWithoutParentEngagementInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutParentEngagementInput | EngagementUpdateManyWithWhereWithoutParentEngagementInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput = {
+    create?: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput> | EngagementCreateWithoutParentEngagementInput[] | EngagementUncheckedCreateWithoutParentEngagementInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutParentEngagementInput | EngagementCreateOrConnectWithoutParentEngagementInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutParentEngagementInput | EngagementUpsertWithWhereUniqueWithoutParentEngagementInput[]
+    createMany?: EngagementCreateManyParentEngagementInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutParentEngagementInput | EngagementUpdateWithWhereUniqueWithoutParentEngagementInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutParentEngagementInput | EngagementUpdateManyWithWhereWithoutParentEngagementInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
   export type CompanyCreateNestedOneWithoutSubCompaniesInput = {
@@ -27440,6 +30665,146 @@ export namespace Prisma {
     delete?: userWhereInput | boolean
     connect?: userWhereUniqueInput
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutAuditLogsInput, userUpdateWithoutAuditLogsInput>, userUncheckedUpdateWithoutAuditLogsInput>
+  }
+
+  export type WorkflowStepCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput> | WorkflowStepCreateWithoutTemplateInput[] | WorkflowStepUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutTemplateInput | WorkflowStepCreateOrConnectWithoutTemplateInput[]
+    createMany?: WorkflowStepCreateManyTemplateInputEnvelope
+    connect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+  }
+
+  export type EngagementCreateNestedManyWithoutWorkflowTemplateInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput> | EngagementCreateWithoutWorkflowTemplateInput[] | EngagementUncheckedCreateWithoutWorkflowTemplateInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowTemplateInput | EngagementCreateOrConnectWithoutWorkflowTemplateInput[]
+    createMany?: EngagementCreateManyWorkflowTemplateInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type WorkflowStepUncheckedCreateNestedManyWithoutTemplateInput = {
+    create?: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput> | WorkflowStepCreateWithoutTemplateInput[] | WorkflowStepUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutTemplateInput | WorkflowStepCreateOrConnectWithoutTemplateInput[]
+    createMany?: WorkflowStepCreateManyTemplateInputEnvelope
+    connect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutWorkflowTemplateInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput> | EngagementCreateWithoutWorkflowTemplateInput[] | EngagementUncheckedCreateWithoutWorkflowTemplateInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowTemplateInput | EngagementCreateOrConnectWithoutWorkflowTemplateInput[]
+    createMany?: EngagementCreateManyWorkflowTemplateInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type WorkflowStepUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput> | WorkflowStepCreateWithoutTemplateInput[] | WorkflowStepUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutTemplateInput | WorkflowStepCreateOrConnectWithoutTemplateInput[]
+    upsert?: WorkflowStepUpsertWithWhereUniqueWithoutTemplateInput | WorkflowStepUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: WorkflowStepCreateManyTemplateInputEnvelope
+    set?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    disconnect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    delete?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    connect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    update?: WorkflowStepUpdateWithWhereUniqueWithoutTemplateInput | WorkflowStepUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: WorkflowStepUpdateManyWithWhereWithoutTemplateInput | WorkflowStepUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: WorkflowStepScalarWhereInput | WorkflowStepScalarWhereInput[]
+  }
+
+  export type EngagementUpdateManyWithoutWorkflowTemplateNestedInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput> | EngagementCreateWithoutWorkflowTemplateInput[] | EngagementUncheckedCreateWithoutWorkflowTemplateInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowTemplateInput | EngagementCreateOrConnectWithoutWorkflowTemplateInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutWorkflowTemplateInput | EngagementUpsertWithWhereUniqueWithoutWorkflowTemplateInput[]
+    createMany?: EngagementCreateManyWorkflowTemplateInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutWorkflowTemplateInput | EngagementUpdateWithWhereUniqueWithoutWorkflowTemplateInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutWorkflowTemplateInput | EngagementUpdateManyWithWhereWithoutWorkflowTemplateInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type WorkflowStepUncheckedUpdateManyWithoutTemplateNestedInput = {
+    create?: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput> | WorkflowStepCreateWithoutTemplateInput[] | WorkflowStepUncheckedCreateWithoutTemplateInput[]
+    connectOrCreate?: WorkflowStepCreateOrConnectWithoutTemplateInput | WorkflowStepCreateOrConnectWithoutTemplateInput[]
+    upsert?: WorkflowStepUpsertWithWhereUniqueWithoutTemplateInput | WorkflowStepUpsertWithWhereUniqueWithoutTemplateInput[]
+    createMany?: WorkflowStepCreateManyTemplateInputEnvelope
+    set?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    disconnect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    delete?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    connect?: WorkflowStepWhereUniqueInput | WorkflowStepWhereUniqueInput[]
+    update?: WorkflowStepUpdateWithWhereUniqueWithoutTemplateInput | WorkflowStepUpdateWithWhereUniqueWithoutTemplateInput[]
+    updateMany?: WorkflowStepUpdateManyWithWhereWithoutTemplateInput | WorkflowStepUpdateManyWithWhereWithoutTemplateInput[]
+    deleteMany?: WorkflowStepScalarWhereInput | WorkflowStepScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutWorkflowTemplateNestedInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput> | EngagementCreateWithoutWorkflowTemplateInput[] | EngagementUncheckedCreateWithoutWorkflowTemplateInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowTemplateInput | EngagementCreateOrConnectWithoutWorkflowTemplateInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutWorkflowTemplateInput | EngagementUpsertWithWhereUniqueWithoutWorkflowTemplateInput[]
+    createMany?: EngagementCreateManyWorkflowTemplateInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutWorkflowTemplateInput | EngagementUpdateWithWhereUniqueWithoutWorkflowTemplateInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutWorkflowTemplateInput | EngagementUpdateManyWithWhereWithoutWorkflowTemplateInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type WorkflowTemplateCreateNestedOneWithoutStepsInput = {
+    create?: XOR<WorkflowTemplateCreateWithoutStepsInput, WorkflowTemplateUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: WorkflowTemplateCreateOrConnectWithoutStepsInput
+    connect?: WorkflowTemplateWhereUniqueInput
+  }
+
+  export type EngagementCreateNestedManyWithoutWorkflowStepInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
+    createMany?: EngagementCreateManyWorkflowStepInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
+    createMany?: EngagementCreateManyWorkflowStepInputEnvelope
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput = {
+    create?: XOR<WorkflowTemplateCreateWithoutStepsInput, WorkflowTemplateUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: WorkflowTemplateCreateOrConnectWithoutStepsInput
+    upsert?: WorkflowTemplateUpsertWithoutStepsInput
+    connect?: WorkflowTemplateWhereUniqueInput
+    update?: XOR<XOR<WorkflowTemplateUpdateToOneWithWhereWithoutStepsInput, WorkflowTemplateUpdateWithoutStepsInput>, WorkflowTemplateUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type EngagementUpdateManyWithoutWorkflowStepNestedInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutWorkflowStepInput | EngagementUpsertWithWhereUniqueWithoutWorkflowStepInput[]
+    createMany?: EngagementCreateManyWorkflowStepInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput | EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutWorkflowStepInput | EngagementUpdateManyWithWhereWithoutWorkflowStepInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput = {
+    create?: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput> | EngagementCreateWithoutWorkflowStepInput[] | EngagementUncheckedCreateWithoutWorkflowStepInput[]
+    connectOrCreate?: EngagementCreateOrConnectWithoutWorkflowStepInput | EngagementCreateOrConnectWithoutWorkflowStepInput[]
+    upsert?: EngagementUpsertWithWhereUniqueWithoutWorkflowStepInput | EngagementUpsertWithWhereUniqueWithoutWorkflowStepInput[]
+    createMany?: EngagementCreateManyWorkflowStepInputEnvelope
+    set?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    disconnect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    delete?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+    update?: EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput | EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput[]
+    updateMany?: EngagementUpdateManyWithWhereWithoutWorkflowStepInput | EngagementUpdateManyWithWhereWithoutWorkflowStepInput[]
+    deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -28376,6 +31741,10 @@ export namespace Prisma {
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutLigneCreditInput = {
@@ -28389,6 +31758,10 @@ export namespace Prisma {
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutLigneCreditInput = {
@@ -28500,6 +31873,9 @@ export namespace Prisma {
     referenceDossier?: StringFilter<"Engagement"> | string
     createdAt?: DateTimeFilter<"Engagement"> | Date | string
     updatedAt?: DateTimeFilter<"Engagement"> | Date | string
+    workflowTemplateId?: StringNullableFilter<"Engagement"> | string | null
+    workflowStepId?: StringNullableFilter<"Engagement"> | string | null
+    parentEngagementId?: StringNullableFilter<"Engagement"> | string | null
   }
 
   export type LigneCreditCreateWithoutGarantiesInput = {
@@ -28841,6 +32217,167 @@ export namespace Prisma {
     create: XOR<LigneCreditCreateWithoutEngagementsInput, LigneCreditUncheckedCreateWithoutEngagementsInput>
   }
 
+  export type WorkflowTemplateCreateWithoutEngagementsInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: WorkflowStepCreateNestedManyWithoutTemplateInput
+  }
+
+  export type WorkflowTemplateUncheckedCreateWithoutEngagementsInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: WorkflowStepUncheckedCreateNestedManyWithoutTemplateInput
+  }
+
+  export type WorkflowTemplateCreateOrConnectWithoutEngagementsInput = {
+    where: WorkflowTemplateWhereUniqueInput
+    create: XOR<WorkflowTemplateCreateWithoutEngagementsInput, WorkflowTemplateUncheckedCreateWithoutEngagementsInput>
+  }
+
+  export type WorkflowStepCreateWithoutEngagementsInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    template: WorkflowTemplateCreateNestedOneWithoutStepsInput
+  }
+
+  export type WorkflowStepUncheckedCreateWithoutEngagementsInput = {
+    id?: string
+    templateId: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkflowStepCreateOrConnectWithoutEngagementsInput = {
+    where: WorkflowStepWhereUniqueInput
+    create: XOR<WorkflowStepCreateWithoutEngagementsInput, WorkflowStepUncheckedCreateWithoutEngagementsInput>
+  }
+
+  export type EngagementCreateWithoutChildEngagementsInput = {
+    id?: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+  }
+
+  export type EngagementUncheckedCreateWithoutChildEngagementsInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+  }
+
+  export type EngagementCreateOrConnectWithoutChildEngagementsInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutChildEngagementsInput, EngagementUncheckedCreateWithoutChildEngagementsInput>
+  }
+
+  export type EngagementCreateWithoutParentEngagementInput = {
+    id?: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutParentEngagementInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutParentEngagementInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput>
+  }
+
+  export type EngagementCreateManyParentEngagementInputEnvelope = {
+    data: EngagementCreateManyParentEngagementInput | EngagementCreateManyParentEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
   export type LigneCreditUpsertWithoutEngagementsInput = {
     update: XOR<LigneCreditUpdateWithoutEngagementsInput, LigneCreditUncheckedUpdateWithoutEngagementsInput>
     create: XOR<LigneCreditCreateWithoutEngagementsInput, LigneCreditUncheckedCreateWithoutEngagementsInput>
@@ -28956,6 +32493,157 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     garanties?: GarantieUncheckedUpdateManyWithoutLigneCreditNestedInput
+  }
+
+  export type WorkflowTemplateUpsertWithoutEngagementsInput = {
+    update: XOR<WorkflowTemplateUpdateWithoutEngagementsInput, WorkflowTemplateUncheckedUpdateWithoutEngagementsInput>
+    create: XOR<WorkflowTemplateCreateWithoutEngagementsInput, WorkflowTemplateUncheckedCreateWithoutEngagementsInput>
+    where?: WorkflowTemplateWhereInput
+  }
+
+  export type WorkflowTemplateUpdateToOneWithWhereWithoutEngagementsInput = {
+    where?: WorkflowTemplateWhereInput
+    data: XOR<WorkflowTemplateUpdateWithoutEngagementsInput, WorkflowTemplateUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type WorkflowTemplateUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: WorkflowStepUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type WorkflowTemplateUncheckedUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: WorkflowStepUncheckedUpdateManyWithoutTemplateNestedInput
+  }
+
+  export type WorkflowStepUpsertWithoutEngagementsInput = {
+    update: XOR<WorkflowStepUpdateWithoutEngagementsInput, WorkflowStepUncheckedUpdateWithoutEngagementsInput>
+    create: XOR<WorkflowStepCreateWithoutEngagementsInput, WorkflowStepUncheckedCreateWithoutEngagementsInput>
+    where?: WorkflowStepWhereInput
+  }
+
+  export type WorkflowStepUpdateToOneWithWhereWithoutEngagementsInput = {
+    where?: WorkflowStepWhereInput
+    data: XOR<WorkflowStepUpdateWithoutEngagementsInput, WorkflowStepUncheckedUpdateWithoutEngagementsInput>
+  }
+
+  export type WorkflowStepUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    template?: WorkflowTemplateUpdateOneRequiredWithoutStepsNestedInput
+  }
+
+  export type WorkflowStepUncheckedUpdateWithoutEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    templateId?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpsertWithoutChildEngagementsInput = {
+    update: XOR<EngagementUpdateWithoutChildEngagementsInput, EngagementUncheckedUpdateWithoutChildEngagementsInput>
+    create: XOR<EngagementCreateWithoutChildEngagementsInput, EngagementUncheckedCreateWithoutChildEngagementsInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutChildEngagementsInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutChildEngagementsInput, EngagementUncheckedUpdateWithoutChildEngagementsInput>
+  }
+
+  export type EngagementUpdateWithoutChildEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutChildEngagementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutParentEngagementInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutParentEngagementInput, EngagementUncheckedUpdateWithoutParentEngagementInput>
+    create: XOR<EngagementCreateWithoutParentEngagementInput, EngagementUncheckedCreateWithoutParentEngagementInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutParentEngagementInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutParentEngagementInput, EngagementUncheckedUpdateWithoutParentEngagementInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutParentEngagementInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutParentEngagementInput>
   }
 
   export type CompanyCreateWithoutSubCompaniesInput = {
@@ -30576,6 +34264,288 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type WorkflowStepCreateWithoutTemplateInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepUncheckedCreateWithoutTemplateInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowStepInput
+  }
+
+  export type WorkflowStepCreateOrConnectWithoutTemplateInput = {
+    where: WorkflowStepWhereUniqueInput
+    create: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type WorkflowStepCreateManyTemplateInputEnvelope = {
+    data: WorkflowStepCreateManyTemplateInput | WorkflowStepCreateManyTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementCreateWithoutWorkflowTemplateInput = {
+    id?: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowStep?: WorkflowStepCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutWorkflowTemplateInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutWorkflowTemplateInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput>
+  }
+
+  export type EngagementCreateManyWorkflowTemplateInputEnvelope = {
+    data: EngagementCreateManyWorkflowTemplateInput | EngagementCreateManyWorkflowTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WorkflowStepUpsertWithWhereUniqueWithoutTemplateInput = {
+    where: WorkflowStepWhereUniqueInput
+    update: XOR<WorkflowStepUpdateWithoutTemplateInput, WorkflowStepUncheckedUpdateWithoutTemplateInput>
+    create: XOR<WorkflowStepCreateWithoutTemplateInput, WorkflowStepUncheckedCreateWithoutTemplateInput>
+  }
+
+  export type WorkflowStepUpdateWithWhereUniqueWithoutTemplateInput = {
+    where: WorkflowStepWhereUniqueInput
+    data: XOR<WorkflowStepUpdateWithoutTemplateInput, WorkflowStepUncheckedUpdateWithoutTemplateInput>
+  }
+
+  export type WorkflowStepUpdateManyWithWhereWithoutTemplateInput = {
+    where: WorkflowStepScalarWhereInput
+    data: XOR<WorkflowStepUpdateManyMutationInput, WorkflowStepUncheckedUpdateManyWithoutTemplateInput>
+  }
+
+  export type WorkflowStepScalarWhereInput = {
+    AND?: WorkflowStepScalarWhereInput | WorkflowStepScalarWhereInput[]
+    OR?: WorkflowStepScalarWhereInput[]
+    NOT?: WorkflowStepScalarWhereInput | WorkflowStepScalarWhereInput[]
+    id?: StringFilter<"WorkflowStep"> | string
+    templateId?: StringFilter<"WorkflowStep"> | string
+    stepOrder?: IntFilter<"WorkflowStep"> | number
+    code?: StringFilter<"WorkflowStep"> | string
+    label?: StringFilter<"WorkflowStep"> | string
+    description?: StringNullableFilter<"WorkflowStep"> | string | null
+    requiredFields?: JsonNullableFilter<"WorkflowStep">
+    requiredDocuments?: JsonNullableFilter<"WorkflowStep">
+    requiresApproval?: BoolFilter<"WorkflowStep"> | boolean
+    approvalRoles?: JsonNullableFilter<"WorkflowStep">
+    triggerAction?: StringNullableFilter<"WorkflowStep"> | string | null
+    icon?: StringNullableFilter<"WorkflowStep"> | string | null
+    color?: StringNullableFilter<"WorkflowStep"> | string | null
+    allowedRoles?: JsonNullableFilter<"WorkflowStep">
+    createdAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkflowStep"> | Date | string
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutWorkflowTemplateInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutWorkflowTemplateInput, EngagementUncheckedUpdateWithoutWorkflowTemplateInput>
+    create: XOR<EngagementCreateWithoutWorkflowTemplateInput, EngagementUncheckedCreateWithoutWorkflowTemplateInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutWorkflowTemplateInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutWorkflowTemplateInput, EngagementUncheckedUpdateWithoutWorkflowTemplateInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutWorkflowTemplateInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutWorkflowTemplateInput>
+  }
+
+  export type WorkflowTemplateCreateWithoutStepsInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementCreateNestedManyWithoutWorkflowTemplateInput
+  }
+
+  export type WorkflowTemplateUncheckedCreateWithoutStepsInput = {
+    id?: string
+    code: string
+    label: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    displayOrder?: number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagements?: EngagementUncheckedCreateNestedManyWithoutWorkflowTemplateInput
+  }
+
+  export type WorkflowTemplateCreateOrConnectWithoutStepsInput = {
+    where: WorkflowTemplateWhereUniqueInput
+    create: XOR<WorkflowTemplateCreateWithoutStepsInput, WorkflowTemplateUncheckedCreateWithoutStepsInput>
+  }
+
+  export type EngagementCreateWithoutWorkflowStepInput = {
+    id?: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ligneCredit: LigneCreditCreateNestedOneWithoutEngagementsInput
+    workflowTemplate?: WorkflowTemplateCreateNestedOneWithoutEngagementsInput
+    parentEngagement?: EngagementCreateNestedOneWithoutChildEngagementsInput
+    childEngagements?: EngagementCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutWorkflowStepInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    parentEngagementId?: string | null
+    childEngagements?: EngagementUncheckedCreateNestedManyWithoutParentEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutWorkflowStepInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput>
+  }
+
+  export type EngagementCreateManyWorkflowStepInputEnvelope = {
+    data: EngagementCreateManyWorkflowStepInput | EngagementCreateManyWorkflowStepInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WorkflowTemplateUpsertWithoutStepsInput = {
+    update: XOR<WorkflowTemplateUpdateWithoutStepsInput, WorkflowTemplateUncheckedUpdateWithoutStepsInput>
+    create: XOR<WorkflowTemplateCreateWithoutStepsInput, WorkflowTemplateUncheckedCreateWithoutStepsInput>
+    where?: WorkflowTemplateWhereInput
+  }
+
+  export type WorkflowTemplateUpdateToOneWithWhereWithoutStepsInput = {
+    where?: WorkflowTemplateWhereInput
+    data: XOR<WorkflowTemplateUpdateWithoutStepsInput, WorkflowTemplateUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type WorkflowTemplateUpdateWithoutStepsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUpdateManyWithoutWorkflowTemplateNestedInput
+  }
+
+  export type WorkflowTemplateUncheckedUpdateWithoutStepsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    formSchema?: NullableJsonNullValueInput | InputJsonValue
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutWorkflowTemplateNestedInput
+  }
+
+  export type EngagementUpsertWithWhereUniqueWithoutWorkflowStepInput = {
+    where: EngagementWhereUniqueInput
+    update: XOR<EngagementUpdateWithoutWorkflowStepInput, EngagementUncheckedUpdateWithoutWorkflowStepInput>
+    create: XOR<EngagementCreateWithoutWorkflowStepInput, EngagementUncheckedCreateWithoutWorkflowStepInput>
+  }
+
+  export type EngagementUpdateWithWhereUniqueWithoutWorkflowStepInput = {
+    where: EngagementWhereUniqueInput
+    data: XOR<EngagementUpdateWithoutWorkflowStepInput, EngagementUncheckedUpdateWithoutWorkflowStepInput>
+  }
+
+  export type EngagementUpdateManyWithWhereWithoutWorkflowStepInput = {
+    where: EngagementScalarWhereInput
+    data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutWorkflowStepInput>
+  }
+
   export type UserRoleCreateManyUserInput = {
     id?: string
     roleId: string
@@ -30968,6 +34938,9 @@ export namespace Prisma {
     referenceDossier: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
   }
 
   export type GarantieUpdateWithoutLigneCreditInput = {
@@ -31008,6 +34981,10 @@ export namespace Prisma {
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutLigneCreditInput = {
@@ -31021,6 +34998,10 @@ export namespace Prisma {
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutLigneCreditInput = {
@@ -31034,6 +35015,75 @@ export namespace Prisma {
     referenceDossier?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EngagementCreateManyParentEngagementInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    workflowStepId?: string | null
+  }
+
+  export type EngagementUpdateWithoutParentEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutParentEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutParentEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyCreateManyParentCompanyInput = {
@@ -31494,6 +35544,212 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WorkflowStepCreateManyTemplateInput = {
+    id?: string
+    stepOrder: number
+    code: string
+    label: string
+    description?: string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: string | null
+    icon?: string | null
+    color?: string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EngagementCreateManyWorkflowTemplateInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowStepId?: string | null
+    parentEngagementId?: string | null
+  }
+
+  export type WorkflowStepUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type WorkflowStepUncheckedUpdateWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: EngagementUncheckedUpdateManyWithoutWorkflowStepNestedInput
+  }
+
+  export type WorkflowStepUncheckedUpdateManyWithoutTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stepOrder?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requiredFields?: NullableJsonNullValueInput | InputJsonValue
+    requiredDocuments?: NullableJsonNullValueInput | InputJsonValue
+    requiresApproval?: BoolFieldUpdateOperationsInput | boolean
+    approvalRoles?: NullableJsonNullValueInput | InputJsonValue
+    triggerAction?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    allowedRoles?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpdateWithoutWorkflowTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    workflowStep?: WorkflowStepUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutWorkflowTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutWorkflowTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowStepId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EngagementCreateManyWorkflowStepInput = {
+    id?: string
+    ligneCreditId: string
+    typeFinancement: string
+    montant: number
+    devise: string
+    dateEngagement: Date | string
+    dateEcheance: Date | string
+    statut: string
+    referenceDossier: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflowTemplateId?: string | null
+    parentEngagementId?: string | null
+  }
+
+  export type EngagementUpdateWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ligneCredit?: LigneCreditUpdateOneRequiredWithoutEngagementsNestedInput
+    workflowTemplate?: WorkflowTemplateUpdateOneWithoutEngagementsNestedInput
+    parentEngagement?: EngagementUpdateOneWithoutChildEngagementsNestedInput
+    childEngagements?: EngagementUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    childEngagements?: EngagementUncheckedUpdateManyWithoutParentEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateManyWithoutWorkflowStepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ligneCreditId?: StringFieldUpdateOperationsInput | string
+    typeFinancement?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    devise?: StringFieldUpdateOperationsInput | string
+    dateEngagement?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEcheance?: DateTimeFieldUpdateOperationsInput | Date | string
+    statut?: StringFieldUpdateOperationsInput | string
+    referenceDossier?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflowTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentEngagementId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
 
 
   /**
@@ -31511,6 +35767,10 @@ export namespace Prisma {
      * @deprecated Use LigneCreditCountOutputTypeDefaultArgs instead
      */
     export type LigneCreditCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LigneCreditCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EngagementCountOutputTypeDefaultArgs instead
+     */
+    export type EngagementCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CompanyCountOutputTypeDefaultArgs instead
      */
@@ -31531,6 +35791,14 @@ export namespace Prisma {
      * @deprecated Use PermissionCountOutputTypeDefaultArgs instead
      */
     export type PermissionCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PermissionCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use WorkflowTemplateCountOutputTypeDefaultArgs instead
+     */
+    export type WorkflowTemplateCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = WorkflowTemplateCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use WorkflowStepCountOutputTypeDefaultArgs instead
+     */
+    export type WorkflowStepCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = WorkflowStepCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use userDefaultArgs instead
      */
@@ -31607,6 +35875,14 @@ export namespace Prisma {
      * @deprecated Use AuditLogDefaultArgs instead
      */
     export type AuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuditLogDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use WorkflowTemplateDefaultArgs instead
+     */
+    export type WorkflowTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = WorkflowTemplateDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use WorkflowStepDefaultArgs instead
+     */
+    export type WorkflowStepArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = WorkflowStepDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

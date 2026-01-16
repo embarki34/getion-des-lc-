@@ -25,7 +25,7 @@ class ApiClient {
           // The previous implementation extracted token from cookie manually.
           // Let's keep that logic for backward compatibility if baseURL is NOT empty (i.e. external backend).
 
-          if (config.baseURL && config.baseURL.startsWith("http")) { // Heuristic for external
+          if (config.baseURL?.startsWith("http") || config.url?.startsWith("http")) {
             const token = this.getTokenFromCookie();
             if (token && config.headers) {
               config.headers.Authorization = `Bearer ${token}`;

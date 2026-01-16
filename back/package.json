@@ -15,9 +15,7 @@
     "prisma:generate": "npx prisma generate",
     "pr:std": "npx prisma studio",
     "seed": "ts-node src/scripts/seed.ts",
-    "seed:rbac": "ts-node src/identity/infrastructure/seeds/seed-rbac.ts",
-    "migrate:roles": "ts-node src/identity/infrastructure/seeds/migrate-roles.ts",
-    "migrate:roles:rollback": "ts-node src/identity/infrastructure/seeds/migrate-roles.ts rollback",
+    "seed:workflow": "ts-node src/scripts/seed-workflow.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"src/**/*.ts\""
   },

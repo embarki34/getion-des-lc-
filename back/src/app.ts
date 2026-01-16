@@ -12,6 +12,7 @@ import { createCompanyRoutes } from './company/infrastructure/routes/company.rou
 import { createBusinessUnitRoutes } from './company/infrastructure/routes/businessUnit.routes';
 import { createSupplierRoutes } from './company/infrastructure/routes/supplier.routes';
 import { createAuditRoutes } from './system/infrastructure/express/routes/audit.routes';
+import workflowRoutes from './workflow/infrastructure/api/workflow.routes';
 import { ErrorHandlerMiddleware } from './identity/infrastructure/express/middleware/ErrorHandlerMiddleware';
 import { errorHandler, logger } from './shared/infrastructure/middleware/error.middleware';
 import { setupSwagger } from './shared/infrastructure/swagger/swagger.setup';
@@ -26,7 +27,7 @@ export class App {
   private app: Application;
   private port: number;
 
-  constructor(port: number = 9009) {
+  constructor(port: number = 9000) {
     this.app = express();
     this.port = port;
     this.setupMiddleware();
@@ -102,6 +103,9 @@ export class App {
     // System Module Routes
     const auditLogController = identityContainer.getAuditLogController();
     this.app.use('/api/v1/system/audit-logs', createAuditRoutes(auditLogController, authMiddleware, permissionMiddleware));
+
+    // Workflow Template Engine Routes
+    this.app.use('/api/v1/workflows', workflowRoutes);
 
     // Credit Line Module Routes
     const creditLineContainer = CreditLineDIContainer.getInstance();
@@ -187,7 +191,7 @@ export function createApp(port?: number): App {
 
 // Start server if this file is run directly
 if (require.main === module) {
-  const port = parseInt(process.env.PORT || '3000', 10);
+  const port = parseInt(process.env.PORT || '9000', 10);
   const app = new App(port);
   app.start();
 }

@@ -239,7 +239,10 @@ exports.Prisma.EngagementScalarFieldEnum = {
   statut: 'statut',
   referenceDossier: 'referenceDossier',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  workflowTemplateId: 'workflowTemplateId',
+  workflowStepId: 'workflowStepId',
+  parentEngagementId: 'parentEngagementId'
 };
 
 exports.Prisma.SwiftMessageScalarFieldEnum = {
@@ -372,6 +375,39 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.WorkflowTemplateScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  label: 'label',
+  description: 'description',
+  icon: 'icon',
+  color: 'color',
+  displayOrder: 'displayOrder',
+  formSchema: 'formSchema',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WorkflowStepScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  stepOrder: 'stepOrder',
+  code: 'code',
+  label: 'label',
+  description: 'description',
+  requiredFields: 'requiredFields',
+  requiredDocuments: 'requiredDocuments',
+  requiresApproval: 'requiresApproval',
+  approvalRoles: 'approvalRoles',
+  triggerAction: 'triggerAction',
+  icon: 'icon',
+  color: 'color',
+  allowedRoles: 'allowedRoles',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -413,7 +449,9 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  WorkflowTemplate: 'WorkflowTemplate',
+  WorkflowStep: 'WorkflowStep'
 };
 
 /**

@@ -3,38 +3,271 @@ import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-interface SeedData {
-  company: any;
-  businessUnit: any;
-  supplier: any;
-  user: any;
-  role: any;
-  permission: any;
-  banque: any[];
+// ==========================================
+// 1. PERMISSIONS DEFINITION
+// ==========================================
+export const PERMISSION_CATEGORIES = {
+  USER_MANAGEMENT: 'User Management',
+  CREDIT_LINE: 'Credit Line Management',
+  BANK: 'Bank Management',
+  COMPANY: 'Company & Business Unit',
+  SUPPLIER: 'Supplier Management',
+  FINANCIAL: 'Financial Operations',
+  DOCUMENT: 'Document Management',
+  SYSTEM: 'System Administration',
+} as const;
+
+export interface PermissionDefinition {
+  code: string;
+  name: string;
+  description: string;
+  resource: string;
+  action: string;
+  scope: 'all' | 'own' | 'company' | 'business-unit';
+  category: string;
 }
 
-/**
- * Generate fake data for development and testing
- */
+export const PERMISSIONS: PermissionDefinition[] = [
+  // ==================== USER MANAGEMENT ====================
+  { code: 'user:create:company', name: 'Create Users (Company)', description: 'Create new users within company scope', resource: 'user', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:create:business-unit', name: 'Create Users (Business Unit)', description: 'Create new users within business unit scope', resource: 'user', action: 'create', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:read:own', name: 'Read Own Profile', description: 'View own user profile', resource: 'user', action: 'read', scope: 'own', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:read:business-unit', name: 'Read Users (Business Unit)', description: 'View users within business unit', resource: 'user', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:read:company', name: 'Read Users (Company)', description: 'View all users within company', resource: 'user', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:read:all', name: 'Read All Users', description: 'View all users across all companies', resource: 'user', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:update:own', name: 'Update Own Profile', description: 'Modify own user profile', resource: 'user', action: 'update', scope: 'own', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:update:business-unit', name: 'Update Users (Business Unit)', description: 'Modify users within business unit', resource: 'user', action: 'update', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:update:company', name: 'Update Users (Company)', description: 'Modify users within company', resource: 'user', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:update:all', name: 'Update All Users', description: 'Modify any user across all companies', resource: 'user', action: 'update', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:delete:business-unit', name: 'Delete Users (Business Unit)', description: 'Remove users within business unit', resource: 'user', action: 'delete', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:delete:company', name: 'Delete Users (Company)', description: 'Remove users within company', resource: 'user', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:delete:all', name: 'Delete All Users', description: 'Remove any user across all companies', resource: 'user', action: 'delete', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:suspend:business-unit', name: 'Suspend Users (Business Unit)', description: 'Suspend user accounts within business unit', resource: 'user', action: 'suspend', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:suspend:company', name: 'Suspend Users (Company)', description: 'Suspend user accounts within company', resource: 'user', action: 'suspend', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:suspend:all', name: 'Suspend All Users', description: 'Suspend any user account', resource: 'user', action: 'suspend', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:activate:business-unit', name: 'Activate Users (Business Unit)', description: 'Activate suspended accounts within business unit', resource: 'user', action: 'activate', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:activate:company', name: 'Activate Users (Company)', description: 'Activate suspended accounts within company', resource: 'user', action: 'activate', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:activate:all', name: 'Activate All Users', description: 'Activate any suspended account', resource: 'user', action: 'activate', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:assign-role:business-unit', name: 'Assign Roles (Business Unit)', description: 'Assign roles to users within business unit', resource: 'user', action: 'assign-role', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:assign-role:company', name: 'Assign Roles (Company)', description: 'Assign roles to users within company', resource: 'user', action: 'assign-role', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:assign-role:all', name: 'Assign Roles (All)', description: 'Assign roles to any user', resource: 'user', action: 'assign-role', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:reset-password:business-unit', name: 'Reset Passwords (Business Unit)', description: 'Reset passwords for users within business unit', resource: 'user', action: 'reset-password', scope: 'business-unit', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:reset-password:company', name: 'Reset Passwords (Company)', description: 'Reset passwords for users within company', resource: 'user', action: 'reset-password', scope: 'company', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+  { code: 'user:reset-password:all', name: 'Reset All Passwords', description: 'Reset password for any user', resource: 'user', action: 'reset-password', scope: 'all', category: PERMISSION_CATEGORIES.USER_MANAGEMENT },
+
+  // ==================== CREDIT LINE MANAGEMENT ====================
+  { code: 'credit-line:create:company', name: 'Create Credit Lines', description: 'Create new credit lines for company', resource: 'credit-line', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:read:business-unit', name: 'Read Credit Lines (Business Unit)', description: 'View credit lines for business unit', resource: 'credit-line', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:read:company', name: 'Read Credit Lines (Company)', description: 'View all credit lines for company', resource: 'credit-line', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:read:all', name: 'Read All Credit Lines', description: 'View all credit lines across companies', resource: 'credit-line', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:update:company', name: 'Update Credit Lines', description: 'Modify credit line details', resource: 'credit-line', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:delete:company', name: 'Delete Credit Lines', description: 'Remove credit lines', resource: 'credit-line', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:approve:company', name: 'Approve Credit Lines', description: 'Approve credit line requests', resource: 'credit-line', action: 'approve', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:modify-limits:company', name: 'Modify Credit Limits', description: 'Change credit line limits and thresholds', resource: 'credit-line', action: 'modify-limits', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:view-utilization:business-unit', name: 'View Utilization (Business Unit)', description: 'View credit usage statistics for business unit', resource: 'credit-line', action: 'view-utilization', scope: 'business-unit', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:view-utilization:company', name: 'View Utilization (Company)', description: 'View credit usage statistics for company', resource: 'credit-line', action: 'view-utilization', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+  { code: 'credit-line:close:company', name: 'Close Credit Lines', description: 'Close or terminate credit lines', resource: 'credit-line', action: 'close', scope: 'company', category: PERMISSION_CATEGORIES.CREDIT_LINE },
+
+  // ==================== BANK MANAGEMENT ====================
+  { code: 'bank:create:company', name: 'Create Bank Relationships', description: 'Add new bank relationships', resource: 'bank', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank:read:company', name: 'Read Banks (Company)', description: 'View bank information for company', resource: 'bank', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank:read:all', name: 'Read All Banks', description: 'View all bank information', resource: 'bank', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank:update:company', name: 'Update Banks', description: 'Modify bank details', resource: 'bank', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank:delete:company', name: 'Delete Banks', description: 'Remove bank relationships', resource: 'bank', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank-account:create:company', name: 'Create Bank Accounts', description: 'Add new bank accounts', resource: 'bank-account', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank-account:read:company', name: 'Read Bank Accounts', description: 'View bank account details', resource: 'bank-account', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank-account:view-balance:company', name: 'View Account Balances', description: 'Access bank account balance information', resource: 'bank-account', action: 'view-balance', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank-account:update:company', name: 'Update Bank Accounts', description: 'Modify bank account information', resource: 'bank-account', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+  { code: 'bank-account:deactivate:company', name: 'Deactivate Bank Accounts', description: 'Deactivate bank accounts', resource: 'bank-account', action: 'deactivate', scope: 'company', category: PERMISSION_CATEGORIES.BANK },
+
+  // ==================== COMPANY & BUSINESS UNIT ====================
+  { code: 'company:create:all', name: 'Create Companies', description: 'Create new companies', resource: 'company', action: 'create', scope: 'all', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'company:read:own', name: 'Read Own Company', description: 'View own company details', resource: 'company', action: 'read', scope: 'own', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'company:read:all', name: 'Read All Companies', description: 'View all company details', resource: 'company', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'company:update:own', name: 'Update Own Company', description: 'Modify own company information', resource: 'company', action: 'update', scope: 'own', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'company:update:all', name: 'Update All Companies', description: 'Modify any company information', resource: 'company', action: 'update', scope: 'all', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'company:delete:all', name: 'Delete Companies', description: 'Remove companies', resource: 'company', action: 'delete', scope: 'all', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:create:company', name: 'Create Business Units', description: 'Create business units within company', resource: 'business-unit', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:read:own', name: 'Read Own Business Unit', description: 'View own business unit details', resource: 'business-unit', action: 'read', scope: 'own', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:read:company', name: 'Read Business Units (Company)', description: 'View all business units in company', resource: 'business-unit', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:read:all', name: 'Read All Business Units', description: 'View all business units', resource: 'business-unit', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:update:own', name: 'Update Own Business Unit', description: 'Modify own business unit information', resource: 'business-unit', action: 'update', scope: 'own', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:update:company', name: 'Update Business Units (Company)', description: 'Modify business units in company', resource: 'business-unit', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.COMPANY },
+  { code: 'business-unit:delete:company', name: 'Delete Business Units', description: 'Remove business units', resource: 'business-unit', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.COMPANY },
+
+  // ==================== SUPPLIER MANAGEMENT ====================
+  { code: 'supplier:create:company', name: 'Create Suppliers', description: 'Add new suppliers', resource: 'supplier', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:read:business-unit', name: 'Read Suppliers (Business Unit)', description: 'View suppliers for business unit', resource: 'supplier', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:read:company', name: 'Read Suppliers (Company)', description: 'View all suppliers in company', resource: 'supplier', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:read:all', name: 'Read All Suppliers', description: 'View all suppliers', resource: 'supplier', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:update:company', name: 'Update Suppliers', description: 'Modify supplier details', resource: 'supplier', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:delete:company', name: 'Delete Suppliers', description: 'Remove suppliers', resource: 'supplier', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.SUPPLIER },
+  { code: 'supplier:assign-to-bu:company', name: 'Assign Suppliers to Business Units', description: 'Assign suppliers to business units', resource: 'supplier', action: 'assign-to-bu', scope: 'company', category: PERMISSION_CATEGORIES.SUPPLIER },
+
+  // ==================== FINANCIAL OPERATIONS ====================
+  { code: 'guarantee:create:company', name: 'Create Guarantees', description: 'Create new guarantees', resource: 'guarantee', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:read:business-unit', name: 'Read Guarantees (Business Unit)', description: 'View guarantees for business unit', resource: 'guarantee', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:read:company', name: 'Read Guarantees (Company)', description: 'View all guarantees in company', resource: 'guarantee', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:read:all', name: 'Read All Guarantees', description: 'View all guarantees', resource: 'guarantee', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:update:company', name: 'Update Guarantees', description: 'Modify guarantee details', resource: 'guarantee', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:delete:company', name: 'Delete Guarantees', description: 'Remove guarantees', resource: 'guarantee', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'guarantee:approve:company', name: 'Approve Guarantees', description: 'Approve guarantee requests', resource: 'guarantee', action: 'approve', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:create:own', name: 'Create Own Engagements', description: 'Create engagements for own work', resource: 'engagement', action: 'create', scope: 'own', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:create:business-unit', name: 'Create Engagements (Business Unit)', description: 'Create engagements for business unit', resource: 'engagement', action: 'create', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:create:company', name: 'Create Engagements (Company)', description: 'Create engagements for company', resource: 'engagement', action: 'create', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:read:own', name: 'Read Own Engagements', description: 'View own engagements', resource: 'engagement', action: 'read', scope: 'own', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:read:business-unit', name: 'Read Engagements (Business Unit)', description: 'View engagements for business unit', resource: 'engagement', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:read:company', name: 'Read Engagements (Company)', description: 'View all engagements in company', resource: 'engagement', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:read:all', name: 'Read All Engagements', description: 'View all engagements', resource: 'engagement', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:update:own', name: 'Update Own Engagements', description: 'Modify own engagements', resource: 'engagement', action: 'update', scope: 'own', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:update:business-unit', name: 'Update Engagements (Business Unit)', description: 'Modify engagements in business unit', resource: 'engagement', action: 'update', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:update:company', name: 'Update Engagements (Company)', description: 'Modify engagements in company', resource: 'engagement', action: 'update', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:delete:business-unit', name: 'Delete Engagements (Business Unit)', description: 'Remove engagements from business unit', resource: 'engagement', action: 'delete', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:delete:company', name: 'Delete Engagements (Company)', description: 'Remove engagements from company', resource: 'engagement', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'engagement:approve:company', name: 'Approve Engagements', description: 'Approve engagement requests', resource: 'engagement', action: 'approve', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'swift:generate:company', name: 'Generate SWIFT Messages', description: 'Generate SWIFT messages', resource: 'swift', action: 'generate', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'swift:send:company', name: 'Send SWIFT Messages', description: 'Send SWIFT messages to banks', resource: 'swift', action: 'send', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'swift:read:business-unit', name: 'Read SWIFT Messages (Business Unit)', description: 'View SWIFT messages for business unit', resource: 'swift', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'swift:read:company', name: 'Read SWIFT Messages (Company)', description: 'View all SWIFT messages in company', resource: 'swift', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.FINANCIAL },
+  { code: 'swift:read:all', name: 'Read All SWIFT Messages', description: 'View all SWIFT messages', resource: 'swift', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.FINANCIAL },
+
+  // ==================== DOCUMENT MANAGEMENT ====================
+  { code: 'document:upload:own', name: 'Upload Own Documents', description: 'Upload documents for own work', resource: 'document', action: 'upload', scope: 'own', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:upload:business-unit', name: 'Upload Documents (Business Unit)', description: 'Upload documents for business unit', resource: 'document', action: 'upload', scope: 'business-unit', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:upload:company', name: 'Upload Documents (Company)', description: 'Upload documents for company', resource: 'document', action: 'upload', scope: 'company', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:read:own', name: 'Read Own Documents', description: 'View own documents', resource: 'document', action: 'read', scope: 'own', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:read:business-unit', name: 'Read Documents (Business Unit)', description: 'View documents for business unit', resource: 'document', action: 'read', scope: 'business-unit', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:read:company', name: 'Read Documents (Company)', description: 'View all documents in company', resource: 'document', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:read:all', name: 'Read All Documents', description: 'View all documents', resource: 'document', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:delete:own', name: 'Delete Own Documents', description: 'Remove own documents', resource: 'document', action: 'delete', scope: 'own', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:delete:business-unit', name: 'Delete Documents (Business Unit)', description: 'Remove documents from business unit', resource: 'document', action: 'delete', scope: 'business-unit', category: PERMISSION_CATEGORIES.DOCUMENT },
+  { code: 'document:delete:company', name: 'Delete Documents (Company)', description: 'Remove documents from company', resource: 'document', action: 'delete', scope: 'company', category: PERMISSION_CATEGORIES.DOCUMENT },
+
+  // ==================== SYSTEM ADMINISTRATION ====================
+  { code: 'role:create:all', name: 'Create Roles', description: 'Create new system roles', resource: 'role', action: 'create', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'role:read:all', name: 'Read Roles', description: 'View system roles', resource: 'role', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'role:update:all', name: 'Update Roles', description: 'Modify system roles', resource: 'role', action: 'update', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'role:delete:all', name: 'Delete Roles', description: 'Remove system roles', resource: 'role', action: 'delete', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'permission:create:all', name: 'Create Permissions', description: 'Create new permissions', resource: 'permission', action: 'create', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'permission:read:all', name: 'Read Permissions', description: 'View permissions', resource: 'permission', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'permission:assign:all', name: 'Assign Permissions', description: 'Assign permissions to roles', resource: 'permission', action: 'assign', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'permission:revoke:all', name: 'Revoke Permissions', description: 'Remove permissions from roles', resource: 'permission', action: 'revoke', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'audit-log:read:company', name: 'Read Audit Logs (Company)', description: 'Access audit logs for company', resource: 'audit-log', action: 'read', scope: 'company', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'audit-log:read:all', name: 'Read All Audit Logs', description: 'Access all system audit logs', resource: 'audit-log', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'report:generate:business-unit', name: 'Generate Reports (Business Unit)', description: 'Create reports for business unit', resource: 'report', action: 'generate', scope: 'business-unit', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'report:generate:company', name: 'Generate Reports (Company)', description: 'Create reports for company', resource: 'report', action: 'generate', scope: 'company', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'report:generate:all', name: 'Generate All Reports', description: 'Create system-wide reports', resource: 'report', action: 'generate', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'system-config:read:all', name: 'Read System Configuration', description: 'View system settings', resource: 'system-config', action: 'read', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+  { code: 'system-config:update:all', name: 'Update System Configuration', description: 'Modify system settings', resource: 'system-config', action: 'update', scope: 'all', category: PERMISSION_CATEGORIES.SYSTEM },
+];
+
+// ==========================================
+// 2. ROLES DEFINITION
+// ==========================================
+export interface RoleDefinition {
+  code: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  permissions: string[]; // Permission codes
+}
+
+export const ROLES: RoleDefinition[] = [
+  {
+    code: 'SUPER_ADMIN',
+    name: 'Super Administrator',
+    description: 'Global system administrator with full access across all companies',
+    isActive: true,
+    permissions: PERMISSIONS.map(p => p.code), // GRANT ALL PERMISSIONS
+  },
+];
+
+// ==========================================
+// 3. SEEDING LOGIC
+// ==========================================
+async function clearData() {
+  console.log('⚠️  Clearing existing data...');
+  try {
+    await prisma.userRole.deleteMany();
+    await prisma.rolePermission.deleteMany();
+    await prisma.user.deleteMany();
+    await prisma.role.deleteMany();
+    await prisma.permission.deleteMany();
+    await prisma.companyBanque.deleteMany();
+    await prisma.businessUnitSupplier.deleteMany();
+    await prisma.companySupplier.deleteMany();
+    await prisma.supplier.deleteMany();
+    await prisma.businessUnit.deleteMany();
+    await prisma.company.deleteMany();
+    await prisma.banque.deleteMany();
+    console.log('✅ Data cleared');
+  } catch (error) {
+    console.error('❌ Failed to clear data (migrations might be missing tables), proceeding anyway...');
+  }
+}
+
 async function seed() {
-  console.log('🌱 Starting database seeding...\n');
+  console.log('🌱 Starting CONSOLIDATED database seeding...\n');
 
   try {
-    // Clear existing data (optional - comment out if you want to keep existing data)
-    // await clearData();
+    await clearData();
 
-    const seedData: SeedData = {
-      company: [],
-      businessUnit: [],
-      supplier: [],
-      user: [],
-      role: [],
-      permission: [],
-      banque: [],
-    };
+    // 1. Create Permissions
+    console.log('📋 Seeding permissions...');
+    const permissionMap = new Map<string, string>(); // code -> id
 
-    // 1. Create Companies
-    console.log('📦 Creating companies...');
+    for (const perm of PERMISSIONS) {
+      const created = await prisma.permission.create({
+        data: {
+          name: perm.name,
+          code: perm.code,
+          description: perm.description,
+          resource: perm.resource,
+          action: perm.action,
+          scope: perm.scope,
+        },
+      });
+      permissionMap.set(perm.code, created.id);
+    }
+    console.log(`✅ Seeded ${PERMISSIONS.length} permissions`);
+
+    // 2. Create Roles & Assignments
+    console.log('👥 Seeding roles...');
+    let superAdminRoleId = '';
+
+    for (const role of ROLES) {
+      const createdRole = await prisma.role.create({
+        data: {
+          name: role.name,
+          code: role.code,
+          description: role.description,
+          isActive: role.isActive,
+        },
+      });
+
+      if (role.code === 'SUPER_ADMIN') {
+        superAdminRoleId = createdRole.id;
+      }
+
+      // Assign permissions
+      let assignedCount = 0;
+      for (const permCode of role.permissions) {
+        const permId = permissionMap.get(permCode);
+        if (permId) {
+          await prisma.rolePermission.create({
+            data: {
+              roleId: createdRole.id,
+              permissionId: permId,
+            },
+          });
+          assignedCount++;
+        }
+      }
+      console.log(`✅ Created Role: ${role.code} with ${assignedCount} permissions`);
+    }
+
+    // 3. Create Basic Company Structure
+    console.log('📦 Creating Basic Company Structure...');
     const company1 = await prisma.company.create({
       data: {
         name: 'Main Company SARL',
@@ -42,262 +275,31 @@ async function seed() {
         description: 'Main company for operations',
         address: '123 Main Street, Algiers, Algeria',
         contactInfo: 'contact@maincompany.dz',
-        parentCompanyId: null,
         isActive: true,
       },
     });
 
-    const company2 = await prisma.company.create({
-      data: {
-        name: 'Branch Office Oran',
-        code: 'BRANCH_ORAN',
-        description: 'Branch office in Oran',
-        address: '456 Oran Street, Oran, Algeria',
-        contactInfo: 'oran@maincompany.dz',
-        parentCompanyId: company1.id,
-        isActive: true,
-      },
-    });
-
-    seedData.company = [company1, company2];
-    console.log(`✅ Created ${seedData.company.length} companies`);
-
-    // 2. Create Business Units
-    console.log('\n🏢 Creating business units...');
     const bu1 = await prisma.businessUnit.create({
       data: {
-        name: 'Sales Department',
-        code: 'SALES',
-        description: 'Sales and marketing',
+        name: 'Headquarters',
+        code: 'HQ',
+        description: 'Headquarters',
         companyId: company1.id,
         isActive: true,
       },
     });
 
-    const bu2 = await prisma.businessUnit.create({
-      data: {
-        name: 'Operations Department',
-        code: 'OPS',
-        description: 'Operations and logistics',
-        companyId: company1.id,
-        isActive: true,
-      },
-    });
-
-    const bu3 = await prisma.businessUnit.create({
-      data: {
-        name: 'Finance Department',
-        code: 'FINANCE',
-        description: 'Finance and accounting',
-        companyId: company2.id,
-        isActive: true,
-      },
-    });
-
-    seedData.businessUnit = [bu1, bu2, bu3];
-    console.log(`✅ Created ${seedData.businessUnit.length} business units`);
-
-    // 3. Create Suppliers
-    console.log('\n🚚 Creating suppliers...');
-    const suppliers = await Promise.all([
-      prisma.supplier.create({
-        data: {
-          name: 'Supplier A Ltd',
-          code: 'SUP001',
-          description: 'Raw materials supplier',
-          contactInfo: 'contact@suppliera.com',
-          address: '789 Supplier Street, London, UK',
-          isActive: true,
-        },
-      }),
-      prisma.supplier.create({
-        data: {
-          name: 'Supplier B Corp',
-          code: 'SUP002',
-          description: 'Equipment supplier',
-          contactInfo: 'info@supplierb.com',
-          address: '321 Equipment Avenue, Paris, France',
-          isActive: true,
-        },
-      }),
-      prisma.supplier.create({
-        data: {
-          name: 'Supplier C SARL',
-          code: 'SUP003',
-          description: 'Local supplier',
-          contactInfo: 'contact@supplierc.dz',
-          address: '654 Local Road, Algiers, Algeria',
-          isActive: true,
-        },
-      }),
-    ]);
-
-    seedData.supplier = suppliers;
-    console.log(`✅ Created ${seedData.supplier.length} suppliers`);
-
-    // 4. Assign Suppliers to Companies
-    console.log('\n🔗 Linking suppliers to companies...');
-    await prisma.companySupplier.createMany({
-      data: [
-        { companyId: company1.id, supplierId: suppliers[0].id },
-        { companyId: company1.id, supplierId: suppliers[1].id },
-        { companyId: company2.id, supplierId: suppliers[2].id },
-      ],
-    });
-    console.log('✅ Linked suppliers to companies');
-
-    // 5. Assign Suppliers to Business Units
-    await prisma.businessUnitSupplier.createMany({
-      data: [
-        { businessUnitId: bu1.id, supplierId: suppliers[0].id },
-        { businessUnitId: bu2.id, supplierId: suppliers[1].id },
-      ],
-    });
-    console.log('✅ Linked suppliers to business units');
-
-    // 6. Create Banks
-    console.log('\n🏦 Creating banks...');
-    const banks = await Promise.all([
-      prisma.banque.create({
-        data: {
-          nom: "Banque Nationale d'Algérie",
-          codeSwift: 'BNAADZAL',
-          adresse: '8 Bd Ernesto Che Guevara, Alger',
-          contactInfo: '+213 21 71 47 19',
-        },
-      }),
-      prisma.banque.create({
-        data: {
-          nom: 'Banque Extérieure d Algérie',
-          codeSwift: 'BEXADZAL',
-          adresse: '11 Boulevard Che Guevara, Alger',
-          contactInfo: '+213 21 71 18 18',
-        },
-      }),
-    ]);
-
-    seedData.banque = banks;
-    console.log(`✅ Created ${seedData.banque.length} banks`);
-
-    // 7. Link Banks to Companies
-    await prisma.companyBanque.createMany({
-      data: [
-        { companyId: company1.id, banqueId: banks[0].id },
-        { companyId: company1.id, banqueId: banks[1].id },
-        { companyId: company2.id, banqueId: banks[0].id },
-      ],
-    });
-    console.log('✅ Linked banks to companies');
-
-    // 8. Create Roles and Permissions
-    console.log('\n🔐 Creating RBAC roles and permissions...');
-
-    // Create Permissions
-    const permissions = await Promise.all([
-      prisma.permission.create({
-        data: {
-          name: 'Read Company',
-          code: 'company:read:all',
-          description: 'Read any company',
-          resource: 'company',
-          action: 'read',
-          scope: 'all',
-        },
-      }),
-      prisma.permission.create({
-        data: {
-          name: 'Create Company',
-          code: 'company:create',
-          description: 'Create new company',
-          resource: 'company',
-          action: 'create',
-          scope: 'all',
-        },
-      }),
-      prisma.permission.create({
-        data: {
-          name: 'Update Company',
-          code: 'company:update',
-          description: 'Update company',
-          resource: 'company',
-          action: 'update',
-          scope: 'all',
-        },
-      }),
-      prisma.permission.create({
-        data: {
-          name: 'Read User',
-          code: 'user:read:all',
-          description: 'Read any user',
-          resource: 'user',
-          action: 'read',
-          scope: 'all',
-        },
-      }),
-      prisma.permission.create({
-        data: {
-          name: 'Manage Roles',
-          code: 'role:manage',
-          description: 'Manage roles and permissions',
-          resource: 'role',
-          action: 'manage',
-          scope: 'all',
-        },
-      }),
-    ]);
-
-    seedData.permission = permissions;
-    console.log(`✅ Created ${seedData.permission.length} permissions`);
-
-    // Create Roles
-    const adminRole = await prisma.role.create({
-      data: {
-        name: 'Administrator',
-        code: 'ADMIN',
-        description: 'Full system access',
-        isActive: true,
-      },
-    });
-
-    const managerRole = await prisma.role.create({
-      data: {
-        name: 'Manager',
-        code: 'MANAGER',
-        description: 'Department manager',
-        isActive: true,
-      },
-    });
-
-    seedData.role = [adminRole, managerRole];
-    console.log(`✅ Created ${seedData.role.length} roles`);
-
-    // Assign Permissions to Roles
-    await prisma.rolePermission.createMany({
-      data: [
-        // Admin gets all permissions
-        { roleId: adminRole.id, permissionId: permissions[0].id },
-        { roleId: adminRole.id, permissionId: permissions[1].id },
-        { roleId: adminRole.id, permissionId: permissions[2].id },
-        { roleId: adminRole.id, permissionId: permissions[3].id },
-        { roleId: adminRole.id, permissionId: permissions[4].id },
-        // Manager gets limited permissions
-        { roleId: managerRole.id, permissionId: permissions[0].id },
-        { roleId: managerRole.id, permissionId: permissions[3].id },
-      ],
-    });
-    console.log('✅ Assigned permissions to roles');
-
-    // 9. Create Users
-    console.log('\n👥 Creating users...');
-    const hashedPassword = await bcrypt.hash('Password123!', 10);
+    // 4. Create SYSTEM ADMIN User
+    console.log('👤 Creating SYSTEM ADMIN user...');
+    const hashedPassword = await bcrypt.hash('Admin123!', 10);
 
     const adminUser = await prisma.user.create({
       data: {
-        name: 'Admin User',
-        email: 'admin@example.com',
+        name: 'System Administrator',
+        email: 'admin@system.local',
         phone: '+213555000001',
         password: hashedPassword,
-        role: 'admin',
+        role: 'SUPER_ADMIN', // Legacy string field
         status: 'active',
         emailVerified: true,
         companyId: company1.id,
@@ -305,62 +307,29 @@ async function seed() {
       },
     });
 
-    const managerUser = await prisma.user.create({
-      data: {
-        name: 'Manager User',
-        email: 'manager@example.com',
-        phone: '+213555000002',
-        password: hashedPassword,
-        role: 'user',
-        status: 'active',
-        emailVerified: true,
-        companyId: company1.id,
-        businessUnitId: bu2.id,
-      },
-    });
-
-    const regularUser = await prisma.user.create({
-      data: {
-        name: 'Regular User',
-        email: 'user@example.com',
-        phone: '+213555000003',
-        password: hashedPassword,
-        role: 'user',
-        status: 'active',
-        emailVerified: true,
-        companyId: company2.id,
-        businessUnitId: bu3.id,
-      },
-    });
-
-    seedData.user = [adminUser, managerUser, regularUser];
-    console.log(`✅ Created ${seedData.user.length} users`);
-
-    // Assign Roles to Users
-    await prisma.userRole.createMany({
-      data: [
-        { userId: adminUser.id, roleId: adminRole.id, assignedBy: null },
-        { userId: managerUser.id, roleId: managerRole.id, assignedBy: adminUser.id },
-      ],
-    });
-    console.log('✅ Assigned roles to users');
+    // Assign Role
+    if (superAdminRoleId) {
+      await prisma.userRole.create({
+        data: {
+          userId: adminUser.id,
+          roleId: superAdminRoleId,
+          assignedBy: null
+        }
+      });
+      console.log('✅ Linkage: User -> SUPER_ADMIN Role created.');
+    } else {
+      console.error('❌ CRITICAL: SUPER_ADMIN Role ID not found during user assignment!');
+    }
 
     console.log('\n' + '='.repeat(60));
     console.log('✅ Seeding completed successfully!');
     console.log('='.repeat(60));
-    console.log('\n📊 Summary:');
-    console.log(`   - Companies: ${seedData.company.length}`);
-    console.log(`   - Business Units: ${seedData.businessUnit.length}`);
-    console.log(`   - Suppliers: ${seedData.supplier.length}`);
-    console.log(`   - Banks: ${seedData.banque.length}`);
-    console.log(`   - Roles: ${seedData.role.length}`);
-    console.log(`   - Permissions: ${seedData.permission.length}`);
-    console.log(`   - Users: ${seedData.user.length}`);
-    console.log('\n🔑 Default login credentials:');
-    console.log('   Admin: admin@example.com / Password123!');
-    console.log('   Manager: manager@example.com / Password123!');
-    console.log('   User: user@example.com / Password123!');
+    console.log('\n🔑 System Admin Credentials:');
+    console.log('   Email: admin@system.local');
+    console.log('   Password: Admin123!');
+    console.log('   Permissions: ALL');
     console.log('='.repeat(60) + '\n');
+
   } catch (error) {
     console.error('❌ Error seeding database:', error);
     throw error;
@@ -369,27 +338,6 @@ async function seed() {
   }
 }
 
-/**
- * Clear all data (use with caution!)
- */
-async function clearData() {
-  console.log('⚠️  Clearing existing data...');
-  await prisma.userRole.deleteMany();
-  await prisma.rolePermission.deleteMany();
-  await prisma.user.deleteMany();
-  await prisma.role.deleteMany();
-  await prisma.permission.deleteMany();
-  await prisma.companyBanque.deleteMany();
-  await prisma.businessUnitSupplier.deleteMany();
-  await prisma.companySupplier.deleteMany();
-  await prisma.supplier.deleteMany();
-  await prisma.businessUnit.deleteMany();
-  await prisma.company.deleteMany();
-  await prisma.banque.deleteMany();
-  console.log('✅ Data cleared');
-}
-
-// Run seed
 if (require.main === module) {
   seed().catch((error) => {
     console.error(error);
@@ -397,4 +345,4 @@ if (require.main === module) {
   });
 }
 
-export { seed, clearData };
+export { seed };

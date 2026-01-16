@@ -19,6 +19,7 @@ export const API_CONFIG = {
     ENGAGEMENTS: "/engagements",
     SWIFT_MESSAGES: "/swift-messages",
     DOCUMENTS: "/documents",
+    WORKFLOWS: "/workflows",
   },
 } as const;
 
